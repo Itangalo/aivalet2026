@@ -7,8 +7,8 @@ De två ramtexterna som binder ihop de arton perspektivanalyserna till en helhet
 Texterna högst upp på sajten. En rad var – ändra texten efter kolon, behåll etiketten. Rubriken används också som sidans titel i webbläsarfliken.
 
 Överrubrik: Riksdagspartierna + Piratpartiet · inför valet 2026
-Rubrik: Vad säger partierna om AI?
-Ingress: En empirisk genomgång av vad partierna faktiskt skriver och säger om AI – ordnad i sex frågor, med arton analyserade perspektiv och primärkällorna under varje.
+Rubrik: Vad har partierna för AI-politik?
+Ingress: Granskning av partiernas politik och visioner om AI, människa, teknik och samhälle – ordnat i sex frågor, arton analyserade perspektiv och 75 primärkällor.
 
 ## Inledning
 
