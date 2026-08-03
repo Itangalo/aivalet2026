@@ -1,10 +1,8 @@
-# Om projektet
-
 Den här sajten kartlägger vad riksdagspartierna och Piratpartiet säger – och inte säger – om artificiell intelligens inför valet hösten 2026. Utgångspunkten är empirisk: vad partierna faktiskt har skrivit och sagt, sammanställt i sex frågor och arton perspektiv med primärkällorna öppet redovisade.
 
 ## Varför
 
-AI pekas ut som en av de mest avgörande frågorna för samhället – av forskning, näringsliv och partierna själva. Ändå är den påfallande frånvarande i valrörelsen. Vi ville göra det gjorda jobbet: gå igenom allt material och visa mönstret, så att väljare kan se var partierna står och var de tiger.
+AI pekas ut som en av de mest avgörande frågorna för samhället – av forskning, näringsliv och partierna själva. Ändå är den påfallande frånvarande i valrörelsen. Vi ville göra grovjobbet: gå igenom allt material och visa mönstren, så att väljare kan se var partierna står och var de tiger.
 
 Piratpartiet är inte ett riksdagsparti, men togs med i analysen eftersom de har mer uttalad hållning i många AI-frågor jämfört med de flesta riksdagspartier. Vi vill också öppet redovisa att en av medlemmarna i gruppen bakom den här webbplatsen är aktiv medlem i Piratpartiet.
 
@@ -26,4 +24,6 @@ Jonatan Tensetti: Folkbildare och författare. Även utbildningspolitisk talespe
 
 *[Platshållare – e-post och ev. övriga kontaktvägar.]*
 
-> Allt innehåll finns också samlat i en enda fil: [innehall.md](innehall.md) – tänkt att vara lätt att arbeta med för både människor och språkmodeller.
+## För AI-agenter
+
+Förutom alla källfiler, länkade i separat flik, finns allt innehåll samlat i en enda fil: [innehall.md](innehall.md). Den som vill analysera eller bearbeta med hjälp av språkmodeller använder med fördel den filen.
