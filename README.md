@@ -4,12 +4,12 @@ En empirisk genomgång av vad riksdagspartierna och Piratpartiet skriver och sä
 
 **Live: https://itangalo.github.io/aivalet2026/**
 
-Materialet är ordnat som en solfjäder: sex frågor, arton analyserade perspektiv under dem, och primärkällorna öppet redovisade under varje perspektiv.
+Materialet är ordnat som en solfjäder: sex frågor, arton analyserade perspektiv under dem, och primärkällorna öppet redovisade under varje perspektiv. Samma material finns också sammanfattat parti för parti, under fliken Partierna.
 
 ## Innehåll
 
 - `index.html` – den byggda sajten (genereras, redigera inte för hand).
-- `innehall/` – de redigerbara analystexterna: inledning, de sex områdessynteserna (`Områdessynteser.md`), de arton perspektivanalyserna och analysmetoden.
+- `innehall/` – de redigerbara analystexterna: inledning, de sex områdessynteserna (`Områdessynteser.md`), de arton perspektivanalyserna, de nio partiporträtten (`partier/`) och analysmetoden.
 - `kallor/` – primärkällorna i markdown (enkätsvar, program, valmanifest, riksdagsdokument, podd-transkript, webbsidor).
 - `innehall.md` – hela innehållet i en fil, tänkt att vara lätt att arbeta med för både människor och språkmodeller.
 

@@ -15,6 +15,7 @@ Tack för att du vill bidra. Sajten byggs ur markdown-filerna i det här repot, 
 
 - `innehall/Områdessynteser.md` – de sex frågornas grundbild och "Här skiljer de sig".
 - `innehall/perspektivanalyser/` – de arton perspektiven (grundbild, nyanser/avvikelser, underlag med källor).
+- `innehall/partier/` – de nio partiporträtten (ingress utan rubrik, Så ställer de sig, Utmärkande drag, Där de tiger, Underlag, Källor). Källor listas som sökvägar relativt `kallor/`, en per rad.
 - `innehall/Ramtexter – inledning och syntes.md` – inledningen.
 - `innehall/Analysmetod – grundbild och avvikelser.md` – hur analysen görs.
 - `kallor/` – primärkällorna. Rätta gärna transkriberingsfel, men ändra inte innebörden i ett partis egna ord.

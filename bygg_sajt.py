@@ -35,6 +35,7 @@ else:
     ANALYS = ROOT / "3 Analys"
     KALLOR = ROOT / "1 Källmaterial"
 PERSP = ANALYS / "perspektivanalyser"
+PARTIER = ANALYS / "partier"
 
 # ---------------------------------------------------------------------------
 # Kluster: hur de 18 perspektiven grupperas, med en brygga som leder läsningen.
@@ -213,6 +214,49 @@ def parse_omraden():
     return areas
 
 
+def parse_partier():
+    """Läs partier/NN Parti.md → lista med partiporträtt.
+
+    Filformat: H1 = partinamn, kursiv metadatarad (Kortnamn · riksdagsstatus),
+    därefter en ingress utan rubrik, och sedan '## '-avsnitten Så ställer de sig,
+    Utmärkande drag, Där de tiger, Underlag och Källor. Källor listar sökvägar
+    relativt källmaterialsmappen, en per rad.
+    """
+    parties = []
+    if not PARTIER.is_dir():
+        return parties
+    for path in sorted(PARTIER.glob("[0-9][0-9] *.md")):
+        text = path.read_text(encoding="utf-8")
+        lines = text.splitlines()
+        name = next(l for l in lines if l.startswith("# "))[2:].strip()
+
+        # Allt före första '## ' är metadatarad + ingress.
+        rest = "\n".join(lines[1:])
+        m = re.search(r"^##\s", rest, flags=re.M)
+        head = rest[:m.start()] if m else rest
+        kort, i_riksdagen = "", True
+        meta = re.search(r"^\*(.+?)\*\s*$", head, flags=re.M)
+        if meta:
+            km = re.search(r"Kortnamn:\s*([^\s·]+)", meta.group(1))
+            kort = km.group(1) if km else ""
+            i_riksdagen = "utanför riksdagen" not in meta.group(1).lower()
+            head = head[:meta.start()] + head[meta.end():]
+
+        secs = split_sections(text)
+        kallor = [ln[2:].strip() for ln in secs.get("Källor", "").splitlines()
+                  if ln.strip().startswith("- ")]
+        parties.append({
+            "namn": name, "kort": kort, "i_riksdagen": i_riksdagen,
+            "ingress": head.strip(),
+            "stallning": secs.get("Så ställer de sig", ""),
+            "utmarkande": secs.get("Utmärkande drag", ""),
+            "tystnad": secs.get("Där de tiger", ""),
+            "underlag": secs.get("Underlag", ""),
+            "kallor": kallor,
+        })
+    return parties
+
+
 # ---------------------------------------------------------------------------
 # Källor
 # ---------------------------------------------------------------------------
@@ -387,6 +431,98 @@ def build_analys_panel(inledning, areas, perspektiv):
     return "\n".join(out)
 
 
+def riksdag_docs(kort):
+    """Riksdagsdokument för ett parti, utifrån filnamnens partiprefix."""
+    d = KALLOR / "Riksdagsdokument"
+    if not kort or not d.is_dir():
+        return []
+    out = []
+    for p in sorted(d.glob("*.md")):
+        if p.name.startswith("_"):
+            continue
+        m = re.match(r"^([A-ZÅÄÖ]+)\s+-\s+(.*)$", p.stem)
+        if m and m.group(1) == kort:
+            out.append((m.group(2), p))
+    return out
+
+
+def render_parti_card(pt):
+    """Ett partiporträtt: ingress + sex frågor + krok + tystnad + utfällbart underlag."""
+    anchor = f'parti-{(pt["kort"] or pt["namn"]).lower()}'
+    parts = [f'<article class="parti" id="{anchor}">', '<div class="parti-head">']
+    if pt["kort"]:
+        parts.append(f'<span class="pkort">{inline(pt["kort"])}</span>')
+    parts.append(f'<h3>{inline(pt["namn"])}</h3>')
+    parts.append('</div>')
+    if pt["ingress"]:
+        parts.append(f'<div class="parti-ingress">{render_blocks(pt["ingress"])}</div>')
+    for cls, label, body in [("stallning", "Så ställer de sig", pt["stallning"]),
+                             ("utmarkande", "Utmärkande drag", pt["utmarkande"]),
+                             ("tystnad", "Där de tiger", pt["tystnad"])]:
+        if not body:
+            continue
+        parts.append(f'<div class="parti-sekt {cls}">')
+        parts.append(f'<span class="slabel">{label}</span>')
+        parts.append(render_blocks(body))
+        parts.append('</div>')
+
+    parts.append('<details class="underlag"><summary>Underlag och källor</summary>')
+    parts.append('<div class="underlag-body">')
+    if pt["underlag"]:
+        parts.append(render_blocks(pt["underlag"]))
+    rows = []
+    for rel in pt["kallor"]:
+        p = KALLOR / rel
+        if not p.exists():
+            continue
+        label = p.stem
+        links = []
+        if p.parent.name == "Podd – AI Sweden":
+            party = label.replace("AI Sweden - ", "")
+            label = f"Poddintervju ({p.parent.name.split(' – ')[1]})"
+            if party in SPOTIFY:
+                links.append(f'<a href="{SPOTIFY[party]}" target="_blank" rel="noopener">Spotify</a>')
+            links.append(f'<a href="{href(p)}">Transkript</a>')
+        else:
+            label = f"{p.parent.name}: {label}"
+            links.append(file_links(p))
+        rows.append(f'<li><span class="src-label">{html.escape(label)}</span>'
+                    f'<span class="src-links">{SEP.join(links)}</span></li>')
+    docs = riksdag_docs(pt["kort"])
+    if docs:
+        rows.append(f'<li><span class="src-label">Riksdagsdokument med AI i titeln</span>'
+                    f'<span class="src-links">{len(docs)} st, se fliken Källor</span></li>')
+    if rows:
+        parts.append(f'<ul class="srclist">{"".join(rows)}</ul>')
+    parts.append('</div></details></article>')
+    return "\n".join(parts)
+
+
+def build_partier_panel(parties):
+    out = ['<div class="panel" id="partier">']
+    out.append('<p class="panel-intro">Samma material sett parti för parti. Varje porträtt '
+               'sammanfattar var partiet står i de sex frågorna, vad som är dess egen krok, '
+               'och var det tiger. Tystnad är inte en hållning – där underlaget är tunt eller '
+               'indirekt sägs det ut, och beläggen ligger under "Underlag och källor".</p>')
+    out.append('<p class="rowspan-note">En del av materialet kommer från en enkät där alla '
+               'partier fick samma fem frågor. Svaren speglar därför vad de tillfrågades om, '
+               'inte nödvändigtvis vad de själva prioriterar – väg in det när flera partier '
+               'tar upp samma sak.</p>')
+    riksdag = [p for p in parties if p["i_riksdagen"]]
+    ovriga = [p for p in parties if not p["i_riksdagen"]]
+    if riksdag:
+        out.append('<h3 class="grouphead">Riksdagspartierna</h3>')
+        out.extend(render_parti_card(p) for p in riksdag)
+    if ovriga:
+        out.append('<h3 class="grouphead">Utanför riksdagen</h3>')
+        out.append('<p class="rowspan-note">Piratpartiet sitter inte i riksdagen och kom med '
+                   'i undersökningen senare. Det är en värdefull jämförelsepunkt, men bör '
+                   'hållas isär från riksdagspartierna.</p>')
+        out.extend(render_parti_card(p) for p in ovriga)
+    out.append('</div>')
+    return "\n".join(out)
+
+
 def build_kallor_panel():
     out = ['<div class="panel" id="kallor">']
     out.append('<p class="panel-intro">Alla primärkällor bakom analysen, öppet redovisade. '
@@ -467,11 +603,14 @@ def build_om_panel():
 </div>"""
 
 
-def build_html(inledning, areas, perspektiv):
+def build_html(inledning, areas, perspektiv, parties=()):
     css = CSS
     analys = build_analys_panel(inledning, areas, perspektiv)
+    partier = build_partier_panel(parties) if parties else ""
     kallor = build_kallor_panel()
     om = build_om_panel()
+    partier_tab = ('<button class="tab" data-panel="partier">Partierna</button>'
+                   if parties else "")
     return f"""<!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -495,6 +634,7 @@ def build_html(inledning, areas, perspektiv):
   <div class="topbar">
     <nav class="tabs">
       <button class="tab active" data-panel="analysen">Analysen</button>
+      {partier_tab}
       <button class="tab" data-panel="kallor">Källor</button>
       <button class="tab" data-panel="om">Om</button>
     </nav>
@@ -504,6 +644,8 @@ def build_html(inledning, areas, perspektiv):
   </div>
 
 {analys}
+
+{partier}
 
 {kallor}
 
@@ -568,7 +710,7 @@ def build_html(inledning, areas, perspektiv):
 # ---------------------------------------------------------------------------
 # innehall.md (LLM-vänlig helhet)
 # ---------------------------------------------------------------------------
-def build_markdown(inledning, areas, perspektiv):
+def build_markdown(inledning, areas, perspektiv, parties=()):
     out = ["# Vad säger partierna om AI?", "",
            "En empirisk genomgång inför valet 2026. Sammanställd ur källmaterialet i "
            "`1 Källmaterial/`. Denna fil speglar sajten och genereras av `4 Sajt/bygg_sajt.py`.",
@@ -587,6 +729,27 @@ def build_markdown(inledning, areas, perspektiv):
                 out += [f"*{p['var_label']}*", "", p["var_body"].strip(), ""]
             out += ["<details><summary>Underlag och källor</summary>", "",
                     p["underlag"].strip(), "", "</details>", ""]
+    if parties:
+        out += ["## Partierna", "",
+                "Samma material sett parti för parti: var partiet står i de sex frågorna, "
+                "dess egen krok, och var det tiger.", ""]
+        for pt in parties:
+            head = pt["namn"] + (f" ({pt['kort']})" if pt["kort"] else "")
+            out += [f"### {head}", ""]
+            if not pt["i_riksdagen"]:
+                out += ["*Utanför riksdagen.*", ""]
+            if pt["ingress"]:
+                out += [pt["ingress"].strip(), ""]
+            for label, body in [("Så ställer de sig", pt["stallning"]),
+                                ("Utmärkande drag", pt["utmarkande"]),
+                                ("Där de tiger", pt["tystnad"])]:
+                if body:
+                    out += [f"**{label}**", "", body.strip(), ""]
+            out += ["<details><summary>Underlag och källor</summary>", "",
+                    pt["underlag"].strip(), ""]
+            if pt["kallor"]:
+                out += ["Källor:", ""] + [f"- {k}" for k in pt["kallor"]] + [""]
+            out += ["</details>", ""]
     return "\n".join(out).rstrip() + "\n"
 
 
@@ -774,6 +937,42 @@ CSS = r"""
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 0.9rem; color: var(--muted); margin-bottom: 9px; line-height: 1.5;
   }
+  /* Partiporträtt */
+  article.parti {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 26px 28px; margin: 20px 0; scroll-margin-top: 90px;
+  }
+  .parti-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .pkort {
+    flex: none; min-width: 44px; height: 44px; padding: 0 10px; border-radius: 22px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); color: var(--accent); border: 2px solid var(--accent);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.05rem; font-weight: 700; letter-spacing: 0.02em;
+  }
+  article.parti h3 { font-size: 1.55rem; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+  .parti-ingress p {
+    font-size: 1.14rem; line-height: 1.5; margin: 0 0 12px; color: var(--ink);
+  }
+  .parti-ingress p:last-child { margin-bottom: 0; }
+  .parti-sekt { margin-top: 18px; padding: 14px 18px 6px; border-radius: 9px; }
+  .parti-sekt.stallning { background: var(--accent-soft); }
+  .parti-sekt.utmarkande { border: 1px solid var(--line); padding-bottom: 12px; }
+  .parti-sekt.tystnad { background: var(--flag-soft); }
+  .slabel {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .parti-sekt.tystnad .slabel { color: var(--flag); }
+  .parti-sekt ul { margin: 10px 0 0; padding-left: 20px; }
+  .parti-sekt li { font-size: 1.0rem; margin-bottom: 10px; line-height: 1.5; }
+  .parti-sekt p { font-size: 1.02rem; margin: 10px 0 6px; }
+  article.parti .underlag-body p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9rem; color: var(--muted); line-height: 1.55; margin: 0 0 10px;
+  }
+  article.parti .underlag-body .srclist { margin-top: 6px; }
   /* Källor */
   .panel-intro { font-size: 1.05rem; color: var(--muted); margin: 26px 0 8px; max-width: 64ch; }
   h3.grouphead { font-size: 1.4rem; margin: 40px 0 6px; letter-spacing: -0.005em; }
@@ -833,8 +1032,9 @@ def export_public(dest):
         inledning, _ = parse_ramtexter()
         areas = parse_omraden()
         perspektiv = {n: parse_perspektiv(n) for n in range(1, 19)}
-        html_out = build_html(inledning, areas, perspektiv)
-        md_out = build_markdown(inledning, areas, perspektiv)
+        parties = parse_partier()
+        html_out = build_html(inledning, areas, perspektiv, parties)
+        md_out = build_markdown(inledning, areas, perspektiv, parties)
         copied = sorted(COPIED)
     finally:
         PUBLISH = False
@@ -854,6 +1054,10 @@ def export_public(dest):
     (src / "perspektivanalyser").mkdir(parents=True, exist_ok=True)
     for f in sorted(PERSP.glob("*.md")):
         shutil.copy2(f, src / "perspektivanalyser" / f.name)
+    if PARTIER.is_dir():
+        (src / "partier").mkdir(parents=True, exist_ok=True)
+        for f in sorted(PARTIER.glob("*.md")):
+            shutil.copy2(f, src / "partier" / f.name)
     for name in SOURCE_FILES:
         shutil.copy2(ANALYS / name, src / name)
 
@@ -868,9 +1072,13 @@ def main():
     inledning, _syntes = parse_ramtexter()
     areas = parse_omraden()
     perspektiv = {n: parse_perspektiv(n) for n in range(1, 19)}
-    (HERE / "index.html").write_text(build_html(inledning, areas, perspektiv), encoding="utf-8")
-    (HERE / "innehall.md").write_text(build_markdown(inledning, areas, perspektiv), encoding="utf-8")
-    print(f"Byggde index.html och innehall.md ({len(areas)} frågor, {len(perspektiv)} perspektiv)")
+    parties = parse_partier()
+    (HERE / "index.html").write_text(
+        build_html(inledning, areas, perspektiv, parties), encoding="utf-8")
+    (HERE / "innehall.md").write_text(
+        build_markdown(inledning, areas, perspektiv, parties), encoding="utf-8")
+    print(f"Byggde index.html och innehall.md ({len(areas)} frågor, "
+          f"{len(perspektiv)} perspektiv, {len(parties)} partier)")
 
 
 if __name__ == "__main__":
