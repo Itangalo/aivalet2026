@@ -1,0 +1,18 @@
+# 18. Systemhotande risk II – kontrollförlust och AGI-säkerhet
+
+*Ursprung: deduktivt (6) · Lins: tystnad · Analyserad: 2026-07-23*
+
+## Grundbild
+
+Att artificiell intelligens skulle kunna växa ur mänsklig kontroll genom sin egen förmågeutveckling – att systemen blir så kapabla att de i förlängningen blir ett hot i sig – är i praktiken helt frånvarande i partiernas AI-politik. Inget parti gör kontrollförlust, eller risken med en intelligens som överträffar människan, till en fråga i sina program eller valdokument. Där risker alls nämns handlar de om hur människan använder tekniken – bedrägeri, övervakning, desinformation, vapen – inte om teknikens egen bana. Detta är materialets tydligaste tystnad.
+
+## Avvikelser
+
+- **Sverigedemokraterna:** En enskild företrädare har lyft frågan i dess skarpaste form – att AI snabbt bygger vidare på sina egna förmågor, kan nå en generell intelligens långt bortom människans, uppvisa självbevarelsedrift och i förlängningen hota mänsklighetens fortlevnad. Det är den enda gången temat om teknikens egen, potentiellt okontrollerbara utveckling berörs på allvar. Den möttes av att ansvarigt statsråd kallade bilden alltför dystopisk, och den har inte återkommit i något partis valmaterial.
+
+## Underlag
+
+- **Samtliga partier (S, M, SD, C, V, KD, L, MP, Piratpartiet):** I enkätsvar, program, valmanifest och motioner behandlas AI-risker genomgående som frågor om mänsklig användning – integritet, desinformation, diskriminering, bedrägeri, autonoma vapen, beroende av techjättar. Ingen adresserar kontrollförlust eller att AI:s egen förmågetillväxt skulle kunna göra systemen okontrollerbara. Perspektivet saknas alltså i allt partiförfattat och beslutat material.
+- **Piratpartiet (avgränsning):** Principprogrammets formulering att "digitaliseringen förändrar allt" och ändrar "vad det betyder att vara människa" är det mest omvälvande anslaget i materialet, men handlar om digitaliseringens och plattformsmaktens samhällspåverkan – inte om AI:s egen förmågetillväxt bortom mänsklig kontroll. Räknas därför inte hit (hör snarare till perspektiv 16).
+- **Sverigedemokraterna (avvikelsen):** Interpellation 2022/23:374 "Risker och möjligheter med artificiell intelligens" (Josef Fransson, ställd till civilminister Erik Slottner, inlämnad 2023-05-31, debatterad 2023-08-22). Fransson tar upp teknologisk singularitet (Kurzweil), en intelligens "10, 1 000 eller 1 000 000 gånger mer intelligent än den smartaste människan", att "AI snabbt bygger på sina egna förmågor", att vi "står på randen av att inte längre vara den mest intelligenta varelsen på jorden", generell intelligens, att en AI "snart kommer att uppvisa tecken på självbevarelsedrift", och refererar en enkät där hälften av AI-forskarna anger >10 % risk för mänsklighetens utplåning. Hund-analogin ("I en framtid skulle vi kunna vara hundarna när artificiell intelligens är oss överlägsna") uttrycker kontrollförlust explicit. Detta är genuint perspektiv 18, inte enbart missbruk (perspektiv 17), även om Fransson i samma inlägg också nämner massarbetslöshet, bedrägerier och värdeöverföring till techbolag (perspektiv 4/17).
+- **Källförbehåll (viktigt):** Interpellationen är en enskild ledamots inlaga från 2023, inte SD:s beslutade linje. Den återfinns varken i SD:s enkätsvar 2026, motion 2025/26:311 eller valplattform (som inte nämner AI alls). Ansvarigt statsråd Erik Slottner (KD) bemötte framställningen som "väl dystopiskt" och sade sig övertygad om att mänskligheten kommer att överleva AI. Interpellationen ska alltså läsas som en enskild röst som bryter tystnaden – inte som ett partis politik, och inte som ett tvärpolitiskt mönster.

@@ -1,0 +1,24 @@
+# 9. Mänsklig kontroll och rättssäkerhet vid automatiserade beslut
+
+*Ursprung: induktivt · Lins: blandad · Analyserad: 2026-07-23*
+
+## Grundbild
+
+Att det ska vara en människa – inte ett system – som fattar beslut som påverkar enskilda återkommer som princip, särskilt när AI används i myndighetsutövning. Flera partier kopplar den till transparens och rättssäkerhet: det ska framgå när AI har använts, och besluten ska gå att lita på och pröva. Men för de flesta stannar det vid en princip. Bara ett par översätter den till konkreta rättigheter för den enskilde, medan andra stannar vid krav på granskbarhet eller berör frågan bara indirekt.
+
+## Nyanser
+
+- **Konkreta rättigheter (Piratpartiet, Miljöpartiet):** Piratpartiet går längst – rätt att få veta att AI använts, rätt till förklaring, samt mänsklig omprövning och överklagande. En människa som bara godkänner utan verkligt mandat är inte meningsfull kontroll. Miljöpartiet ligger nära: det ska redovisas när AI används, enskilda ska skyddas mot diskriminering och kunna få upprättelse.
+- **Principen utan färdiga mekanismer (Sverigedemokraterna, Kristdemokraterna, Vänsterpartiet, Moderaterna):** Sverigedemokraterna slår fast att människan ska ha kontrollen över beslut som rör rättigheter, trygghet och frihet, och vill se tydliga krav på högriskområden som myndighetsbeslut. Kristdemokraterna lyfter transparens, ansvar och rättssäkerhet i offentlig sektor. Vänsterpartiet vill att AI-användning där föregås av noggranna konsekvensanalyser. Moderaterna går åt ett annat håll än rättigheterna och betonar granskbarhet: automatiserade beslut i myndigheter och vård ska följas upp och kunna granskas i efterhand för att undvika "black box"-problem, och system ska skalas upp stegvis. Ingen av dem ger den enskilde rätt till förklaring eller omprövning.
+
+## Underlag
+
+- **Piratpartiet:** Enkätsvar (partiförfattat, undertecknat av partiledaren): rätt att veta att AI använts, rätt till förklaring, mänsklig omprövning och överklagande; "en människa som bara godkänner utan mandat" är inte meningsfull kontroll; ju större konsekvens för individen, desto högre krav på dokumentation, granskning och mänskligt ansvar. Grunden finns i principprogram 5.0 (2021), som kritiserar algoritmisk styrning – alltså partilinje, inte en lös formulering. Skarpast belagt av alla.
+- **Miljöpartiet:** Programfördjupningen "En grön AI-politik" (2022) och enkätsvar (signerat): människan fattar alltid besluten; krav på redovisning av när AI används, insyn i hur system fungerar, skydd mot diskriminering och att enskilda ska kunna få upprättelse. Bred och beslutad partiförfattad grund.
+- **Sverigedemokraterna:** Enkätsvar (partiförfattat): "Människan ska ha kontrollen över beslut som påverkar människors rättigheter, trygghet och frihet"; högriskområden som myndighetsbeslut ska ha tydliga krav. Tydlig princip, men utan de enskildes rättighetsmekanismer som Piratpartiet/MP anger.
+- **Kristdemokraterna:** Enkätsvar (partiförfattat, enda egna AI-underlaget): AI i offentlig sektor ska präglas av transparens, ansvar och rättssäkerhet. Nämns som princip, inte konkretiserat.
+- **Vänsterpartiet:** Enkätsvar (partiförfattat): all AI-användning, särskilt i offentlig verksamhet, ska föregås av noggranna konsekvensanalyser; lyfter risker för diskriminering och bristande transparens. Enskilda motioner/frågor granskar t.ex. Försäkringskassans AI-användning. Fokus ligger på förhandskontroll snarare än den enskildes rättigheter i efterhand.
+- **Liberalerna:** Enkätsvar och valmanifest (partiförfattat): teknikoptimism "med tydligt skydd för individens frihet och rättigheter", men utan uttalad mekanism för mänsklig kontroll i automatiserade beslut. Ligger inom grundbilden men konkretiserar den inte.
+- **Socialdemokraterna:** Enkätsvar och webbsida (partiförfattat): AI ska "underställas det demokratiska styret" – demokratisk styrning på systemnivå snarare än den enskildes rättssäkerhet i enskilda beslut. Berör inte perspektivet direkt.
+- **Centerpartiet:** Enkätsvar och webbsida (partiförfattat): rikt på integritets- och demokrativärn (nej till ansiktsigenkänning i realtid, transparenskrav i politisk kommunikation), men adresserar inte mänsklig kontroll i automatiserat beslutsfattande specifikt.
+- **Moderaterna:** Enkätsvar 2026: särskilt vid "automatiserade beslut inom myndigheter och vård krävs uppföljning för att undvika 'black box'-problem, tragiska konsekvenser och säkerställa att besluten kan granskas i efterhand"; reglering bör bygga på "utfallskontroll" där system testas småskaligt och skalas upp stegvis. Adresserar alltså granskbarhet och kontroll av automatiserade beslut – men inte den enskildes rätt till förklaring, omprövning eller överklagande.

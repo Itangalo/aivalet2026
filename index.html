@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vad säger partierna om AI?</title>
+<style>
+
+  :root {
+    --bg: #f7f6f3; --card: #ffffff; --ink: #1c1c1a; --muted: #5f5c56;
+    --line: #e4e1da; --accent: #1a5f5a; --accent-soft: #e7f0ef;
+    --flag: #b3541e; --flag-soft: #f6e9df; --maxw: 800px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16171a; --card: #1e2024; --ink: #eceae5; --muted: #a3a09a;
+      --line: #33353b; --accent: #6fc8bf; --accent-soft: #1c2c2b;
+      --flag: #e08a54; --flag-soft: #2c2320;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: Georgia, 'Iowan Old Style', 'Times New Roman', serif;
+    line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 22px 90px; }
+  header.hero { padding: 58px 0 22px; }
+  .kicker {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin: 0 0 14px;
+  }
+  h1 { font-size: 2.5rem; line-height: 1.1; margin: 0 0 18px; letter-spacing: -0.01em; }
+  .lede { font-size: 1.14rem; color: var(--muted); margin: 0; max-width: 62ch; }
+  /* Tabs */
+  .topbar { position: sticky; top: 0; z-index: 10; background: var(--bg); }
+  .tabs {
+    display: flex; gap: 6px; border-bottom: 1px solid var(--line);
+    margin: 4px 0 0; padding-top: 8px;
+  }
+  .area-bar { display: none; border-bottom: 1px solid var(--line); }
+  .area-bar.visible { display: block; }
+  .area-bar a {
+    display: block; padding: 9px 2px; text-decoration: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.85rem; line-height: 1.3;
+  }
+  .area-bar .ab-num {
+    color: var(--accent); font-weight: 700; margin-right: 9px;
+  }
+  .area-bar .ab-title { color: var(--ink); }
+  .tab {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.95rem; font-weight: 600; color: var(--muted); background: none;
+    border: none; border-bottom: 2px solid transparent; padding: 12px 14px;
+    cursor: pointer; margin-bottom: -1px;
+  }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  /* Body text */
+  section.intro { margin: 30px 0 10px; }
+  section.intro p { font-size: 1.12rem; margin: 0 0 18px; }
+  .sectionhead {
+    font-size: 1.9rem; letter-spacing: -0.01em; margin: 52px 0 6px;
+    padding-top: 26px; border-top: 1px solid var(--line);
+  }
+  .sectionlede { color: var(--muted); font-size: 1.05rem; margin: 0 0 22px; max-width: 60ch; }
+  .syntes p { font-size: 1.08rem; margin: 0 0 16px; }
+  .syntes-sub {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.02rem; font-weight: 700; letter-spacing: 0.01em;
+    margin: 26px 0 10px; color: var(--ink);
+  }
+  /* Översiktskarta */
+  .oversikt {
+    margin: 30px 0 10px; padding: 20px 24px;
+    border: 1px solid var(--line); border-radius: 12px; background: var(--card);
+  }
+  .oversikt-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700; margin: 0;
+  }
+  .oversikt ol { margin: 12px 0 0; padding-left: 1.5em; }
+  .oversikt li { margin-bottom: 9px; font-size: 1.06rem; }
+  .oversikt li::marker { color: var(--accent); font-weight: 700; }
+  .oversikt a {
+    color: var(--ink); text-decoration: none;
+    border-bottom: 1px solid var(--accent-soft);
+  }
+  .oversikt a:hover { border-bottom-color: var(--accent); color: var(--accent); }
+  /* Områden (solfjädern) */
+  .omraden { margin-top: 8px; }
+  .omrade {
+    margin: 44px 0; padding-top: 32px; border-top: 2px solid var(--line);
+    scroll-margin-top: 104px;
+  }
+  .fraga-head { display: flex; align-items: center; gap: 18px; margin: 0 0 18px; }
+  .fraga-num {
+    flex: none; width: 58px; height: 58px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--accent-soft); color: var(--accent);
+    border: 2px solid var(--accent);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  h2.fraga {
+    font-size: 1.85rem; line-height: 1.15; letter-spacing: -0.01em;
+    margin: 0; color: var(--accent); flex: 1;
+  }
+  .omrade-grund p { font-size: 1.1rem; margin: 0 0 14px; }
+  .omrade-grund p:last-child { margin-bottom: 0; }
+  .skiljer {
+    margin: 20px 0 4px; padding: 16px 20px 8px;
+    background: var(--accent-soft); border-radius: 10px;
+  }
+  .skiljer-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .skiljer ul { margin: 10px 0 0; padding-left: 20px; }
+  .skiljer li { font-size: 1.02rem; margin-bottom: 10px; line-height: 1.5; }
+  .skiljer p { font-size: 1.02rem; margin: 10px 0 6px; }
+  details.perspektiv-foldout { margin-top: 18px; }
+  details.perspektiv-foldout > summary {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9rem; color: var(--muted); cursor: pointer;
+    list-style: none; padding: 8px 0;
+  }
+  details.perspektiv-foldout > summary::-webkit-details-marker { display: none; }
+  details.perspektiv-foldout > summary::before {
+    content: "▸"; color: var(--accent); display: inline-block;
+    font-size: 1.6em; line-height: 1; vertical-align: middle;
+    margin-right: 11px; position: relative; top: -1px;
+  }
+  details.perspektiv-foldout[open] > summary::before { content: "▾"; }
+  details.perspektiv-foldout > summary .count {
+    color: var(--accent); font-weight: 600; border-bottom: 1px solid var(--line);
+  }
+  details.perspektiv-foldout[open] > summary { margin-bottom: 6px; }
+  .perspektiv-lista { padding-left: 16px; border-left: 2px solid var(--accent-soft); }
+  /* Perspektiv-kort */
+  article.perspektiv {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 24px 28px; margin: 14px 0;
+  }
+  .pnum {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.74rem; font-weight: 700; color: var(--accent);
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  article.perspektiv h4 { font-size: 1.3rem; line-height: 1.22; margin: 5px 0 14px; }
+  .grundbild p { margin: 0 0 12px; font-size: 1.06rem; }
+  .grundbild p:last-child { margin-bottom: 0; }
+  .variation {
+    margin-top: 16px; padding: 14px 16px 6px; border-radius: 9px;
+    background: var(--accent-soft);
+  }
+  .variation.avvikelser { background: var(--flag-soft); }
+  .vlabel {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .variation.avvikelser .vlabel { color: var(--flag); }
+  .variation ul { margin: 8px 0 0; padding-left: 20px; }
+  .variation li { font-size: 1.0rem; margin-bottom: 8px; line-height: 1.5; }
+  .variation p { font-size: 1.0rem; margin: 10px 0 6px; }
+  details.underlag { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 10px; }
+  details.underlag summary {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.85rem; font-weight: 600; color: var(--muted); cursor: pointer;
+    list-style: none;
+  }
+  details.underlag summary::-webkit-details-marker { display: none; }
+  details.underlag summary::before {
+    content: "▸"; color: var(--accent); display: inline-block;
+    font-size: 1.4em; line-height: 1; vertical-align: middle; margin-right: 9px;
+  }
+  details.underlag[open] summary::before { content: "▾"; }
+  .underlag-body { margin-top: 10px; }
+  .underlag-body ul { padding-left: 18px; margin: 0; }
+  .underlag-body li {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9rem; color: var(--muted); margin-bottom: 9px; line-height: 1.5;
+  }
+  /* Källor */
+  .panel-intro { font-size: 1.05rem; color: var(--muted); margin: 26px 0 8px; max-width: 64ch; }
+  h3.grouphead { font-size: 1.4rem; margin: 40px 0 6px; letter-spacing: -0.005em; }
+  ul.srclist { list-style: none; padding: 0; margin: 12px 0 0; }
+  ul.srclist li {
+    display: flex; justify-content: space-between; gap: 16px; align-items: baseline;
+    padding: 11px 0; border-bottom: 1px solid var(--line);
+  }
+  .src-label { font-size: 0.98rem; }
+  .src-links {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    white-space: nowrap; font-size: 0.85rem;
+  }
+  .srclist a, .panel-intro a, .intro a {
+    color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent;
+  }
+  .srclist a:hover { border-bottom-color: var(--accent); }
+  .sep { color: var(--line); margin: 0 5px; }
+  .rowspan-note {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.85rem; color: var(--muted); margin: 6px 0 0; max-width: 64ch; line-height: 1.5;
+  }
+  details.riksdag { margin-top: 12px; }
+  details.riksdag > summary {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9rem; font-weight: 600; color: var(--accent); cursor: pointer;
+  }
+  .party-sub {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700; font-size: 0.98rem; margin: 22px 0 0;
+  }
+  .party-sub .cnt { color: var(--muted); font-weight: 400; font-size: 0.85rem; }
+  footer {
+    margin-top: 50px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.82rem; color: var(--muted); text-align: center;
+  }
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="kicker">Riksdagspartierna + Piratpartiet · inför valet 2026</p>
+    <h1>Vad säger partierna om&nbsp;AI?</h1>
+    <p class="lede">En empirisk genomgång av vad partierna faktiskt skriver och säger om AI –
+    ordnad i sex frågor, med arton analyserade perspektiv och primärkällorna under varje.</p>
+  </header>
+
+  <div class="topbar">
+    <nav class="tabs">
+      <button class="tab active" data-panel="analysen">Analysen</button>
+      <button class="tab" data-panel="kallor">Källor</button>
+      <button class="tab" data-panel="om">Om</button>
+    </nav>
+    <div class="area-bar" id="areaBar">
+      <a href="#omrade-1"><span class="ab-num"></span><span class="ab-title"></span></a>
+    </div>
+  </div>
+
+<div class="panel active" id="analysen">
+<section class="intro">
+<p>Hösten 2026 går Sverige till val. Under mandatperioden som passerat har artificiell intelligens gått från en fråga för teknikintresserade till något som rör nästan allt politiken förvaltar: vården och skolan, jobben och tryggheten, det offentliga samtalet, rättssäkerheten och Sveriges plats i världen. Få tekniker har på så kort tid pekats ut som lika avgörande – av forskning, näringsliv och partierna själva.</p>
+<p>Ändå är AI påfallande frånvarande där det borde synas mest. De två största partiernas flaggskeppsdokument inför valet – Socialdemokraternas "Plan för Sverige" och Sverigedemokraternas valplattform – nämner inte AI en enda gång, och inte heller Vänsterpartiets valplattform gör det. Den politik som ändå finns bärs ofta upp av enkätsvar och enskilda ledamöter snarare än av de dokument partierna faktiskt går till val på.</p>
+<p>Vad tycker partierna då om AI? Den här genomgången försöker svara så empiriskt som möjligt. Utgångspunkten är källorna: partiprogram, valmanifest, riksdagsmotioner, enkätsvar och offentliga uttalanden – vad partierna faktiskt har skrivit och sagt. Att sammanställa och tolka det kräver omdöme, och de slutsatser vi drar är våra. Men vi håller dem nära beläggen och redovisar dem öppet, så att den som vill kan gå tillbaka till källan och pröva dem själv. Materialet är ojämnt, och även det redovisar vi: vissa partier har utförliga, beslutade texter, andra bärs upp av ett enda enkätsvar eller en poddintervju.</p>
+<p>Resultatet är sammanställt i arton perspektiv, från grundhållning och offentlig sektor till demokrati, rättssäkerhet och de mest långtgående konsekvenserna. Genomgående är en sak tydlig: alla nio partier är teknikpositiva och vill att Sverige ska ligga i framkant. Skillnaderna – och de mest talande tystnaderna – finns i vad de betonar näst efter möjligheterna, och i vad de inte säger något om alls.</p>
+<p>En anmärkning om metoden: arbetet med att gå igenom, sammanställa och analysera materialet har i stor utsträckning gjorts med hjälp av AI, under mänsklig ledning och granskning. Beläggen redovisas öppet under varje perspektiv så att slutsatserna går att kontrollera mot källan. Om företrädare för något parti anser att partiets hållning beskrivs på fel sätt är de välkomna att höra av sig, så rättar vi.</p>
+</section>
+<nav class="oversikt" aria-label="De sex frågorna">
+<p class="oversikt-label">Sex frågor</p>
+<ol>
+<li><a href="#omrade-1">Vad är partiernas grundinställning till AI?</a></li>
+<li><a href="#omrade-2">Vad ska AI göra, och för vem?</a></li>
+<li><a href="#omrade-3">Hur ska AI styras?</a></li>
+<li><a href="#omrade-4">Vilka rättigheter har den enskilda?</a></li>
+<li><a href="#omrade-5">Hur ska demokratin värnas?</a></li>
+<li><a href="#omrade-6">Hur möter vi omvälvande förändringar?</a></li>
+</ol>
+</nav>
+<section class="omraden">
+<section class="omrade" id="omrade-1" data-num="1" data-title="Vad är partiernas grundinställning till AI?">
+<div class="fraga-head">
+<span class="fraga-num">1</span>
+<h2 class="fraga">Vad är partiernas grundinställning till AI?</h2>
+</div>
+<div class="omrade-grund"><p>Alla nio partier är i grunden positiva till AI och vill att Sverige ska ligga i framkant – ingen är avvisande, alla ser stora möjligheter för samhälle och ekonomi. Det som skiljer dem är inte om de är positiva, utan vad de betonar näst efter möjligheterna. Där öppnar sig två poler: en som drar mot tillväxt och konkurrenskraft, en som drar mot samhällelig styrning och rättvis fördelning.</p></div>
+<div class="skiljer">
+<span class="skiljer-label">Här skiljer de sig</span>
+<ul><li><strong>Tillväxt och konkurrenskraft (Moderaterna, Centerpartiet, Kristdemokraterna, Liberalerna):</strong> vill att Sverige ska ta en tätposition och inte bromsa tekniken – "Europas Silicon Valley", topp tio i världen, innovation framför tung byråkrati.</li><li><strong>Styrning och fördelning (Vänsterpartiet, Miljöpartiet, Piratpartiet):</strong> lika positiva till tekniken, men vill att samhället aktivt styr utvecklingen och att vinsterna kommer alla till del.</li><li><strong>Mellan polerna (Socialdemokraterna, Sverigedemokraterna):</strong> använda tekniken men underställa den demokratisk styrning, respektive en "teknikrealism" med betoning på att människan ska behålla kontrollen.</li></ul>
+</div>
+<details class="perspektiv-foldout">
+<summary>Bygger på <span class="count">1 analyserat perspektiv</span>, med källhänvisning</summary>
+<div class="perspektiv-lista">
+<article class="perspektiv" id="p1">
+<span class="pnum">Perspektiv 1</span>
+<h4>Grundhållning till AI och Sveriges ambition</h4>
+<div class="grundbild"><p>Alla nio partier är i grunden teknikpositiva och vill att Sverige ska ligga i framkant. Ingen är AI-avvisande, och alla ser stora möjligheter för samhälle och ekonomi. Ambitionen sätts genomgående högt: Sverige ska ta vara på AI och inte hamna på efterkälken. Det som skiljer partierna är därför inte om de är positiva, utan vad de betonar näst efter möjligheterna. Där öppnar sig två poler – en som drar mot tillväxt och konkurrenskraft, en som drar mot samhällelig styrning och rättvis fördelning.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Moderaterna, Centerpartiet, Kristdemokraterna och Liberalerna:</strong> betonar tydligast konkurrenskraft, näringsliv och att Sverige ska ta en tätposition. Moderaterna talar om "Europas Silicon Valley" och att bli rikast i EU, Centerpartiet vill bli bäst i världen på att använda AI, Kristdemokraterna siktar på topp tio, och Liberalerna vill uppmuntra innovation snarare än tung byråkrati. Det som kommer näst efter möjligheterna är tillväxt och att inte bromsa tekniken.</li><li><strong>Vänsterpartiet, Miljöpartiet och Piratpartiet:</strong> är lika positiva till tekniken, men betonar att samhället aktivt måste styra utvecklingen och att vinsterna ska fördelas brett. Vänsterpartiet vill att nyttan tillfaller det allmänna och de anställda, Miljöpartiet ser AI som ett verktyg för människan och den gröna omställningen, och Piratpartiet sätter individens rättssäkerhet och maktkritik främst.</li></ul>
+<p>Socialdemokraterna och Sverigedemokraterna lägger sig mellan polerna: Socialdemokraterna i en linje om att använda tekniken men underställa den demokratisk styrning, Sverigedemokraterna i en "teknikrealism" med betoning på att människan ska behålla kontrollen.</p>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Socialdemokraterna:</strong> teknikpositiv men riskmedveten, Sverige får inte "hamna på efterkälken", världsledande på att <em>använda</em> digitaliseringen, men den ska "underställas det demokratiska styret" (enkätsvar, webbsida).</li><li><strong>Moderaterna:</strong> enkätsvaret ramar in AI som "ett historiskt tekniksprång i klass med ångmaskinen och elektriciteten" som ska göra oss rikare och frigöra tid, "inte ersätta människan", med målet att Sverige blir en av världens tio främsta AI-nationer och når "EU:s högsta levnadsstandard" inom tio år (enkätsvar). Samstämmigt med podden ("paradigmskifte", "Europas Silicon Valley", "rikast i EU om tio år" – poddintervju med Jessica Rosencrantz, webbsida). Moderaterna besvarade enkäten sent, så grundhållningen är nu partiförfattat belagd; AI saknas dock alltjämt i partiets egna programdokument och infångat valmanifest.</li><li><strong>Sverigedemokraterna:</strong> "teknikrealistisk" politik, ta vara på möjligheterna och hantera riskerna, mänsklig kontroll över beslut (enkätsvar).</li><li><strong>Centerpartiet:</strong> "teknikoptimister, men inte naiva", "bäst i världen på att använda AI", tre miljarder till ett nationellt AI-center (enkätsvar, webbsida).</li><li><strong>Vänsterpartiet:</strong> samhället måste "aktivt styra utvecklingen", nyttan till det allmänna och de anställda, inte "övervinster" för privata företag (enkätsvar).</li><li><strong>Kristdemokraterna:</strong> "topp tio i världen", lutar sig på regeringens AI-strategi, proportionerlig reglering (enkätsvar).</li><li><strong>Liberalerna:</strong> teknikoptimism med skydd för individens frihet, innovation framför "tung byråkrati", europeisk inramning (enkätsvar, valmanifest, webbsida).</li><li><strong>Miljöpartiet:</strong> "AI är ett verktyg för människan och den gröna omställningen – inte ett mål i sig" (handlingsprogram 2026–2030, programfördjupningen "En grön AI-politik", enkätsvar).</li><li><strong>Piratpartiet:</strong> "människan ska vara subjektet och tekniken verktyget", rättssäkerhet och maktkritik främst (enkätsvar, principprogram 5.0).</li></ul></div>
+</details></article>
+</div>
+</details>
+</section>
+<section class="omrade" id="omrade-2" data-num="2" data-title="Vad ska AI göra, och för vem?">
+<div class="fraga-head">
+<span class="fraga-num">2</span>
+<h2 class="fraga">Vad ska AI göra, och för vem?</h2>
+</div>
+<div class="omrade-grund"><p>När partierna talar om vad AI faktiskt ska användas till råder stor samsyn. I det offentliga ska tekniken frigöra tid och förbättra servicen – snabbare vård, kortare handläggning, stöd åt lärare – som ett stöd för personalen, inte en ersättning för den. Alla vill ha ett brett kompetenslyft så att fler kan använda AI och förhålla sig till den med omdöme. Och alla utgår från att jobben förändras men ska mötas med omställning och livslångt lärande, inte med att bromsa tekniken. Enigheten är stor om hur människor ska rustas. Den spricker först i frågan om vem som ska få del av de vinster tekniken skapar.</p></div>
+<div class="skiljer">
+<span class="skiljer-label">Här skiljer de sig</span>
+<ul><li><strong>Vem får vinsten? (Vänsterpartiet, Miljöpartiet, Piratpartiet):</strong> gör fördelningen till en egen politisk fråga – arbetstidsförkortning med bibehållen lön, mer tid för mänskliga möten, på sikt en basinkomst. Vinsterna ska inte bara tillfalla systemens ägare.</li><li><strong>Kompetens och tillväxt (Socialdemokraterna, Moderaterna, Sverigedemokraterna, Centerpartiet, Kristdemokraterna, Liberalerna):</strong> stannar vid omställning, kompetens och konkurrenskraft, utan att göra fördelningen till en egen fråga.</li><li><strong>Hur brett ska kunskapen nå? (Centerpartiet, Miljöpartiet):</strong> vill sträcka kompetenslyftet till folkbildning för hela samhället och alla åldrar, inte bara skola och yrkesliv; Piratpartiet betonar dessutom kritiskt kunnande framför ren verktygsanvändning.</li></ul>
+</div>
+<details class="perspektiv-foldout">
+<summary>Bygger på <span class="count">3 analyserade perspektiv</span>, samtliga med källhänvisningar</summary>
+<div class="perspektiv-lista">
+<article class="perspektiv" id="p2">
+<span class="pnum">Perspektiv 2</span>
+<h4>AI i offentlig sektor och välfärd</h4>
+<div class="grundbild"><p>I det offentliga vill partierna framför allt använda AI för att frigöra tid och förbättra servicen: snabbare vårddiagnoser och mindre pappersarbete, kortare handläggning hos myndigheter och stöd åt lärare. Genomgående beskrivs AI som ett stöd åt personalen, inte en ersättning för den – där tekniken påverkar beslut som betyder mycket för enskilda ska en människa fortfarande fatta dem. Detta är ett av de områden där partierna ligger närmast varandra.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Vad den frigjorda tiden ska gå till:</strong> Vänsterpartiet och Miljöpartiet vill växla tidsvinsten mot kortare arbetstid och mer tid för mänskliga möten, som del av ett större offentligt åtagande. Moderaterna, Kristdemokraterna och Centerpartiet betonar i stället snabbare, billigare och mer tillgänglig service.</li><li><strong>Villkor kontra tempo:</strong> Piratpartiet och Vänsterpartiet vill att den faktiska nyttan – inte graden av automatisering – avgör, med konsekvensanalyser innan AI införs. Moderaterna driver i stället på takten och vill att myndigheterna brett tar fram planer för att införa AI.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Socialdemokraterna:</strong> vill att AI ger effektivare offentlig förvaltning och stärker hälso- och sjukvårdstjänster; framhåller samtidigt att risken med att överlåta beslutsfattande från människor måste bevakas noggrant (enkätsvar, partiförfattat).</li><li><strong>Moderaterna:</strong> beskriver offentlig sektor som stor outnyttjad potential; AI som beslutsstöd som avlastar personal i vård, skola och omsorg – "inte så mycket om att ersätta personal utan om att hjälpa den som arbetar inom välfärden". Hänvisar till regeringens uppdrag till ett hundratal myndigheter att jobba mer med AI. Vilar på poddintervju (talat, oredigerat) och enskilda motioner (bl.a. plan för AI-stöd i varje myndighet, AI i sjukvården). Moderaterna har nu besvarat enkäten, men svaret utvecklar inte offentlig sektor närmare än så; bilden bygger därför fortsatt på podd och motioner.</li><li><strong>Sverigedemokraterna:</strong> AI ska stärka bl.a. välfärden men aldrig ersätta mänskligt ansvar; högriskanvändning inom myndighetsbeslut, vård och skola ska mötas av tydliga krav (enkätsvar, partiförfattat; en enskild motion tar upp husläkare och AI – indikation, inte beslutad linje).</li><li><strong>Centerpartiet:</strong> konkretiserar välfärdstillämpningar – snabbare diagnoser, anpassat stöd i skolan och smidigare myndighetskontakter (webbsida, partiförfattat).</li><li><strong>Vänsterpartiet:</strong> AI i offentlig sektor ska frigöra tid genom att ta över rutinuppgifter i vården och korta handläggningstider, kopplat till ett större offentligt åtagande och arbetstidsförkortning med bibehållen lön; kräver noggranna konsekvensanalyser före all offentlig användning (enkätsvar, partiförfattat).</li><li><strong>Kristdemokraterna:</strong> vill se vårdpersonal med mer tid för patienterna och snabbare, enklare offentlig service; AI ska frigöra tid för mänskliga möten, inte ersätta människans omdöme, ansvar eller värdighet, och offentlig AI ska präglas av transparens och rättssäkerhet (enkätsvar, partiförfattat).</li><li><strong>Liberalerna:</strong> vill att den offentliga sektorn digitaliseras mer, men utvecklar välfärdstillämpningarna mindre än de flesta andra (enkätsvar och webbsida, partiförfattat).</li><li><strong>Miljöpartiet:</strong> AI ska stärka välfärden och vara ett stöd för människor – inte ersätta mänskligt ansvar i beslut med stor betydelse för individen; tidsvinster kan tas ut som förkortad arbetstid eller mer tid till mellanmänskliga möten (enkätsvar och handlingsprogram, partiförfattat och beslutat).</li><li><strong>Piratpartiet:</strong> AI ska förbättra offentlig service och frigöra tid från administration; investeringar i offentlig sektor ska bedömas efter vilken offentlig nytta de skapar, inte hur många processer som automatiserats – "effektivisering är ett medel, aldrig ett tillräckligt politiskt mål i sig". AI får vara stöd men inte ersätta mänskligt ansvar i myndighetsutövning och rättsväsende (enkätsvar undertecknat av partiledaren, förankrat i principprogrammet).</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p3">
+<span class="pnum">Perspektiv 3</span>
+<h4>Utbildning, kompetenslyft och folkbildning</h4>
+<div class="grundbild"><p>Att bygga bred AI-kompetens är ett av de mest samlande temana – i praktiken vill alla partier ha ett kompetenslyft. Skolan återkommer hos nästan alla, liksom vidareutbildning och livslångt lärande för yrkesverksamma, och flera vill nå bredare ut till vuxna och allmänheten. Motivet är dubbelt: att fler ska kunna använda AI i vardag och arbete, och att människor ska kunna förhålla sig till tekniken med omdöme. Skillnaderna gäller hur brett lyftet sträcks och hur mycket vikt som läggs vid ett kritiskt kunnande.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Bredast räckvidd (Centerpartiet, Miljöpartiet):</strong> vill nå hela samhället – från grundskola till bibliotek och civilsamhälle, i alla åldrar – och ser folkbildning, inte bara yrkesutbildning, som en del av uppdraget.</li><li><strong>Kritiskt kunnande, inte bara verktygsanvändning (Piratpartiet):</strong> betonar att kompetens handlar om mer än att skriva instruktioner till en chattbot – människor ska förstå systemens gränser, felkällor och maktstrukturer. En bred medborgerlig förmåga genom hela utbildningssystemet.</li><li><strong>Mot skola och arbetsliv (Socialdemokraterna, Moderaterna, Sverigedemokraterna, Kristdemokraterna, Liberalerna, Vänsterpartiet):</strong> håller tyngdpunkten vid skolan och vid omställning för yrkesverksamma – tidig undervisning, livslångt lärande och kurser för anställda – snarare än vid folkbildning för hela allmänheten.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Centerpartiet:</strong> brett kunskapslyft och folkbildning om AI i hela landet, från grundskola till bibliotek och civilsamhälle, alla åldrar (enkätsvar och webbsida, partiförfattat).</li><li><strong>Miljöpartiet:</strong> folkbildningsuppdrag till bibliotek om källgranskning och manipulerat material, och att skolan ska kunna undervisa kritiskt om AI (handlingsprogram 2026 och enkätsvar, partiförfattat och beslutat).</li><li><strong>Piratpartiet:</strong> en bred satsning på AI-kunnighet som medborgerlig kompetens genom hela utbildningssystemet, uttryckligen bortom att "skriva instruktioner till en chattbot" – att förstå möjligheter, begränsningar, resursåtgång, felkällor och maktstrukturer (enkätsvar, partiförfattat och signerat av partiledaren).</li><li><strong>Vänsterpartiet:</strong> brett AI-kompetenslyft med särskild satsning på generativ AI i kvinnodominerade yrken och regionala kompetenscenter (enkätsvar, partiförfattat).</li><li><strong>Kristdemokraterna:</strong> AI-kurser för yrkesverksamma, livslångt lärande, studie- och yrkesvägledning och bättre dimensionering av utbildning; stärkt källkritik och digital kompetens i skolan (enkätsvar, partiförfattat). Inget eget AI-dokument utöver enkäten.</li><li><strong>Liberalerna:</strong> ett "AI-kunskapslyft" så att fler kan använda AI i vardagen och på jobbet, och skolan som "den bästa omställningsförsäkringen" (valmanifest 2026 och enkätsvar, partiförfattat).</li><li><strong>Sverigedemokraterna:</strong> tidig AI- och cybersäkerhetsundervisning i skolan (enkätsvar och motion). Den bredare strukturlinjen vilar delvis på enskilda motioner, flera av samma ledamot, snarare än beslutad partilinje.</li><li><strong>Socialdemokraterna:</strong> vidareutbildning och aktiv arbetsmarknadspolitik så att ingen lämnas efter (enkätsvar, partiförfattat) – tyngdpunkten ligger på omställning snarare än brett folkbildningslyft.</li><li><strong>Moderaterna:</strong> enkätsvaret vill införa nationell vägledning för AI-användning i skolan och stärka det livslånga lärandet – bättre vidareutbildning, fler platser i yrkeshögskolan och enklare kompetensutveckling under arbetslivet (enkätsvar). Kompletterar den tidigare bilden av utbildning och omställning som svar på att jobb förändras (podd, webbsida); partilinjen är nu partiförfattat belagd.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p4">
+<span class="pnum">Perspektiv 4</span>
+<h4>Arbetsmarknad, arbete och fördelning</h4>
+<div class="grundbild"><p>Alla partier utgår från att AI förändrar arbetsmarknaden – en del jobb försvinner, fler förändras – men ingen ser det som ett hot som ska bromsas. Det gemensamma svaret är omställning: livslångt lärande, vidareutbildning, bättre möjligheter att studera mitt i arbetslivet och trygghetssystem som fångar upp den som byter spår. Grundtonen är att ingen ska slås ut av tekniken. Det partierna är ense om är alltså hur människor ska rustas – inte vem som ska få del av de vinster automatiseringen skapar.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Fördelningen som egen fråga (Vänsterpartiet, Miljöpartiet, Piratpartiet):</strong> Här görs vem som får produktivitetsvinsten till en uttalad politisk fråga. Vänsterpartiet och Miljöpartiet vill att vinsten kommer löntagarna till del, bland annat som arbetstidsförkortning med bibehållen lön eller mer tid till mellanmänskliga möten. Piratpartiet vill på sikt införa en generell basinkomst och menar att vinsterna inte bara ska tillfalla systemens ägare.</li></ul>
+<ul><li><strong>Kompetens och tillväxt (Socialdemokraterna, Moderaterna, Sverigedemokraterna, Centerpartiet, Kristdemokraterna, Liberalerna):</strong> Här stannar svaret vid omställning, kompetens och konkurrenskraft, utan att fördelningen av vinsten görs till en egen fråga. Centerpartiet ramar in AI som något som skapar fler jobb, Liberalerna pekar på skolan som den bästa omställningsförsäkringen, och flera vill underlätta vidareutbildning mitt i arbetslivet.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Socialdemokraterna:</strong> "Strukturomvandlingar kräver att ingen lämnas efter" – vidareutbildning, omställning och starkt socialförsäkringsskydd, aktiv arbetsmarknadspolitik; kopplas till den svenska modellen och partsamarbetet. Ingen fördelningsfråga om vinsten. Källa: enkätsvar 2026 (partiförfattat).</li></ul>
+<ul><li><strong>Moderaterna:</strong> svaret på att jobb förändras är utbildning och omställning, inte att bromsa tekniken: stärkt livslångt lärande, fler platser i yrkeshögskolan, yrkesväxling med fungerande omställningsstöd och en a-kassa som reformerats till "en tydligare omställningsförsäkring". AI ska "bidra till högre produktivitet, bättre välfärd och fler möjligheter", inte otrygghet. Tillväxt- och konkurrenskraftsinramning utan egen fördelningsfråga (enkätsvar; även poddintervju och webbsidor). Partilinjen nu partiförfattat belagd.</li></ul>
+<ul><li><strong>Sverigedemokraterna:</strong> "Pragmatisk arbetsmarknadspolitik" – yrkesutbildning, vidareutbildning, lärlingsvägar och matchning; målet att människor inte slås ut utan stärker sin ställning. Kortast av enkätsvaren på denna punkt; ingen fördelningsfråga. Källa: enkätsvar 2026 (partiförfattat).</li></ul>
+<ul><li><strong>Centerpartiet:</strong> Livslångt lärande som nyckel – omställningsstudiestöd byggs ut till en "Kunskapsväxel", brett kunskapslyft, a-kassan anpassas för kompetensutveckling. AI ramas in som något som skapar fler jobb. Källa: enkätsvar 2026 och webbsida (partiförfattat).</li></ul>
+<ul><li><strong>Vänsterpartiet:</strong> Nyttan ska tillfalla det allmänna och de anställda, inte bli "övervinster för privata företag"; frigjord tid i offentlig sektor ska möjliggöra "arbetstidsförkortning med bibehållen lön". AI-kompetenslyft, särskilt i kvinnodominerade yrken. Källa: enkätsvar 2026 (partiförfattat). AI saknas i partiprogram 2024 och valplattform 2026.</li></ul>
+<ul><li><strong>Kristdemokraterna:</strong> Stärkt omställningsförmåga, livslångt lärande, bättre dimensionering av utbildning; "teknikutvecklingen ska skapa fler möjligheter, inte större otrygghet". Ingen fördelningsfråga. Källa: enkätsvar 2026 (partiförfattat); KD har inget eget AI-dokument utöver enkäten.</li></ul>
+<ul><li><strong>Liberalerna:</strong> Stärkt kompetensutveckling och vidareutbildning, bredare a-kassa (tidigare förslag om obligatorisk a-kassa), validering; på lång sikt är skolan "den bästa omställningsförsäkringen". Ingen fördelningsfråga. Källa: enkätsvar 2026 och valmanifest (partiförfattat).</li></ul>
+<ul><li><strong>Miljöpartiet:</strong> "Om AI ökar produktiviteten ska vinsterna också komma löntagarna till del"; produktivitetsökningen ska fördelas i samhället, gärna via "förkortad arbetstid eller mer tid till mellanmänskliga möten". Även livslångt lärande, omställningsstudiestöd och stärkt trygghet vid arbetslöshet. Källa: enkätsvar 2026 och handlingsprogram 2026–2030 (partiförfattat och beslutat).</li></ul>
+<ul><li><strong>Piratpartiet:</strong> Staten, arbetsgivarna och utbildningssystemet ska ta gemensamt ansvar för omställning; på längre sikt en generell basinkomst. "Automatiseringens produktivitetsvinster ska inte endast tillfalla systemens ägare." Källa: enkätsvar 2026 (partiförfattat, undertecknat av partiledaren), förankrat i principprogram 5.0.</li></ul></div>
+</details></article>
+</div>
+</details>
+</section>
+<section class="omrade" id="omrade-3" data-num="3" data-title="Hur ska AI styras?">
+<div class="fraga-head">
+<span class="fraga-num">3</span>
+<h2 class="fraga">Hur ska AI styras?</h2>
+</div>
+<div class="omrade-grund"><p>Partierna är påfallande eniga om hur AI ska styras – så länge man håller sig till riktningen. Regleringen ska vara riskbaserad och sättas på EU-nivå, inte genom egen svensk lagstiftning: höga krav där konsekvenserna för människor är stora, lätt hand där risken är låg. Beroendet av utländska, främst amerikanska, teknikjättar oroar brett, och svaret är genomgående europeiskt – öppna standarder, egna moln- och datalösningar och stärkt europeisk kapacitet. Men själva styrningen stannar vid strategier och principer. Nästan ingen vill bygga nya institutioner eller ge något organ egen makt över AI, och ingen alls föreslår en myndighet med ansvar för teknikens risker. Enigheten om vart man vill är stor; det som skiljer partierna är hur hårt – och med vilka motiv.</p></div>
+<div class="skiljer">
+<span class="skiljer-label">Här skiljer de sig</span>
+<ul><li><strong>Hur hårt ska det hållas?</strong> Moderaterna, Kristdemokraterna och Sverigedemokraterna väger tyngst mot att inte reglera bort konkurrenskraften. Miljöpartiet och Piratpartiet drar åt andra hållet och ser reglering som ett demokratiskt värn – ända till uttryckliga förbud mot exempelvis massövervakning. Övriga ligger nära mitten.</li><li><strong>Varför söka oberoende?</strong> Samma önskan om europeisk suveränitet bärs av olika motiv: konkurrenskraft (Moderaterna, Centerpartiet), nationell säkerhet – där Sverigedemokraterna lutar tydligast nationellt – eller demokratisk kontroll och egen offentlig förmåga (Vänsterpartiet, Miljöpartiet, Piratpartiet).</li><li><strong>Vem vill bygga nytt?</strong> Bara Centerpartiet (en samordnande "AI-general" och ett nationellt AI-center) och Sverigedemokraterna (bland annat ett AI-utskott och en nationell AI-plan) föreslår konkreta nya strukturer. Övriga lutar sig mot befintliga myndigheter och den statliga färdplanen.</li></ul>
+</div>
+<details class="perspektiv-foldout">
+<summary>Bygger på <span class="count">3 analyserade perspektiv</span>, samtliga med källhänvisningar</summary>
+<div class="perspektiv-lista">
+<article class="perspektiv" id="p5">
+<span class="pnum">Perspektiv 5</span>
+<h4>Reglering – nivå och filosofi</h4>
+<div class="grundbild"><p>Det råder en påfallande bred enighet om regleringens grundform: den ska vara riskbaserad och teknikneutral, med höga krav där konsekvenserna för människor är stora och lätt hand där risken är låg, särskilt för mindre företag. Nästan alla pekar också ut EU och internationella överenskommelser, snarare än egen svensk lagstiftning, som den rätta nivån. Skillnaden mellan partierna ligger inte i formen utan i hur hårt regleringen ska hållas – hur tungt oron för överreglering väger mot skyddsbehovet.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Lättare hand, värna konkurrenskraften:</strong> Moderaterna, Kristdemokraterna och Sverigedemokraterna betonar att inte reglera bort innovation. Sverigedemokraterna vill inte "reglera bort konkurrenskraften", Kristdemokraterna vill implementera EU:s regelverk "utan överreglering". Moderaterna går längst – de vill bromsa delar av regelverket tills gemensamma standarder finns och acceptera något mer risk.</li><li><strong>Reglering som demokratiskt värn:</strong> Miljöpartiet och Piratpartiet vill gå längre. Miljöpartiet oroar sig tvärtom för att skyddsreglerna införs för långsamt och förordar försiktighet och förbud i vissa fall. Piratpartiet vill ha uttryckliga förbud, bland annat mot biometrisk massövervakning och social poängsättning. Vänsterpartiet lutar åt samma håll men betonar främst att staten ska styra och minska beroendet av utländska teknikbolag.</li></ul>
+<p>Socialdemokraterna, Centerpartiet och Liberalerna ligger nära grundbilden. Liberalerna driver särskilt att standarder ska sättas gemensamt på EU-nivå, och Centerpartiet lägger till en tydlig integritetsspärr.</p>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Grundbild (riskbaserad, teknikneutral, EU som nivå):</strong> S, SD, KD, L, C, MP och Piratpartiet, samtliga i sina enkätsvar (fråga 3). Socialdemokraterna: "AI-regleringar bör ske på EU-nivå eller genom andra internationella överenskommelser". Liberalerna: "avgörande att regler och standarder för AI sätts på EU-nivå".</li><li><strong>Sverigedemokraterna:</strong> "ska inte reglera bort sin konkurrenskraft"; riskbaserad, teknikneutral och proportionerlig reglering (enkätsvar; även motion 2025/26:311 om minskad regelbörda).</li><li><strong>Kristdemokraterna:</strong> "utan överreglering" plus regulatoriska sandlådor (enkätsvar).</li><li><strong>Moderaterna:</strong> EU:s AI-förordning är "principiellt rätt väg" genom att gradera efter risk, men kriterierna får inte bli så hårda att de bromsar utvecklingen eller gör Europa mindre konkurrenskraftigt än Asien och USA; reglering bör bygga på "utfallskontroll" – system testas småskaligt, utvärderas noggrant och skalas upp stegvis (enkätsvar). Samstämmigt med statsministerns brev till EU-kommissionen om "mer rimliga regler" (podd). Partilinjen nu partiförfattat belagd.</li><li><strong>Miljöpartiet:</strong> oro för att skyddsreglerna (Bilaga III i EU:s AI-förordning) fördröjs, aktivt EU- och globalt regelarbete, försiktighetsprincip (enkätsvar, programfördjupningen "En grön AI-politik").</li><li><strong>Piratpartiet:</strong> reglera efter "användning, risk och maktförhållanden", förbud mot biometrisk massövervakning och social poängsättning (enkätsvar, förankrat i principprogram 5.0).</li><li><strong>Vänsterpartiet:</strong> svaret på regleringsfrågan handlar om statlig ledarroll och minskat beroende av amerikanska teknikbolag snarare än om regleringsfilosofi (enkätsvar).</li><li><strong>Centerpartiet:</strong> riskbaserad reglering i linje med EU:s AI-förordning, med tydlig integritetsspärr (enkätsvar).</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p6">
+<span class="pnum">Perspektiv 6</span>
+<h4>Suveränitet och strategisk autonomi</h4>
+<div class="grundbild"><p>Det finns en bred delad oro för beroendet av utländska – framför allt amerikanska – teknikjättar, och en gemensam önskan att stärka den digitala suveräniteten. Svaret är för de flesta europeiskt: öppna standarder, europeiska moln- och datalösningar och stärkt egen kapacitet inom halvledare, moln och AI, med EU som den naturliga nivån snarare än Sverige ensamt. Motiven varierar – ekonomi och konkurrenskraft, säkerhet och beredskap, eller demokratisk kontroll – men grundlinjen "minska beroendet, bygg europeisk förmåga" delas brett, tydligast av Liberalerna.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Sverigedemokraterna:</strong> lutar tydligast nationellt och säkerhets- och försvarsmotiverat. Känslig data ska "aldrig lämna svensk jurisdiktion" och valet av molntjänst beskrivs som en säkerhetspolitisk fråga, inte en upphandlingsfråga.</li><li><strong>Piratpartiet, Miljöpartiet och Vänsterpartiet:</strong> nöjer sig inte med att minska beroendet utan vill bygga egen offentlig och europeisk förmåga – gemensam beräkningskapacitet, öppna modeller och offentligt finansierade resultat som gemensam egendom. Drivkraften är demokratisk kontroll och egenmakt, inte i första hand ekonomi.</li><li><strong>Moderaterna och Centerpartiet:</strong> är minst oroade för beroendet och ser frågan mest som konkurrenskraft. Moderaterna vill minska ensidiga beroenden men samtidigt behålla samarbetet med USA, och Centerpartiet fokuserar på nationell innovationskraft snarare än på suveränitet.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Grundbild (beroende av utländska teknikjättar, europeisk suveränitet):</strong> Socialdemokraterna (ledande modeller ägs av utländska företag, ibland "stater som utgör hot mot Sverige"), Vänsterpartiet ("minska beroendet av de amerikanska techjättarna", gemensamma öppna europeiska lösningar), Kristdemokraterna ("svensk och europeisk digital suveränitet"), Miljöpartiet (öppna standarder, europeiska moln- och datalösningar) – samtliga enkätsvar.</li><li><strong>Liberalerna som tydligaste exemplet på grundbilden:</strong> europeisk kapacitet inom halvledare, moln och AI, "en europeisk motvikt till exempelvis amerikanska och kinesiska AI-modeller" (enkätsvar, valmanifest, webbsida).</li><li><strong>Sverigedemokraterna:</strong> nationell molnpolicy, data i "svensk jurisdiktion", molnval som "strategisk säkerhetspolitisk fråga" – men grundat i "svensk <em>och europeisk</em> digital suveränitet". Linjen finns i en enskild motion (huvudsakligen Rashid Farivar), inte i det partiförfattade enkätsvaret, som inte nämner suveränitet. SD är alltså mest nationellt lutande, men inte renodlat nationellt, och hållningen är svagare belagd som partilinje.</li><li><strong>Piratpartiet, Miljöpartiet, Vänsterpartiet (demokratisk kontroll, egen förmåga):</strong> Piratpartiet skarpast ("Sverige ska inte nöja sig med att köpa licenser och hyra intelligens"; egen offentlig och europeisk förmåga, öppna modeller, fri mjukvara – förankrat i principprogram 5.0), Miljöpartiet kopplar till beredskap och datasäkerhet, Vänsterpartiet betonar statens ledarroll (enkätsvar).</li><li><strong>Moderaterna och Centerpartiet:</strong> Moderaterna vill minska ensidiga beroenden men behålla USA-samarbetet och ramar in frågan som konkurrenskraft (podd, webbsida; enkätsvaret betonar konkurrenskraft gentemot Asien och USA men utvecklar inte suveränitetsfrågan). Centerpartiets enkätsvar nämner knappt suveränitet och fokuserar på nationell innovationskraft.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p7">
+<span class="pnum">Perspektiv 7</span>
+<h4>Institutionell beredskap</h4>
+<div class="grundbild"><p>Frågan om nya institutioner för att styra AI får förvånansvärt lite plats. De flesta partier nöjer sig med satsningar, strategier och att bygga vidare på befintliga myndigheter och den statliga färdplanen för AI – inte med att rita om det institutionella landskapet. Talet handlar om AI-center, testmiljöer och kompetenslyft snarare än om nya organ med egen makt. En egen myndighet med ansvar för AI:s risker föreslås inte av någon. Där konkreta nya strukturer alls föreslås är det enstaka partier som sticker ut, inte ett gemensamt mönster.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Mest institutionsbyggande – Centerpartiet och Sverigedemokraterna:</strong> Centerpartiet vill inrätta ett nationellt AI-center och utse en "AI-general" som samordnar initiativ mellan departement, myndigheter och nivåer, plus ett cyberhemvärn och en IT-haverikommission. Sverigedemokraterna går längst i antal förslag: ett särskilt AI-utskott i riksdagen, en nationell AI-kommitté, en AI task force vid Statsrådsberedningen, en nationell AI-plan samt gemensam AI-infrastruktur och molnpolicy för det offentliga.</li></ul>
+<ul><li><strong>Övriga – strukturer inom befintliga ramar:</strong> De flesta andra partier stannar vid att uppdatera den nationella AI-strategin, satsa på forskning och kompetens och luta sig mot redan pågående statliga initiativ som AI-verkstad, sandlådor och existerande myndigheter. Nya, självständiga organ efterfrågas inte.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Centerpartiet:</strong> Nationellt AI-center (3 mdkr) i enkätsvaret; "AI-general" för samordning mellan departement, myndigheter och politiska nivåer på partiets webbsida; cyberhemvärn och IT-haverikommission i enkätsvaret. Partiförfattat material, alltså partilinje – men den samordnande AI-generalen är belagd på webbsidan, inte i enkätsvaret.</li></ul>
+<ul><li><strong>Sverigedemokraterna:</strong> Rikast på institutionsförslag, men merparten kommer ur enskilda ledamöters motioner snarare än beslutad partilinje. Björn Söders motion 2025/26:286 föreslår ett särskilt AI-utskott i riksdagen. Rashid Farivars motion 2025/26:311 föreslår en nationell AI-kommitté (ledd av statsministern eller talmannen), en AI task force vid Statsrådsberedningen, en nationell AI-plan, en gemensam nationell AI-infrastruktur och en nationell molnpolicy. Motionerna bärs av två ledamöter och utgör indikation snarare än fastställd politik. SD:s korta enkätsvar innehåller inte dessa strukturförslag.</li></ul>
+<ul><li><strong>Moderaterna:</strong> Ingen ny institution som partilinje. Enskilda motioner vill uppdatera Sveriges AI-strategi och ta fram en plan för AI-stöd i myndigheterna; en regional webbsida nämner "regulatoriska växthus" och ett nationellt AI-institut. Moderaternas enkätsvar nämner en "nationell AI-strategi" men inget nytt organ; bilden av strukturförslag vilar därför på enskilda ledamöters motioner.</li></ul>
+<ul><li><strong>Kristdemokraterna:</strong> Lutar sig i enkätsvaret helt mot regeringens AI-strategi och pågående initiativ (AI-verkstad, AI-sandlådor, "den svenska AI-fabriken"). Inga förslag om nya organ.</li></ul>
+<ul><li><strong>Liberalerna:</strong> Betonar en nationell AI-strategi, en AI-säkerhetsstrategi och ett forskningskluster (excellenskluster för AI inom hälsa/life science) i enkätsvar, webbsida och valmanifest – satsningar och strategier snarare än nya myndigheter.</li></ul>
+<ul><li><strong>Socialdemokraterna:</strong> Lutar sig i enkätsvaret på AI-kommissionens diagnos och efterlyser politiskt ledarskap; en enskild motion föreslår nationell AI-infrastruktur för offentlig förvaltning. Ingen ny institution som partilinje.</li></ul>
+<ul><li><strong>Vänsterpartiet:</strong> Vill se staten i tydlig ledarroll och regionala kompetenscenter samt konsekvensanalyser före AI-införande (enkätsvar), men föreslår inget nytt centralt organ.</li></ul>
+<ul><li><strong>Miljöpartiet:</strong> Har det bredaste AI-materialet men riktar det mot regler, rättigheter och miljö snarare än mot nya svenska institutioner; nämner en etisk kod för AI-utvecklare och aktivt EU- och globalt regelarbete (handlingsprogram, grön AI-politik, enkätsvar).</li></ul>
+<ul><li><strong>Piratpartiet:</strong> Vill bygga gemensam offentlig och europeisk förmåga (beräkningskapacitet, öppna modeller) men pekar inte ut något nytt namngivet organ; fokus ligger på rättssäkerhet, öppna standarder och antimonopol (enkätsvar, principprogram).</li></ul>
+<ul><li><strong>Tystnad över lag:</strong> Ingen föreslår en dedikerad myndighet för AI:s risker eller säkerhet. Integritetsskyddsmyndigheten förbereds som tillsynsmyndighet för AI inom brottsbekämpning, men det är pågående statligt arbete som partierna hänvisar till, inte ett eget partiförslag.</li></ul></div>
+</details></article>
+</div>
+</details>
+</section>
+<section class="omrade" id="omrade-4" data-num="4" data-title="Vilka rättigheter har den enskilda?">
+<div class="fraga-head">
+<span class="fraga-num">4</span>
+<h2 class="fraga">Vilka rättigheter har den enskilda?</h2>
+</div>
+<div class="omrade-grund"><p>Här är mönstret att partierna gärna säger sig värna den enskildas integritet och rättssäkerhet – men sällan översätter det till konkreta rättigheter eller skarpa gränser. De flesta talar allmänt om att en människa ska fatta de viktiga besluten och att integriteten ska skyddas, utan att peka ut var gränsen faktiskt går. Risken att AI-system missgynnar redan utsatta grupper är nästan oadresserad, liksom barns särskilda utsatthet och skaparnas ställning när deras verk används för att träna AI. Mätt mot grundlagens mål om alla människors lika värde lever AI-politiken knappt upp till ambitionen.</p></div>
+<div class="skiljer">
+<span class="skiljer-label">Här skiljer de sig</span>
+<ul><li><strong>Konkreta rättigheter och skarpa gränser (Piratpartiet, Miljöpartiet, Centerpartiet):</strong> går längst – rätt att veta att AI använts, förklaring och omprövning; nej till biometrisk massövervakning, ansiktsigenkänning i realtid och Chat Control; skydd mot diskriminering och rätt till upprättelse.</li><li><strong>Nyttan för brottsbekämpning främst (Sverigedemokraterna samt regeringen: Moderaterna, Kristdemokraterna, Liberalerna):</strong> lägger tyngden vid att AI ska stärka rättssamhället och brottsbekämpningen; regeringen har infört polisens ansiktsigenkänning i realtid.</li><li><strong>De svagast bevakade (barn, funktionsnedsättning, minoriteter, skapare):</strong> nämns nästan bara av enstaka partier – Liberalerna om barn och skärmar, Miljöpartiet om utsatta grupper och om att kompensera skapare – medan de hos flertalet är helt frånvarande.</li></ul>
+</div>
+<details class="perspektiv-foldout">
+<summary>Bygger på <span class="count">5 analyserade perspektiv</span>, samtliga med källhänvisningar</summary>
+<div class="perspektiv-lista">
+<article class="perspektiv" id="p8">
+<span class="pnum">Perspektiv 8</span>
+<h4>Integritet och övervakning</h4>
+<div class="grundbild"><p>Alla partier säger sig vilja värna den personliga integriteten samtidigt som AI ska kunna användas mot brott. Men de flesta stannar vid den allmänna balansen och pekar inte ut var gränsen faktiskt går. Det är först i de konkreta stridsfrågorna – polisens ansiktsigenkänning i realtid och massavläsning av privata meddelanden (Chat Control) – som skillnaderna framträder. Där någon vill ge brottsbekämpningen kraftfulla AI-verktyg vill andra sätta hårda spärrar mot att staten övervakar medborgare i det offentliga rummet.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Skarp restriktiv gräns:</strong> Centerpartiet säger uttryckligen nej till både polisens ansiktsigenkänning i realtid och Chat Control, med krav på proportionalitet och nödvändighet. Piratpartiet vill förbjuda biometrisk massövervakning, generell beteendekartläggning och social poängsättning. Miljöpartiet och Vänsterpartiet accepterar ett snävt undantag för polisen men vill kringgärda det hårt – domstolsprövning, tidsbegränsning och starkare skydd för den enskilde.</li><li><strong>Betonar nyttan för brottsbekämpning och säkerhet:</strong> Sverigedemokraterna vill att AI ska stärka rättssamhället, försvaret och brottsbekämpningen och lägger tyngden vid att motverka kriminell användning av tekniken. Den sittande regeringen – Moderaterna, Kristdemokraterna och Liberalerna – har drivit igenom lagen som ger polisen rätt att använda ansiktsigenkänning i realtid.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Centerpartiet:</strong> Enkätsvar 2026 (partiförfattat): "säger nej till massövervakning … emot förslag som polisens användning av ansiktsigenkänning i realtid och Chat Control"; varje inskränkning ska möta strikta krav på proportionalitet och nödvändighet. Den tydligaste skriftligt belagda restriktiva linjen bland riksdagspartierna.</li><li><strong>Piratpartiet:</strong> Enkätsvar 2026 (partiförfattat, undertecknat av partiledaren): "Biometrisk massövervakning, generell kartläggning av människors beteenden, social poängsättning och automatiserade system som behandlar alla som potentiellt misstänkta ska inte accepteras." Förankrat i principprogram 5.0 (2021), som slår fast att "informationsflödets riktning avgör ifall det rör sig om transparens eller övervakning". Alltså partilinje, inte en enskild formulering.</li><li><strong>Miljöpartiet:</strong> Kommittémotion 2025/26:3953 med anledning av prop. 2025/26:150 (polisens ansiktsigenkänning i realtid): accepterar teknik i snäva undantagsfall men kräver domstolsprövning som huvudregel, offentligt ombud, överklagbarhet, tidsbegränsning (fem år) och stärkt integritetsskydd; "tillämpningen … måste vara mer restriktiv än vad regeringen föreslår". Enkätsvar 2026 lyfter oro för att AI kan missbrukas för övervakning.</li><li><strong>Vänsterpartiet:</strong> Kommittémotion 2025/26:3947 med anledning av samma proposition: positiv till att tekniken regleras, men vill att all användning kräver domstolsbeslut, med offentligt ombud, överklagande, obligatoriska riskanalyser och tidsbegränsning (fem år). Enkätsvar 2026 betonar att AI inte får användas "integritetskränkande eller repressivt".</li><li><strong>Sverigedemokraterna:</strong> Enkätsvar 2026 (partiförfattat, kort): AI ska stärka "rättssamhället … det militära försvaret och brottsbekämpningen", människan ska ha kontroll över beslut. Motion 2025/26:311 (till stor del enskild ledamot Rashid Farivar, indikation snarare än beslutad partilinje): välkomnar att regeringen föreslagit reglering för polisens AI-baserade ansiktsigenkänning och vill komplettera med nationella verktyg mot kriminell AI-användning; lutar sig på att EU redan förbjuder olaglig biometrisk övervakning och social scoring. Tonvikten ligger på nyttan för säkerhet och brottsbekämpning.</li><li><strong>Moderaterna, Kristdemokraterna, Liberalerna (regeringen):</strong> Regeringens proposition 2025/26:150 inför polisens ansiktsigenkänning i realtid – den konkreta åtgärd som placerar regeringspartierna på nytto-/säkerhetssidan i sakfrågan. I det partiegna materialet är hållningen mer abstrakt: KD:s enkätsvar vill värna "integritet, rättssäkerhet och demokratiska värden"; L:s enkätsvar betonar att "din integritet skyddas" och hårdare press på techjättar; Moderaternas enkätsvar tar inte upp övervakning eller integritetsgränser; i podd nämns bara att "datahantering, integritet … måste vi vara varsamma kring". Ingen av dem drar en egen skarp gräns i skrift.</li><li><strong>Socialdemokraterna:</strong> Enkätsvar 2026 nämner integritet som en risk att "våga ta tag i" bland flera (nationell säkerhet, arbetsmarknad), utan att peka ut ansiktsigenkänning eller Chat Control. Ligger inom grundbildens allmänna balans.</li><li><strong>Källdisciplin:</strong> Den restriktiva linjen (C, Piratpartiet) är belagd i partiförfattat material och väger tungt. MP:s och V:s skärpningskrav kommer ur kommittémotioner (partiets linje i sakfrågan). SD:s säkerhetsbetoning vilar dels på kort enkätsvar, dels på en motion buren av en enskild ledamot. Regeringspartiernas position avläses främst ur en proposition, inte ur egna programtexter; Moderaterna har nu besvarat enkäten men berör inte integritet eller övervakning där.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p9">
+<span class="pnum">Perspektiv 9</span>
+<h4>Mänsklig kontroll och rättssäkerhet vid automatiserade beslut</h4>
+<div class="grundbild"><p>Att det ska vara en människa – inte ett system – som fattar beslut som påverkar enskilda återkommer som princip, särskilt när AI används i myndighetsutövning. Flera partier kopplar den till transparens och rättssäkerhet: det ska framgå när AI har använts, och besluten ska gå att lita på och pröva. Men för de flesta stannar det vid en princip. Bara ett par översätter den till konkreta rättigheter för den enskilde, medan andra stannar vid krav på granskbarhet eller berör frågan bara indirekt.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Konkreta rättigheter (Piratpartiet, Miljöpartiet):</strong> Piratpartiet går längst – rätt att få veta att AI använts, rätt till förklaring, samt mänsklig omprövning och överklagande. En människa som bara godkänner utan verkligt mandat är inte meningsfull kontroll. Miljöpartiet ligger nära: det ska redovisas när AI används, enskilda ska skyddas mot diskriminering och kunna få upprättelse.</li><li><strong>Principen utan färdiga mekanismer (Sverigedemokraterna, Kristdemokraterna, Vänsterpartiet, Moderaterna):</strong> Sverigedemokraterna slår fast att människan ska ha kontrollen över beslut som rör rättigheter, trygghet och frihet, och vill se tydliga krav på högriskområden som myndighetsbeslut. Kristdemokraterna lyfter transparens, ansvar och rättssäkerhet i offentlig sektor. Vänsterpartiet vill att AI-användning där föregås av noggranna konsekvensanalyser. Moderaterna går åt ett annat håll än rättigheterna och betonar granskbarhet: automatiserade beslut i myndigheter och vård ska följas upp och kunna granskas i efterhand för att undvika "black box"-problem, och system ska skalas upp stegvis. Ingen av dem ger den enskilde rätt till förklaring eller omprövning.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Piratpartiet:</strong> Enkätsvar (partiförfattat, undertecknat av partiledaren): rätt att veta att AI använts, rätt till förklaring, mänsklig omprövning och överklagande; "en människa som bara godkänner utan mandat" är inte meningsfull kontroll; ju större konsekvens för individen, desto högre krav på dokumentation, granskning och mänskligt ansvar. Grunden finns i principprogram 5.0 (2021), som kritiserar algoritmisk styrning – alltså partilinje, inte en lös formulering. Skarpast belagt av alla.</li><li><strong>Miljöpartiet:</strong> Programfördjupningen "En grön AI-politik" (2022) och enkätsvar (signerat): människan fattar alltid besluten; krav på redovisning av när AI används, insyn i hur system fungerar, skydd mot diskriminering och att enskilda ska kunna få upprättelse. Bred och beslutad partiförfattad grund.</li><li><strong>Sverigedemokraterna:</strong> Enkätsvar (partiförfattat): "Människan ska ha kontrollen över beslut som påverkar människors rättigheter, trygghet och frihet"; högriskområden som myndighetsbeslut ska ha tydliga krav. Tydlig princip, men utan de enskildes rättighetsmekanismer som Piratpartiet/MP anger.</li><li><strong>Kristdemokraterna:</strong> Enkätsvar (partiförfattat, enda egna AI-underlaget): AI i offentlig sektor ska präglas av transparens, ansvar och rättssäkerhet. Nämns som princip, inte konkretiserat.</li><li><strong>Vänsterpartiet:</strong> Enkätsvar (partiförfattat): all AI-användning, särskilt i offentlig verksamhet, ska föregås av noggranna konsekvensanalyser; lyfter risker för diskriminering och bristande transparens. Enskilda motioner/frågor granskar t.ex. Försäkringskassans AI-användning. Fokus ligger på förhandskontroll snarare än den enskildes rättigheter i efterhand.</li><li><strong>Liberalerna:</strong> Enkätsvar och valmanifest (partiförfattat): teknikoptimism "med tydligt skydd för individens frihet och rättigheter", men utan uttalad mekanism för mänsklig kontroll i automatiserade beslut. Ligger inom grundbilden men konkretiserar den inte.</li><li><strong>Socialdemokraterna:</strong> Enkätsvar och webbsida (partiförfattat): AI ska "underställas det demokratiska styret" – demokratisk styrning på systemnivå snarare än den enskildes rättssäkerhet i enskilda beslut. Berör inte perspektivet direkt.</li><li><strong>Centerpartiet:</strong> Enkätsvar och webbsida (partiförfattat): rikt på integritets- och demokrativärn (nej till ansiktsigenkänning i realtid, transparenskrav i politisk kommunikation), men adresserar inte mänsklig kontroll i automatiserat beslutsfattande specifikt.</li><li><strong>Moderaterna:</strong> Enkätsvar 2026: särskilt vid "automatiserade beslut inom myndigheter och vård krävs uppföljning för att undvika 'black box'-problem, tragiska konsekvenser och säkerställa att besluten kan granskas i efterhand"; reglering bör bygga på "utfallskontroll" där system testas småskaligt och skalas upp stegvis. Adresserar alltså granskbarhet och kontroll av automatiserade beslut – men inte den enskildes rätt till förklaring, omprövning eller överklagande.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p10">
+<span class="pnum">Perspektiv 10</span>
+<h4>Lika värde och skydd mot diskriminering</h4>
+<div class="grundbild"><p>Grundlagens mål om alla människors lika värde och det allmännas skyldighet att motverka diskriminering är just ett mål för politiken, inte en rättighet den enskilde kan kräva ut. Prövat mot AI syns målet sällan. Risken att AI-system missgynnar skyddade grupper – kön, ursprung, religion, funktionsnedsättning, ålder, sexuell läggning – tas nästan aldrig upp. De flesta partier talar om rättssäkerhet, etik och mänsklig kontroll i allmänna ordalag och behandlar i praktiken tekniken som värderingsneutral, utan uttalat ansvar för likabehandling.</p></div>
+<div class="variation avvikelser">
+<span class="vlabel">Avvikelser</span>
+<ul><li><strong>Miljöpartiet och Vänsterpartiet:</strong> de enda som namnger diskriminering som en egen AI-risk. Vänsterpartiet vill att all AI-användning i det offentliga föregås av noggranna konsekvensanalyser, bland annat mot diskriminering och minskad tillit. Miljöpartiet går längst och behandlar tekniken som allt annat än neutral: träningsdata är sällan neutral och kan ge orättvisa beslut, därför krävs insyn i hur systemen fungerar, redovisning av när AI används och möjlighet till upprättelse vid diskriminering. Miljöpartiet är också ensamt om att peka ut de svagast bevakade grupperna – äldre, personer med funktionsnedsättning och nationella minoriteter.</li><li><strong>Piratpartiet:</strong> utgår från att medborgarna ska behandlas lika av staten – nej till social poängsättning och till system som behandlar alla som potentiellt misstänkta. Udden riktas dock mot statsmakt och övervakning snarare än mot diskriminering av skyddade grupper.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Miljöpartiet:</strong> starkast och partiförfattat. Programfördjupningen "En grön AI-politik" (2022), handlingsprogrammet 2026–2030, motion 2025/26:3425 och enkätsvaret: AI-diskriminering omfattas av diskrimineringslagen men är svår att granska, därav krav på transparens och upprättelse; utbildning och information med "särskilt fokus på äldre, minoritetsgrupper och personer med funktionsnedsättning". Enda parti som i beslutat/partiförfattat material namnger de svagast bevakade grupperna.</li><li><strong>Vänsterpartiet:</strong> enkätsvaret (partiförfattat) räknar upp diskriminering bland de risker som gör att all offentlig AI-användning måste föregås av konsekvensanalyser. Förbehåll: partiprogram (2024) och valplattform (2026) nämner inte AI alls. I poddintervjun (talat, oredigerat) tar en företrädare även upp nationella minoriteter och samiska språk samt digitalt utanförskap kopplat till ålder och funktionshinder – men som fråga om inkludering och tillgång, inte diskriminering, och på svagare källtyp.</li><li><strong>Piratpartiet:</strong> enkätsvaret och principprogram 5.0 (2021): social poängsättning, biometrisk massövervakning och system som behandlar alla som misstänkta ska inte accepteras. En likabehandlingsprincip gentemot staten, gränsande till integritetsperspektivet.</li><li><strong>Socialdemokraterna:</strong> partilinjen (enkätsvar) betonar desinformation och utländskt ägande, inte diskriminering av skyddade grupper. Enskilda ledamöter går längre: skriftlig fråga 2024/25:263 (marginaliserade grupper, etniska minoriteter, "nya former av diskriminering") och motion 2024/25:768 (diskriminerande attityder mot minoritetsgrupper). Enskilda dokument, inte beslutad partilinje.</li><li><strong>Centerpartiet, Kristdemokraterna, Liberalerna, Sverigedemokraterna:</strong> håller sig till allmänna formuleringar om rättssäkerhet, etik, proportionalitet och mänsklig kontroll utan att koppla dem till diskriminering av skyddade grupper (enkätsvar, webb, motioner).</li><li><strong>Moderaterna:</strong> har nu besvarat enkäten, men diskriminering av skyddade grupper berörs inte där heller (enkätsvaret rör vision, reglering, skola, arbetsmarknad och demokrati). Frågan är alltså oadresserad även i det partiförfattade materialet.</li><li><strong>De svagast bevakade grupperna:</strong> funktionshinder, ålder och nationella minoriteter nämns i AI-sammanhang endast av Miljöpartiet (partiförfattat) och av Vänsterpartiet i podd. Samer namnges specifikt bara i Vänsterpartiets poddintervju (om AI som stöd för hotade samiska språk). Hos övriga partier är dessa grupper helt frånvarande.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p11">
+<span class="pnum">Perspektiv 11</span>
+<h4>Upphovsrätt</h4>
+<div class="grundbild"><p>Frågan om vad AI:s träning på befintligt material betyder för upphovsrätten – och om de som skapat materialet ska skyddas eller ersättas – lyfts bara av ett fåtal partier. Flertalet berör den inte alls i sitt AI-material. Där den tas upp handlar det om att upphovsrätten behöver ses över och moderniseras när AI tränas på texter, bilder och musik utan att upphovspersonerna gett sitt medgivande.</p></div>
+<div class="variation avvikelser">
+<span class="vlabel">Avvikelser</span>
+<ul><li><strong>Miljöpartiet, Socialdemokraterna och Vänsterpartiet:</strong> bryter tystnaden och vill skydda och ersätta dem som skapar. Miljöpartiet går längst – skapare ska kompenseras rättvist, i förlängningen även retroaktivt, när deras verk använts för att träna AI. Socialdemokraterna vill modernisera det immaterialrättsliga regelverket, Vänsterpartiet se över lagstiftningen så att skyddet för kulturskapare hålls uppe.</li><li><strong>Piratpartiet:</strong> bryter tystnaden åt motsatt håll. En utvidgad upphovsrätt ses som ett maktmedel snarare än ett skydd, kunskap och kultur som en gemensam allmänning. Partiet motsätter sig uppladdningsfilter och liknande skärpningar – där de andra vill stärka rättigheterna vill Piratpartiet inte låsa in.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Miljöpartiet:</strong> starkast belagt. Krav på rättvis – och retroaktiv – ersättning till upphovspersoner vars verk tränar AI finns i den enskilda motionen "Säkra upphovsrätten i ljuset av AI" (2023/24:1522), och frågan återkommer i partiets enkätsvar 2026 och handlingsprogram. Vilar alltså både på partiförfattat, beslutat material och på motion.</li><li><strong>Socialdemokraterna:</strong> partiets AI-webbsida vill "se över på vilket sätt upphovsrätten ska fungera i ljuset av AI-utvecklingen och modernisera det immaterialrättsliga regelverket". Partiförfattat, men kortfattat och utan konkret ersättningsmodell.</li><li><strong>Vänsterpartiet:</strong> vilar på en enskild motion, "AI och upphovsrätt" (2023/24:17), som vill tillsätta en utredning av upphovsrättslagstiftningen i relation till AI:s inlärning på skyddat material; ambitionen är att både ge kulturskapare betalt och värna ett fritt och öppet internet. Frågan nämns också i podd-intervjun. Enskild motion väger lättare än beslutad partilinje, och V:s enkätsvar tar inte upp temat.</li><li><strong>Piratpartiet:</strong> partilinjen är förankrad i principprogram 5.0 (2021), som beskriver upphovsrätt och patent som verktyg "för att skaffa makt och egen vinning" och kunskap som en allmänning. Enkätsvaret 2026 avvisar uttryckligen uppladdningsfilter. Partiet adresserar inte AI-träning och ersättning i just de termerna, men dess genomgående position lutar mot mindre, inte mer, upphovsrättslig inlåsning.</li><li><strong>Övriga (Moderaterna, Centerpartiet, Kristdemokraterna, Liberalerna, Sverigedemokraterna):</strong> ingen av dem tar upp upphovsrätt kopplat till AI i det insamlade materialet – inte heller i Moderaternas enkätsvar.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p14">
+<span class="pnum">Perspektiv 14</span>
+<h4>Barn och unga</h4>
+<div class="grundbild"><p>Barn och unga som en egen grupp med särskilda behov och risker kring AI är i stort frånvarande. Där ämnet alls dyker upp handlar det nästan alltid om skolan – att bygga AI- och källkritikkompetens hos eleverna – snarare än om barns utsatthet i sig. AI-kompisar och chattbottar riktade mot barn nämns inte av något parti, och skärmtid berörs bara i förbigående. Frågan ryms alltså inom utbildning och skydd mot bedrägeri, inte som ett eget barnperspektiv.</p></div>
+<div class="variation avvikelser">
+<span class="vlabel">Avvikelser</span>
+<ul><li><strong>Liberalerna:</strong> enda partiet som gör barns situation till en egen poäng. Menar att digitaliseringen i skolan gått för långt och vill tygla skärmarna samtidigt som källkritik och grundkunskaper stärks. Lyfter också konkret behovet av verktyg mot kränkande manipulerade bilder – det närmaste någon kommer barns särskilda utsatthet.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Liberalerna:</strong> i valmanifestet betonas att digitaliseringen i skolan "gått för långt", att källkritik blir viktigare "när AI är vardag", och att det behövs verktyg mot kränkande AI-deepfakes; källkritik och grundkunskaper ska väga tyngre än tekniken (valmanifest, enkätsvar, webb – partiförfattat).</li><li><strong>Sverigedemokraterna:</strong> vill ha tidig AI- och cybersäkerhetsundervisning i skolan och motverka deepfake-utpressning, men som del av skola respektive brottsbekämpning, inte som ett barnperspektiv (enkätsvar; struktur­förslagen ligger i enskilda motioner).</li><li><strong>Kristdemokraterna:</strong> stärkt källkritik och digital kompetens i skolan samt hårdare tag mot deepfakes; ramas in som skola och skadlig användning generellt (enkätsvar).</li><li><strong>Centerpartiet:</strong> nämner anpassat stöd i skolan och ett kunskapslyft från grundskola till bibliotek för alla åldrar – utbildningsspår, inte barns utsatthet (enkätsvar, webb).</li><li><strong>Miljöpartiet:</strong> skolan ska kunna lära ut om AI kritiskt och bibliotek få uppdrag om manipulerat material; folkbildning för alla, inte specifikt barn (handlingsprogram, enkätsvar).</li><li><strong>Övriga (S, M, V, Piratpartiet):</strong> ingen egen hållning om barn och unga specifikt. Deras skol- och kompetensresonemang gäller vuxna och samhället brett.</li><li><strong>Genomgående:</strong> AI-companions och barns särskilda psykologiska utsatthet för AI saknas helt i materialet. Att flera partier alls nämner skolan speglar delvis att enkäten frågade om kompetens och skadlig användning, inte om barn.</li></ul></div>
+</details></article>
+</div>
+</details>
+</section>
+<section class="omrade" id="omrade-5" data-num="5" data-title="Hur ska demokratin värnas?">
+<div class="fraga-head">
+<span class="fraga-num">5</span>
+<h2 class="fraga">Hur ska demokratin värnas?</h2>
+</div>
+<div class="omrade-grund"><p>Nästan alla partier ser AI som ett verkligt hot mot demokratin, inte bara som enskilda bedrägerier. Två oroshärdar återkommer: desinformation och deepfakes som gör det svårare att skilja sant från falskt, och att makten över informationsflödet – vad medborgarna faktiskt ser – samlas hos ett fåtal, ofta utländska, teknikjättar. Motmedlen som nämns är källkritik, granskning, märkning och europeisk digital självständighet. Desto tystare är det om en annan demokratifråga: att AI kan försvaga medborgarnas eget tänkande. Att tekniken kan avlasta bort själva omdömet är nästan ingen som tar upp.</p></div>
+<div class="skiljer">
+<span class="skiljer-label">Här skiljer de sig</span>
+<ul><li><strong>Maktkoncentrationen som kärna (Piratpartiet, Centerpartiet, Miljöpartiet):</strong> vill åtgärda plattformarnas makt strukturellt – konkurrensregler, interoperabilitet, insyn och rätten att välja bort profilstyrda flöden.</li><li><strong>Smalare eller vagare (Sverigedemokraterna, Liberalerna, Moderaterna):</strong> håller frågan vid att märka manipulerat innehåll, en geopolitisk oro för auktoritärt styrda modeller, respektive en vag avvägning där mer kunskap ska minska riskerna.</li><li><strong>Det egna tänkandet (Liberalerna):</strong> i stort sett ensamt om att lyfta risken att AI urholkar omdömet, med en stark kunskapsskola som värn; Piratpartiet och, smalt, Moderaterna berör den delvis.</li></ul>
+</div>
+<details class="perspektiv-foldout">
+<summary>Bygger på <span class="count">2 analyserade perspektiv</span>, samtliga med källhänvisningar</summary>
+<div class="perspektiv-lista">
+<article class="perspektiv" id="p12">
+<span class="pnum">Perspektiv 12</span>
+<h4>Demokrati I – informationslandskapet</h4>
+<div class="grundbild"><p>Nästan alla partier ser AI som ett verkligt hot mot demokratin, inte bara som enskilda bedrägerier. Två sammanflätade oroshärdar återkommer: dels desinformation och deepfakes som gör det svårare att skilja sant från falskt och som ska mötas med källkritik, granskning och märkning, dels att makten över informationsflödet – vad medborgarna faktiskt ser – samlas hos ett fåtal, ofta utländska, teknikjättar. Den senare oron knyts ofta till behovet av europeisk digital självständighet. Ett parti stannar vid en vag avvägning – ser både möjligheter och risker, men pekar inte ut något konkret och lutar sig mot att mer kunskap ska minska riskerna.</p></div>
+<div class="variation nyanser">
+<span class="vlabel">Nyanser</span>
+<ul><li><strong>Piratpartiet, Centerpartiet och Miljöpartiet:</strong> gör maktkoncentrationen till själva kärnan och vill åtgärda den strukturellt. Piratpartiet är skarpast och menar att det avgörande inte är den enskilda falska bilden utan att ett fåtal privata aktörer kontrollerar infrastrukturen för det offentliga samtalet – motmedlet är konkurrensregler, interoperabilitet och rätten att välja bort profilstyrda flöden. Centerpartiet vill utreda plattformsföretagens makt och kräva öppenhet i politisk kommunikation; Miljöpartiet betonar insyn i systemen och digital suveränitet.</li><li><strong>Sverigedemokraterna, Liberalerna och Moderaterna:</strong> håller frågan smalare eller vagare. Sverigedemokraterna ser den mest som ett problem att upptäcka och märka manipulerat innehåll och påminner om att desinformation inte är något nytt. Liberalerna ramar in den geopolitiskt – risken att språkmodeller styrs av auktoritära regimer eller enskilda teknikjättar, mött med en europeisk motvikt – snarare än som plattformarnas makt över det inhemska samtalet. Moderaterna är vagast av alla: ser en "blandning av möjligheter och risker" men pekar inte ut plattformarnas makt och stannar vid att ökad kunskap och utbildning ska dämpa de negativa effekterna.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Piratpartiet:</strong> enkätsvar (partiförfattat, undertecknat av partiledaren): "Det största demokratiska problemet är inte en enskild falsk bild eller text, utan att ett fåtal privata aktörer kontrollerar infrastrukturen för vad människor ser." Vill bryta maktkoncentrationen genom konkurrensregler, interoperabilitet, dataportabilitet och möjlighet att välja bort profilbaserade flöden; större transparens för politiska annonser och rekommendationssystem, men nej till uppladdningsfilter, realnamnskrav och "statliga sanningsmyndigheter". Förankrat i principprogram 5.0.</li><li><strong>Centerpartiet:</strong> enkätsvar (partiförfattat): vill "utreda de globala plattformsföretagens makt över det offentliga samtalet", krav på full transparens i politisk kommunikation mot anonyma trollkonton, samt cyberhemvärn och IT-haverikommission för motståndskraft.</li><li><strong>Miljöpartiet:</strong> enkätsvar (partiförfattat): risk att "ett fåtal globala teknikföretag får ett oproportionerligt inflytande över information, offentlighet och demokratiska processer"; krav på transparens kring träningsdata och algoritmer, redovisning av när AI används, och stärkt europeisk digital suveränitet. Nämner även realistiska AI-filmer/-bilder framtagna för att vilseleda.</li><li><strong>Socialdemokraterna:</strong> enkätsvar och webbsida (partiförfattat): två fronter – att ledande AI-modeller ägs av utländska företag och ibland av "stater som utgör hot mot Sverige" (central digital infrastruktur utanför demokratisk kontroll), och att trovärdig desinformation blir lättare att sprida, vilket ställer krav på källkritik och motmedel från stat, media och medborgare. Flera enskilda motioner/frågor fördjupar (t.ex. "AI och demokratins grunder", märkning av AI-material, politisk desinformation) – indikationer på bredd, inte beslutad valplattform (AI saknas i "Plan för Sverige").</li><li><strong>Kristdemokraterna:</strong> enkätsvar (partiförfattat): nämner både desinformation/manipulation/cyberangrepp och "ökad koncentration av makt hos ett fåtal globala teknikaktörer"; konkreta åtgärder riktas mot företag som möjliggör deepfakes, stärkt källkritik i skolan samt stärkt digital suveränitet. Ligger inom grundbilden men landar i generella åtgärder snarare än strukturell plattformsreglering.</li><li><strong>Liberalerna:</strong> enkätsvar och webbsida (partiförfattat): gemensam AI-säkerhetsstrategi för Sverige/EU mot desinformation och cyberattacker; särskild oro för att språkmodeller kontrolleras av auktoritära regimer eller enskilda teknikjättar och sprider vinklad information – därav en "europeisk motvikt". Geopolitisk inramning snarare än inhemsk plattformsmakt.</li><li><strong>Sverigedemokraterna:</strong> enkätsvar (partiförfattat, kortast av alla): ser allvarligt på att det blir svårare att skilja sant från falskt, men framhåller att "problematiken i sig inte är helt ny". Tyngdpunkt på granskning av källor samt upptäckt och märkning av manipulerat material, och bibehållet mänskligt ansvar i demokratiska beslut. Nämner maktkoncentration men utvecklar den inte.</li><li><strong>Vänsterpartiet:</strong> enkätsvar (partiförfattat): räknar upp "påverkan på demokratins funktionssätt" bland riskerna (jämte desinformation, diskriminering, minskad tillit, fientlig användning), men landar i den generella principen att all AI-användning, särskilt i offentlig verksamhet, ska föregås av noggranna konsekvensanalyser. Ingen egen linje om plattformsmakt. AI saknas i partiprogram och valplattform.</li><li><strong>Moderaterna:</strong> enkätsvaret (partiförfattat) tar upp frågan men vagt: "svårt för oss alla att fullt bedöma" effekterna, AI kan både ge medborgare bättre insyn och "nyttjas av krafter som vill styra eller begränsa" systemet, alltså "en blandning av möjligheter och risker". Ingen utpekad plattformsmakt och inga strukturella åtgärder; tyngdpunkten ligger på att "utbildning och kunskap" ska minska de negativa effekterna. Vagast av alla partier i sakfrågan.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p13">
+<span class="pnum">Perspektiv 13</span>
+<h4>Demokrati II – kognition och bildning</h4>
+<div class="grundbild"><p>Frågan om att AI kan försvaga medborgarnas eget tänkande och omdöme är i det närmaste orörd. Partierna talar gärna om att bygga kunskap och källkritik inför en AI-driven vardag, men nästan ingen ställer den motsatta frågan: om att luta sig mot tekniken kan avlasta bort själva tänkandet och göra oss mindre självständiga. AI beskrivs som ett stöd att lära sig behärska, sällan som något som riskerar att urholka förmågan att tänka på egen hand.</p></div>
+<div class="variation avvikelser">
+<span class="vlabel">Avvikelser</span>
+<ul><li><strong>Liberalerna:</strong> Går längst i att lyfta risken. En stark kunskapsskola beskrivs som den bästa försäkringen: medborgare som kan läsa, räkna och tänka självständigt använder AI så att den egna förmågan stärks "i stället för att tekniken urholkar deras autonomi". AI ska vara "ett verktyg, inte tvärtom", och digitaliseringen i skolan anses ha gått för långt.</li><li><strong>Piratpartiet:</strong> Vill att kunnigheten sträcker sig bortom att skriva instruktioner till en chatt – att förstå systemens felkällor och maktstrukturer – och att utbildningens uppgift att ge människor förmåga att tänka och delta självständigt inte reduceras till det teknikföretagen efterfrågar. Tonvikten ligger dock på kritisk kompetens snarare än på tänkandets urholkning.</li><li><strong>Moderaterna:</strong> Vill ha "tydliga riktlinjer som säkerställer att tekniken stärker snarare än underminerar mänskligt omdöme och ansvar", och se över examination och betygssättning "så att elevers kunskaper verkligen är deras egna". Berör därmed risken att lärandet urholkas – men avgränsat till skolans examination, inte som en bredare fråga om tänkandets självständighet.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Liberalerna:</strong> Enkätsvar 2026: "Bildade medborgare som kan läsa, räkna och tänka självständigt är bäst rustade att använda AI på ett sätt som stärker deras egen förmåga, i stället för att tekniken urholkar deras autonomi"; grundskolan ska ge kunskap att "förhålla sig till AI som ett verktyg, inte tvärtom". Valmanifest 2026: "Digitaliseringen i skolan har gått för långt", "Från skärm till pärm", mer lärarledd undervisning och läroböcker. Detta är den enda tydliga och partiförfattade rösten som direkt adresserar risken att tekniken försvagar det egna tänkandet.</li><li><strong>Piratpartiet:</strong> Enkätsvar 2026 (signerat av partiledaren): AI-kunnighet handlar "inte bara om att lära människor skriva instruktioner till en chattbot, utan om att förstå systemens möjligheter, begränsningar, resursåtgång, felkällor och maktstrukturer"; utbildningen "ska ge människor förmåga att tänka, skapa, samarbeta och delta självständigt i samhället". Berör tänkandets självständighet, men glider mot kritisk kompetens (jfr perspektivet om kompetenslyft) snarare än risken att AI ersätter omdömet.</li><li><strong>Moderaterna:</strong> Enkätsvar 2026: AI ska omgärdas av "tydliga riktlinjer som säkerställer att tekniken stärker snarare än underminerar mänskligt omdöme och ansvar"; skolan ska få nationell vägledning för AI-användning och en översyn av examination och betygssättning "så att elevers kunskaper verkligen är deras egna". Adresserar risken att tekniken tränger undan eget kunnande, men smalt – kopplat till examination och fusk snarare än till tänkandets självständighet i stort.</li><li><strong>Övriga partier (S, SD, C, V, KD, MP):</strong> Ingen behandlar risken att AI urholkar det egna tänkandet. Där skola och bildning nämns i AI-sammanhang gäller det att bygga källkritik och kompetens – t.ex. Kristdemokraternas "stärkt källkritik och digital kompetens i skolan" och Centerpartiets och Miljöpartiets breda folkbildning – vilket är att stärka förmåga, inte att värja den mot att tänkandet avlastas bort. Sådana satsningar räknas inte som att frågan adresseras.</li><li><strong>Källförbehåll:</strong> Bilden vilar på partiförfattat material (enkätsvar, valmanifest, principprogram). Formuleringar om källkritik eller kompetenslyft har medvetet inte räknats som att ett parti tar upp risken att AI försvagar det egna omdömet; endast Liberalerna gör det uttalat, medan Piratpartiet och – smalt, via skolans examination – Moderaterna berör den delvis.</li></ul></div>
+</details></article>
+</div>
+</details>
+</section>
+<section class="omrade" id="omrade-6" data-num="6" data-title="Hur möter vi omvälvande förändringar?">
+<div class="fraga-head">
+<span class="fraga-num">6</span>
+<h2 class="fraga">Hur möter vi omvälvande förändringar?</h2>
+</div>
+<div class="omrade-grund"><p>Ju längre bort från effektiviseringen här och nu en fråga ligger, desto tystare blir partierna. Tanken att AI kan förändra samhällets grunder – inte bara effektivisera det som redan finns – finns knappt som mer än en formulering. Storskaliga risker för att tekniken missbrukas, som autonoma vapen eller angrepp på samhällskritisk infrastruktur, nämns sällan. Allra tystast är det om möjligheten att AI:s egen förmågetillväxt en dag går ur mänsklig kontroll – den berörs på allvar en enda gång i hela materialet, i en enskild ledamots inlaga, aldrig i något partis valdokument. Och AI:s eget klimatavtryck väger nästan ingen in. Det handlar inte om att partierna gör fel avvägningar i dessa frågor, utan om att avvägningarna aldrig görs.</p></div>
+<div class="skiljer">
+<span class="skiljer-label">Här skiljer de sig</span>
+<ul><li><strong>Enstaka röster bryter tystnaden:</strong> Miljöpartiet är ensamt om att systematiskt väga in AI:s klimat- och resursavtryck och vill att Sverige driver ett totalförbud mot autonoma vapen; Liberalerna vill skydda kritisk infrastruktur mot cyberangrepp. Det är undantagen som bekräftar tystnaden.</li><li><strong>Den skarpaste tystnaden:</strong> att avancerad AI i förlängningen kan bli okontrollerbar tas inte upp av något parti i dess valmaterial. Enda gången temat berörs är i en enskild riksdagsledamots inlaga, som ansvarigt statsråd avfärdade som alltför dystopisk.</li></ul>
+</div>
+<details class="perspektiv-foldout">
+<summary>Bygger på <span class="count">4 analyserade perspektiv</span>, samtliga med källhänvisningar</summary>
+<div class="perspektiv-lista">
+<article class="perspektiv" id="p15">
+<span class="pnum">Perspektiv 15</span>
+<h4>Miljö, energi och AI:s klimatavtryck</h4>
+<div class="grundbild"><p>AI:s egen miljöpåverkan – energin, materialen och resurserna som storskalig AI kräver – väger partierna i praktiken inte in. Den sidan av frågan är nästan helt frånvarande. Den andra sidan, AI som verktyg i klimatomställningen, skymtar hos några: att tekniken kan effektivisera energianvändning, jordbruk och resursförvaltning. Men det stannar oftast vid passerande omnämnanden. Att väga teknikens klimatnytta mot dess klimatkostnad görs knappast alls.</p></div>
+<div class="variation avvikelser">
+<span class="vlabel">Avvikelser</span>
+<ul><li><strong>Miljöpartiet:</strong> ensamt om att göra miljön till en systematisk del av sin AI-politik, och det enda parti som alls tar upp teknikens egen resursåtgång. Vill både använda AI i den gröna omställningen – smarta elnät, precisionsjordbruk, cirkulär ekonomi, klimatanpassning – och ställa krav på att AI:s egen energi- och materialförbrukning hålls nere, med den uttalade oron att tekniken kan bidra med mer utsläpp än den sparar.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Miljöpartiet:</strong> både halvorna belagda i det partiförfattade och beslutade materialet. Programfördjupningen "En grön AI-politik" (2022) och det politiska handlingsprogrammet 2026–2030 utvecklar AI för smarta elnät, precisionsjordbruk, cirkulär ekonomi och klimatanpassning, och slår samtidigt fast att AI kan bidra till mer klimatutsläpp än den minskar och att resursåtgången måste förebyggas. Enkätsvaret 2026 (signerat) upprepar att utvecklingen "är en fråga om utvinning av resurser, såväl mänskliga som ändliga material- och energiresurser". Klart bredast belägg av alla partier.</li><li><strong>Vänsterpartiet:</strong> enkätsvaret 2026 (partiförfattat) anger att tekniken bör användas för att "bidra till att lösa klimatomställningen" – AI som verktyg, ingen beröring av teknikens egen förbrukning.</li><li><strong>Liberalerna:</strong> enkätsvaret 2026 nämner klimatarbete som ett av flera användningsområden i förbigående.</li><li><strong>Socialdemokraterna:</strong> en enskild ledamotsmotion (2024/25:2457) om AI:s roll i den digitala och gröna omställningen lyfter effektivare energianvändning och minskat koldioxidavtryck. Enskild motion, inte beslutad partilinje; temat saknas i partiets valdokument.</li><li><strong>Moderaterna:</strong> talar om elförsörjning, kärnkraft, fossilfri el och datacenter, men motivet är kapacitet och konkurrenskraft ("Europas Silicon Valley"), inte att begränsa AI:s miljöpåverkan – hör därför inte hit som miljöperspektiv. Enkätsvaret tar inte upp AI:s miljöpåverkan; bilden av energifrågan bygger på podd och webb.</li><li><strong>Sverigedemokraterna:</strong> motionernas "hållbar" AI-politik avser mänsklig kontroll och driftsäker energitillgång, inte klimat- eller miljöhänsyn.</li><li><strong>Piratpartiet:</strong> nämner AI:s "resursåtgång" enbart som något medborgare bör förstå (AI-kunnighet), inte som ett miljöpolitiskt krav.</li><li><strong>Centerpartiet, Kristdemokraterna:</strong> berör inte AI:s miljö- eller klimatpåverkan i tillgängligt material.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p16">
+<span class="pnum">Perspektiv 16</span>
+<h4>Transformativ AI – tre steg</h4>
+<div class="grundbild"><p>Nästan alla partier ser AI som viktig och betonar att utvecklingen går snabbt – Sverige får inte hamna efter. Men steget vidare, att AI kan ändra samhällets grundförutsättningar och inte bara göra det vi redan gör effektivare, tas sällan. I praktiken hanteras AI som ett verktyg för produktivitet, tillväxt och bättre offentlig service, och mötet med förändringen blir utbildning och omställning. Konkreta planer för att möta en genomgripande samhällsomvandling – där arbete, ekonomi eller institutioner fungerar på ett annat sätt – saknas i det närmaste helt.</p></div>
+<div class="variation avvikelser">
+<span class="vlabel">Avvikelser</span>
+<ul><li><strong>Piratpartiet och Moderaterna:</strong> går längst i att beskriva själva förändringen som genomgripande. Piratpartiet ramar teknikutvecklingen som något som ändrar "vad det betyder att vara människa" och menar att dagens institutioner är illa lämpade att hantera den; Moderaterna talar om ett paradigmskifte "som påverkar i princip allting". Men ingen av dem omsätter insikten i beredskap – hos det ena blir den en demokrati- och maktkritik, hos det andra en tillväxtvision.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Socialdemokraterna:</strong> talar om att strukturomvandling ska ske men att ingen ska lämnas efter, och beskriver uteblivet handlande som "farlig, kostsam" (enkätsvar). Medvetenhet om hastigheten finns; inramningen är effektivisering och omställning, inte systemförändring.</li><li><strong>Moderaterna:</strong> enkätsvaret kallar AI "ett historiskt tekniksprång i klass med ångmaskinen och elektriciteten" (enkätsvar), i linje med poddens "paradigmskifte som påverkar i princip allting" och målen "Europas Silicon Valley" och "rikast i EU om tio år" (podd, webbsida). Ett omvälvande anslag, men riktat mot ekonomisk möjlighet snarare än beredskap för samhällsomvandling. Partilinjen nu partiförfattat belagd; AI saknas dock i partiets infångade valmanifest.</li><li><strong>Sverigedemokraterna:</strong> "teknikrealism" – ta vara på möjligheterna, hantera riskerna, behålla mänsklig kontroll (enkätsvar). Motioner föreslår statlig struktur (nationell AI-plan, AI task force, AI-utskott), men motiverad av styrning och säkerhet, inte av att förutsättningarna ändras. Merparten av motionerna är enskilda ledamöters, flera av samma person – indikation snarare än beslutad linje.</li><li><strong>Centerpartiet:</strong> "teknikoptimister, men inte naiva", med målet att bli bäst i världen på att använda AI och konkreta innovationssatsningar (enkätsvar, webbsida). Hastighet och möjligheter betonas; ingen uttalad bild av att samhällets grunder ändras.</li><li><strong>Vänsterpartiet:</strong> samhället "måste aktivt styra utvecklingen", och produktivitetsvinster ska kunna tas ut som arbetstidsförkortning med bibehållen lön (enkätsvar). Drar en praktisk konsekvens av förändringen, men som fördelningsfråga. AI saknas i partiprogram och valplattform.</li><li><strong>Kristdemokraterna:</strong> innovationsfrämjande med proportionerlig reglering, i hög grad med regeringens AI-strategi som ram; mål att nå topp tio (enkätsvar). Medvetenhet om betydelsen finns; inget resonemang om grundläggande samhällsförändring. Principprogrammet nämner inte AI.</li><li><strong>Liberalerna:</strong> teknikoptimism med skydd för individens rättigheter; i valmanifestet noteras att "när AI är vardag" blir källkritik viktigare (enkätsvar, valmanifest). Konstaterar att AI blir en del av vardagen, men utan att teckna en genomgripande omvandling.</li><li><strong>Miljöpartiet:</strong> det bredaste materialet, med tesen att AI ändrar förutsättningarna och att vinsterna ska fördelas – gärna via förkortad arbetstid eller mer tid till mellanmänskliga möten – samt försiktighetsprincip (handlingsprogram, "En grön AI-politik", enkätsvar). Närmast en praktisk slutsats, men fortfarande som fördelningspolitik, inte som beredskapsplan.</li><li><strong>Piratpartiet:</strong> principprogrammets inledning "Digitaliseringen förändrar allt" ramar utvecklingen som något som ändrar "vad det betyder att vara människa" och som institutioner och politiker är "illa lämpade att hantera"; basinkomst lyfts på sikt (principprogram 5.0, enkätsvar). Det mest omvälvande anslaget – men centrerat på digitalisering och plattformsmakt, inte på AI:s egen förmågetillväxt, och utan konkret beredskap. Positionerna är förankrade i det antagna principprogrammet, alltså partilinje.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p17">
+<span class="pnum">Perspektiv 17</span>
+<h4>Systemhotande risk I – missbrukskatastrof</h4>
+<div class="grundbild"><p>Att AI avsiktligt skulle användas av människor eller stater för storskalig, samhällshotande skada – autonoma vapen, biologiska hot eller angrepp på samhällets kritiska funktioner – är en fråga som nästan inget parti lyfter. När partierna talar om AI:s risker avser de oftast något smalare: bedrägerier, desinformation, partiska system och hot mot den personliga integriteten. Den katastrofala missbruksdimensionen lyser i stort med sin frånvaro, och där den skymtar handlar det snarare om att skydda samhället än om att peka ut AI som ett vapen.</p></div>
+<div class="variation avvikelser">
+<span class="vlabel">Avvikelser</span>
+<ul><li><strong>Miljöpartiet:</strong> går längst och vill att Sverige driver ett totalförbud mot autonoma vapensystem och att AI inte ska få användas för att utveckla vapen – den enda uttalade hållningen mot AI som medel för dödligt våld.</li><li><strong>Liberalerna:</strong> vill ha en gemensam europeisk säkerhetsstrategi som skyddar kritisk infrastruktur mot cyberattacker, och varnar för att avancerade AI-modeller kontrolleras av auktoritära stater och kan bli ett påtryckningsmedel mot Europa.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Miljöpartiet:</strong> kräver att Sverige arbetar för "ett totalförbud mot att använda autonoma vapensystem" (programfördjupningen "En grön AI-politik", 2022) och att Sverige i EU verkar för att AI "inte används för utveckling av vapensystem" (motion 2025/26:3425). Partiförfattat och beslutat – det tydligaste och bäst belagda inslaget för perspektivet.</li><li><strong>Liberalerna:</strong> "Sverige och EU behöver en gemensam AI-säkerhetsstrategi" mot desinformation och cyberattacker, med särskild oro för att språkmodeller "kontrolleras av auktoritära regimer" (enkätsvar); webbsidan är mer explicit och talar om en europeisk AI-säkerhetsstrategi för att "skydda demokratiska samhällen och kritisk infrastruktur" mot cyberhot och "missbruk av AI-teknik". Partiförfattat (enkät, webb, valmanifest).</li><li><strong>Sverigedemokraterna:</strong> framhåller att känslig data aldrig får lämna svensk jurisdiktion och att molnval är "en strategisk säkerhetspolitisk fråga" som del av totalförsvaret, samt satsningar på cyberresiliens (motion 2025/26:311); enkätsvaret räknar "säkerhetskritisk verksamhet" till högriskområdena. Källförbehåll: den utvecklade texten är en motion buren av en enskild ledamot, och inramningen ligger nära beredskap/digital suveränitet snarare än storskalig missbrukskatastrof.</li><li><strong>Kristdemokraterna:</strong> nämner "AI-drivna cyberattacker" och cyberangrepp bland riskerna och vill agera mot AI-modeller som möjliggör skadlig användning (enkätsvar), men håller sig mest till brottslig användning och deepfakes på lägre nivå än det systemhotande.</li><li><strong>Socialdemokraterna:</strong> en skriftlig fråga (Annika Strandhäll) om att avancerad AI väcker risker för det finansiella systemet – automatiserade cyberangrepp, finansiell manipulation och marknadsstörningar. Källförbehåll: enskild ledamots fråga, inte partilinje, och delvis överlappande med autonomirisk (perspektiv 18).</li><li><strong>Avgränsning:</strong> Moderaternas motion 2024/25:2289 talar om "systemhotande funktioner" och att AI "springer iväg" och blir okontrollerbar – det hör till kontrollförlust ur AI:s egen förmåga (perspektiv 18), inte mänskligt uppsåt. Centerpartiets cyberhemvärn och IT-haverikommission handlar om beredskap och demokrativärn. Centerpartiet, Vänsterpartiet och Piratpartiet berör inte storskalig missbruksrisk i denna bemärkelse. Moderaternas enkätsvar berör inte storskalig missbruksrisk; bilden bygger på motioner och podd.</li></ul></div>
+</details></article>
+<article class="perspektiv" id="p18">
+<span class="pnum">Perspektiv 18</span>
+<h4>Systemhotande risk II – kontrollförlust och AGI-säkerhet</h4>
+<div class="grundbild"><p>Att artificiell intelligens skulle kunna växa ur mänsklig kontroll genom sin egen förmågeutveckling – att systemen blir så kapabla att de i förlängningen blir ett hot i sig – är i praktiken helt frånvarande i partiernas AI-politik. Inget parti gör kontrollförlust, eller risken med en intelligens som överträffar människan, till en fråga i sina program eller valdokument. Där risker alls nämns handlar de om hur människan använder tekniken – bedrägeri, övervakning, desinformation, vapen – inte om teknikens egen bana. Detta är materialets tydligaste tystnad.</p></div>
+<div class="variation avvikelser">
+<span class="vlabel">Avvikelser</span>
+<ul><li><strong>Sverigedemokraterna:</strong> En enskild företrädare har lyft frågan i dess skarpaste form – att AI snabbt bygger vidare på sina egna förmågor, kan nå en generell intelligens långt bortom människans, uppvisa självbevarelsedrift och i förlängningen hota mänsklighetens fortlevnad. Det är den enda gången temat om teknikens egen, potentiellt okontrollerbara utveckling berörs på allvar. Den möttes av att ansvarigt statsråd kallade bilden alltför dystopisk, och den har inte återkommit i något partis valmaterial.</li></ul>
+</div>
+<details class="underlag"><summary>Underlag och källor</summary>
+<div class="underlag-body"><ul><li><strong>Samtliga partier (S, M, SD, C, V, KD, L, MP, Piratpartiet):</strong> I enkätsvar, program, valmanifest och motioner behandlas AI-risker genomgående som frågor om mänsklig användning – integritet, desinformation, diskriminering, bedrägeri, autonoma vapen, beroende av techjättar. Ingen adresserar kontrollförlust eller att AI:s egen förmågetillväxt skulle kunna göra systemen okontrollerbara. Perspektivet saknas alltså i allt partiförfattat och beslutat material.</li><li><strong>Piratpartiet (avgränsning):</strong> Principprogrammets formulering att "digitaliseringen förändrar allt" och ändrar "vad det betyder att vara människa" är det mest omvälvande anslaget i materialet, men handlar om digitaliseringens och plattformsmaktens samhällspåverkan – inte om AI:s egen förmågetillväxt bortom mänsklig kontroll. Räknas därför inte hit (hör snarare till perspektiv 16).</li><li><strong>Sverigedemokraterna (avvikelsen):</strong> Interpellation 2022/23:374 "Risker och möjligheter med artificiell intelligens" (Josef Fransson, ställd till civilminister Erik Slottner, inlämnad 2023-05-31, debatterad 2023-08-22). Fransson tar upp teknologisk singularitet (Kurzweil), en intelligens "10, 1 000 eller 1 000 000 gånger mer intelligent än den smartaste människan", att "AI snabbt bygger på sina egna förmågor", att vi "står på randen av att inte längre vara den mest intelligenta varelsen på jorden", generell intelligens, att en AI "snart kommer att uppvisa tecken på självbevarelsedrift", och refererar en enkät där hälften av AI-forskarna anger &gt;10 % risk för mänsklighetens utplåning. Hund-analogin ("I en framtid skulle vi kunna vara hundarna när artificiell intelligens är oss överlägsna") uttrycker kontrollförlust explicit. Detta är genuint perspektiv 18, inte enbart missbruk (perspektiv 17), även om Fransson i samma inlägg också nämner massarbetslöshet, bedrägerier och värdeöverföring till techbolag (perspektiv 4/17).</li><li><strong>Källförbehåll (viktigt):</strong> Interpellationen är en enskild ledamots inlaga från 2023, inte SD:s beslutade linje. Den återfinns varken i SD:s enkätsvar 2026, motion 2025/26:311 eller valplattform (som inte nämner AI alls). Ansvarigt statsråd Erik Slottner (KD) bemötte framställningen som "väl dystopiskt" och sade sig övertygad om att mänskligheten kommer att överleva AI. Interpellationen ska alltså läsas som en enskild röst som bryter tystnaden – inte som ett partis politik, och inte som ett tvärpolitiskt mönster.</li></ul></div>
+</details></article>
+</div>
+</details>
+</section>
+</section>
+</div>
+
+<div class="panel" id="kallor">
+<p class="panel-intro">Alla primärkällor bakom analysen, öppet redovisade. Varje källa finns som redigerbar markdown; där det finns en officiell länk anges den också. Analysen ska gå att kontrollera mot källan.</p>
+<h3 class="grouphead">Enkätsvar 2026</h3><p class="rowspan-note">Nio partier har besvarat samma fem frågor. Moderaterna inkom sist, i augusti 2026.</p><ul class="srclist"><li><span class="src-label">Centerpartiet</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Centerpartiet.md">md</a></span></li><li><span class="src-label">Kristdemokraterna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Kristdemokraterna.md">md</a></span></li><li><span class="src-label">Liberalerna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Liberalerna.md">md</a></span></li><li><span class="src-label">Miljöpartiet</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Miljo%CC%88partiet.md">md</a></span></li><li><span class="src-label">Moderaterna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Moderaterna.md">md</a></span></li><li><span class="src-label">Piratpartiet</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Piratpartiet.md">md</a></span></li><li><span class="src-label">Socialdemokraterna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Socialdemokraterna.md">md</a></span></li><li><span class="src-label">Sverigedemokraterna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Sverigedemokraterna.md">md</a></span></li><li><span class="src-label">Vänsterpartiet</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Va%CC%88nsterpartiet.md">md</a></span></li></ul>
+<h3 class="grouphead">Valmanifest och plattformar 2026</h3><ul class="srclist"><li><span class="src-label">Liberalerna - Valmanifest 2026</span><span class="src-links"><a href="kallor/Valmanifest%202026/Liberalerna%20-%20Valmanifest%202026.md">md</a></span></li><li><span class="src-label">Miljöpartiet - Politiskt handlingsprogram 2026-2030</span><span class="src-links"><a href="kallor/Valmanifest%202026/Miljo%CC%88partiet%20-%20Politiskt%20handlingsprogram%202026-2030.md">md</a></span></li><li><span class="src-label">Sverigedemokraterna - Valplattform - 2026</span><span class="src-links"><a href="kallor/Valmanifest%202026/Sverigedemokraterna%20-%20Valplattform%20-%202026.md">md</a></span></li><li><span class="src-label">Vänsterpartiet - Valplattform - 2026</span><span class="src-links"><a href="kallor/Valmanifest%202026/Va%CC%88nsterpartiet%20-%20Valplattform%20-%202026.md">md</a></span></li></ul>
+<h3 class="grouphead">Parti- och principprogram</h3><ul class="srclist"><li><span class="src-label">Kristdemokraterna principprogram 2025</span><span class="src-links"><a href="kallor/Parti-%20och%20principprogram/Kristdemokraterna%20principprogram%202025.md">md</a></span></li><li><span class="src-label">Miljöpartiet - En grön AI-politik (programfördjupning) - 2022</span><span class="src-links"><a href="kallor/Parti-%20och%20principprogram/Miljo%CC%88partiet%20-%20En%20gro%CC%88n%20AI-politik%20%28programfo%CC%88rdjupning%29%20-%202022.md">md</a></span></li><li><span class="src-label">Piratpartiet - Principprogram 5.0 - 2021</span><span class="src-links"><a href="kallor/Parti-%20och%20principprogram/Piratpartiet%20-%20Principprogram%205.0%20-%202021.md">md</a></span></li><li><span class="src-label">Vänsterpartiet - Partiprogram - 2024</span><span class="src-links"><a href="kallor/Parti-%20och%20principprogram/Va%CC%88nsterpartiet%20-%20Partiprogram%20-%202024.md">md</a></span></li></ul>
+<h3 class="grouphead">EU-valmanifest 2024</h3><ul class="srclist"><li><span class="src-label">Socialdemokraterna - EU-valmanifest 2024</span><span class="src-links"><a href="kallor/EU-valmanifest%202024/Socialdemokraterna%20-%20EU-valmanifest%202024.md">md</a></span></li></ul>
+<h3 class="grouphead">Partiernas webbsidor om AI</h3><ul class="srclist"><li><span class="src-label">Centerpartiet</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Centerpartiet.md">md</a></span></li><li><span class="src-label">Liberalerna</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Liberalerna.md">md</a></span></li><li><span class="src-label">Moderaterna - Sveriges konkurrenskraft</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Moderaterna%20-%20Sveriges%20konkurrenskraft.md">md</a></span></li><li><span class="src-label">Moderaterna - arbetslöshet</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Moderaterna%20-%20arbetslo%CC%88shet.md">md</a></span></li><li><span class="src-label">Moderaterna - jobb och arbetsmarknad</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Moderaterna%20-%20jobb%20och%20arbetsmarknad.md">md</a></span></li><li><span class="src-label">Moderaterna Östergötland - digitalisering</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Moderaterna%20O%CC%88stergo%CC%88tland%20-%20digitalisering.md">md</a></span></li><li><span class="src-label">Socialdemokraterna</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Socialdemokraterna.md">md</a></span></li></ul>
+<h3 class="grouphead">AI Sweden-podden</h3><p class="rowspan-note">Transkripten är AI-genererade (KB-Whisper), inte officiella – verifiera mot ljudet vid citat. Sverigedemokraterna och Piratpartiet saknas i podden.</p><ul class="srclist"><li><span class="src-label">Socialdemokraterna</span><span class="src-links"><a href="https://open.spotify.com/episode/6rAkteSviAZFMu8xbik8R8" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Socialdemokraterna.md">Transkript</a></span></li><li><span class="src-label">Moderaterna</span><span class="src-links"><a href="https://open.spotify.com/episode/75PYBCY4aNte27ehrCDh5b" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Moderaterna.md">Transkript</a></span></li><li><span class="src-label">Centerpartiet</span><span class="src-links"><a href="https://open.spotify.com/episode/3CdZLF8QieoXofnJf1uNNt" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Centerpartiet.md">Transkript</a></span></li><li><span class="src-label">Vänsterpartiet</span><span class="src-links"><a href="https://open.spotify.com/episode/3Mj1sOfkw4U7D7yDODrSDR" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20V%C3%A4nsterpartiet.md">Transkript</a></span></li><li><span class="src-label">Kristdemokraterna</span><span class="src-links"><a href="https://open.spotify.com/episode/4Z8GZ7ApOU1w91SmJBNu6G" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Kristdemokraterna.md">Transkript</a></span></li><li><span class="src-label">Liberalerna</span><span class="src-links"><a href="https://open.spotify.com/episode/6F1M1OLNo6edQKRk93m8Ct" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Liberalerna.md">Transkript</a></span></li><li><span class="src-label">Miljöpartiet</span><span class="src-links"><a href="https://open.spotify.com/episode/2q5xLfJlgltjqwsGoNcVjy" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Milj%C3%B6partiet.md">Transkript</a></span></li></ul>
+<h3 class="grouphead">Riksdagsdokument</h3><p class="rowspan-note">Systematiskt svep av riksdagsdokument med AI i titeln (2021/22–2025/26). De flesta är enskilda motioner – de visar tänkandet inom partierna, inte beslutad politik. Kristdemokraterna och Liberalerna saknar helt dokument med AI i titeln.</p><details class="riksdag"><summary>Visa alla riksdagsdokument</summary><div class="riksdag-body"><p class="party-sub">Socialdemokraterna <span class="cnt">16 dokument</span></p><ul class="srclist"><li><span class="src-label">fr 2024-25-1263 - Konsumentskydd i en AI-driven marknad</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20fr%202024-25-1263%20-%20Konsumentskydd%20i%20en%20AI-driven%20marknad.md">md</a></span></li><li><span class="src-label">fr 2024-25-1274 - AI-driven politisk desinformation</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20fr%202024-25-1274%20-%20AI-driven%20politisk%20desinformation.md">md</a></span></li><li><span class="src-label">fr 2024-25-263 - AI, annan ny teknik och de mänskliga rättigheterna</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20fr%202024-25-263%20-%20AI%2C%20annan%20ny%20teknik%20och%20de%20ma%CC%88nskliga%20ra%CC%88ttigheterna.md">md</a></span></li><li><span class="src-label">fr 2025-26-708 - Avancerad AI och risker för det finansiella systemet</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20fr%202025-26-708%20-%20Avancerad%20AI%20och%20risker%20fo%CC%88r%20det%20finansiella%20systemet.md">md</a></span></li><li><span class="src-label">ip 2023-24-585 - AI-genererad hämndpornografi</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20ip%202023-24-585%20-%20AI-genererad%20ha%CC%88mndpornografi.md">md</a></span></li><li><span class="src-label">mot 2021-22-1592 - Insyn, algoritmer och AI</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202021-22-1592%20-%20Insyn%2C%20algoritmer%20och%20AI.md">md</a></span></li><li><span class="src-label">mot 2022-23-1740 - Insyn, algoritmer och AI</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202022-23-1740%20-%20Insyn%2C%20algoritmer%20och%20AI.md">md</a></span></li><li><span class="src-label">mot 2023-24-1337 - Utredning för att förbättra Sveriges AI-kompetens</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202023-24-1337%20-%20Utredning%20fo%CC%88r%20att%20fo%CC%88rba%CC%88ttra%20Sveriges%20AI-kompetens.md">md</a></span></li><li><span class="src-label">mot 2024-25-1261 - Nationell AI-infrastruktur för offentlig förvaltning</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202024-25-1261%20-%20Nationell%20AI-infrastruktur%20fo%CC%88r%20offentlig%20fo%CC%88rvaltning.md">md</a></span></li><li><span class="src-label">mot 2024-25-1599 - AI i utbildningssystemet</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202024-25-1599%20-%20AI%20i%20utbildningssystemet.md">md</a></span></li><li><span class="src-label">mot 2024-25-2457 - AI s roll i den digitala och gröna omställningen i Väst</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202024-25-2457%20-%20AI%20s%20roll%20i%20den%20digitala%20och%20gro%CC%88na%20omsta%CC%88llningen%20i%20Va%CC%88st.md">md</a></span></li><li><span class="src-label">mot 2024-25-768 - AI och demokratins grunder</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202024-25-768%20-%20AI%20och%20demokratins%20grunder.md">md</a></span></li><li><span class="src-label">mot 2024-25-942 - Artificiell intelligens</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202024-25-942%20-%20Artificiell%20intelligens.md">md</a></span></li><li><span class="src-label">mot 2025-26-1807 - AI i arbetet mot välfärdsbrottslighet</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202025-26-1807%20-%20AI%20i%20arbetet%20mot%20va%CC%88lfa%CC%88rdsbrottslighet.md">md</a></span></li><li><span class="src-label">mot 2025-26-1813 - En AI-utveckling till gagn för arbetstagarna</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202025-26-1813%20-%20En%20AI-utveckling%20till%20gagn%20fo%CC%88r%20arbetstagarna.md">md</a></span></li><li><span class="src-label">mot 2025-26-1815 - Märkning av AI-genererat material för att motverka desi</span><span class="src-links"><a href="kallor/Riksdagsdokument/S%20-%20mot%202025-26-1815%20-%20Ma%CC%88rkning%20av%20AI-genererat%20material%20fo%CC%88r%20att%20motverka%20desi.md">md</a></span></li></ul><p class="party-sub">Moderaterna <span class="cnt">8 dokument</span></p><ul class="srclist"><li><span class="src-label">mot 2023-24-758 - För utbildning och forskning i framkant med AI</span><span class="src-links"><a href="kallor/Riksdagsdokument/M%20-%20mot%202023-24-758%20-%20Fo%CC%88r%20utbildning%20och%20forskning%20i%20framkant%20med%20AI.md">md</a></span></li><li><span class="src-label">mot 2024-25-1236 - Utökat nordiskt samarbete inom AI-fältet för ökad konku</span><span class="src-links"><a href="kallor/Riksdagsdokument/M%20-%20mot%202024-25-1236%20-%20Uto%CC%88kat%20nordiskt%20samarbete%20inom%20AI-fa%CC%88ltet%20fo%CC%88r%20o%CC%88kad%20konku.md">md</a></span></li><li><span class="src-label">mot 2024-25-1282 - Uppdatering av Sveriges AI-strategi</span><span class="src-links"><a href="kallor/Riksdagsdokument/M%20-%20mot%202024-25-1282%20-%20Uppdatering%20av%20Sveriges%20AI-strategi.md">md</a></span></li><li><span class="src-label">mot 2024-25-1284 - Plan för implementering av AI-stöd inom svenska myndigh</span><span class="src-links"><a href="kallor/Riksdagsdokument/M%20-%20mot%202024-25-1284%20-%20Plan%20fo%CC%88r%20implementering%20av%20AI-sto%CC%88d%20inom%20svenska%20myndigh.md">md</a></span></li><li><span class="src-label">mot 2024-25-2289 - AI och rättssäkerheten</span><span class="src-links"><a href="kallor/Riksdagsdokument/M%20-%20mot%202024-25-2289%20-%20AI%20och%20ra%CC%88ttssa%CC%88kerheten.md">md</a></span></li><li><span class="src-label">mot 2025-26-1774 - Risker och möjligheter med artificiell intelligens (AI)</span><span class="src-links"><a href="kallor/Riksdagsdokument/M%20-%20mot%202025-26-1774%20-%20Risker%20och%20mo%CC%88jligheter%20med%20artificiell%20intelligens%20%28AI%29.md">md</a></span></li><li><span class="src-label">mot 2025-26-3137 - En AI-strategi som förenar rättssäkerhet, etik och inno</span><span class="src-links"><a href="kallor/Riksdagsdokument/M%20-%20mot%202025-26-3137%20-%20En%20AI-strategi%20som%20fo%CC%88renar%20ra%CC%88ttssa%CC%88kerhet%2C%20etik%20och%20inno.md">md</a></span></li><li><span class="src-label">mot 2025-26-3345 - Artificiell intelligens inom sjukvården</span><span class="src-links"><a href="kallor/Riksdagsdokument/M%20-%20mot%202025-26-3345%20-%20Artificiell%20intelligens%20inom%20sjukva%CC%8Arden.md">md</a></span></li></ul><p class="party-sub">Sverigedemokraterna <span class="cnt">10 dokument</span></p><ul class="srclist"><li><span class="src-label">fr 2023-24-139 - AI-kommissionen</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20fr%202023-24-139%20-%20AI-kommissionen.md">md</a></span></li><li><span class="src-label">fr 2025-26-219 - Uppföljning av regeringens arbete med AI-kommissionens</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20fr%202025-26-219%20-%20Uppfo%CC%88ljning%20av%20regeringens%20arbete%20med%20AI-kommissionens.md">md</a></span></li><li><span class="src-label">ip 2022-23-374 - Risker och möjligheter med AI (med svar)</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20ip%202022-23-374%20-%20Risker%20och%20mo%CC%88jligheter%20med%20AI%20%28med%20svar%29.md">md</a></span></li><li><span class="src-label">ip 2025-26-551 - Avancerade AI-baserade förarstödssystem i Sverige och E</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20ip%202025-26-551%20-%20Avancerade%20AI-baserade%20fo%CC%88rarsto%CC%88dssystem%20i%20Sverige%20och%20E.md">md</a></span></li><li><span class="src-label">mot 2023-24-497 - En tillförlitlig, konkurrenskraftig och hållbar svensk</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20mot%202023-24-497%20-%20En%20tillfo%CC%88rlitlig%2C%20konkurrenskraftig%20och%20ha%CC%8Allbar%20svensk.md">md</a></span></li><li><span class="src-label">mot 2024-25-1424 - En tillförlitlig, konkurrenskraftig och hållbar svensk</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20mot%202024-25-1424%20-%20En%20tillfo%CC%88rlitlig%2C%20konkurrenskraftig%20och%20ha%CC%8Allbar%20svensk.md">md</a></span></li><li><span class="src-label">mot 2024-25-396 - AI-utbildning inom grundskolan</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20mot%202024-25-396%20-%20AI-utbildning%20inom%20grundskolan.md">md</a></span></li><li><span class="src-label">mot 2025-26-205 - Husläkare och artificiell intelligens</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20mot%202025-26-205%20-%20Husla%CC%88kare%20och%20artificiell%20intelligens.md">md</a></span></li><li><span class="src-label">mot 2025-26-286 - Inrättande av ett särskilt AI-utskott</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20mot%202025-26-286%20-%20Inra%CC%88ttande%20av%20ett%20sa%CC%88rskilt%20AI-utskott.md">md</a></span></li><li><span class="src-label">mot 2025-26-311 - En tillförlitlig, konkurrenskraftig och hållbar svensk</span><span class="src-links"><a href="kallor/Riksdagsdokument/SD%20-%20mot%202025-26-311%20-%20En%20tillfo%CC%88rlitlig%2C%20konkurrenskraftig%20och%20ha%CC%8Allbar%20svensk.md">md</a></span></li></ul><p class="party-sub">Centerpartiet <span class="cnt">1 dokument</span></p><ul class="srclist"><li><span class="src-label">fr 2023-24-338 - Internationella samarbeten om reglering av AI</span><span class="src-links"><a href="kallor/Riksdagsdokument/C%20-%20fr%202023-24-338%20-%20Internationella%20samarbeten%20om%20reglering%20av%20AI.md">md</a></span></li></ul><p class="party-sub">Vänsterpartiet <span class="cnt">4 dokument</span></p><ul class="srclist"><li><span class="src-label">fr 2024-25-728 - Försäkringskassans användning av AI</span><span class="src-links"><a href="kallor/Riksdagsdokument/V%20-%20fr%202024-25-728%20-%20Fo%CC%88rsa%CC%88kringskassans%20anva%CC%88ndning%20av%20AI.md">md</a></span></li><li><span class="src-label">fr 2025-26-209 - AI-bedrägerier inom sjukvården</span><span class="src-links"><a href="kallor/Riksdagsdokument/V%20-%20fr%202025-26-209%20-%20AI-bedra%CC%88gerier%20inom%20sjukva%CC%8Arden.md">md</a></span></li><li><span class="src-label">mot 2023-24-17 - AI och upphovsrätt</span><span class="src-links"><a href="kallor/Riksdagsdokument/V%20-%20mot%202023-24-17%20-%20AI%20och%20upphovsra%CC%88tt.md">md</a></span></li><li><span class="src-label">mot 2025-26-3947 - med anledning av prop. 2025 26 150 Polisens användning</span><span class="src-links"><a href="kallor/Riksdagsdokument/V%20-%20mot%202025-26-3947%20-%20med%20anledning%20av%20prop.%202025%2026%20150%20Polisens%20anva%CC%88ndning.md">md</a></span></li></ul><p class="party-sub">Miljöpartiet <span class="cnt">4 dokument</span></p><ul class="srclist"><li><span class="src-label">mot 2023-24-1522 - Säkra upphovsrätten i ljuset av AI</span><span class="src-links"><a href="kallor/Riksdagsdokument/MP%20-%20mot%202023-24-1522%20-%20Sa%CC%88kra%20upphovsra%CC%88tten%20i%20ljuset%20av%20AI.md">md</a></span></li><li><span class="src-label">mot 2025-26-3320 - För en säker och hållbar AI</span><span class="src-links"><a href="kallor/Riksdagsdokument/MP%20-%20mot%202025-26-3320%20-%20Fo%CC%88r%20en%20sa%CC%88ker%20och%20ha%CC%8Allbar%20AI.md">md</a></span></li><li><span class="src-label">mot 2025-26-3425 - En grön AI-politik</span><span class="src-links"><a href="kallor/Riksdagsdokument/MP%20-%20mot%202025-26-3425%20-%20En%20gro%CC%88n%20AI-politik.md">md</a></span></li><li><span class="src-label">mot 2025-26-3953 - med anledning av prop. 2025 26 150 Polisens användning</span><span class="src-links"><a href="kallor/Riksdagsdokument/MP%20-%20mot%202025-26-3953%20-%20med%20anledning%20av%20prop.%202025%2026%20150%20Polisens%20anva%CC%88ndning.md">md</a></span></li></ul></div></details>
+</div>
+
+<div class="panel" id="om">
+  <section class="intro">
+    <h2 class="sectionhead">Om projektet</h2>
+    <p>Den här sajten kartlägger vad riksdagspartierna och Piratpartiet säger – och inte säger –
+    om artificiell intelligens inför valet hösten 2026. Utgångspunkten är empirisk: vad partierna
+    faktiskt har skrivit och sagt, sammanställt i arton perspektiv med primärkällorna öppet redovisade.</p>
+
+    <h3 class="syntes-sub">Varför</h3>
+    <p>AI pekas ut som en av de mest avgörande frågorna för samhället – av forskning, näringsliv och
+    partierna själva. Ändå är den påfallande frånvarande i valrörelsen. Vi ville göra det gjorda jobbet:
+    gå igenom allt material och visa mönstret, så att väljare kan se var partierna står och var de tiger.</p>
+
+    <h3 class="syntes-sub">Så gjordes analysen</h3>
+    <p>Arbetet med att samla in, sammanställa och analysera materialet har i stor utsträckning gjorts
+    med hjälp av AI, under mänsklig ledning och granskning. Varje slutsats vilar på angivna källor,
+    som redovisas under respektive perspektiv och samlat under fliken Källor. Anser företrädare för
+    något parti att partiets hållning beskrivs på fel sätt är de välkomna att höra av sig, så rättar vi.</p>
+
+    <h3 class="syntes-sub">Vilka vi är</h3>
+    <p><em>[Platshållare – kort om gruppen bakom sajten.]</em></p>
+
+    <h3 class="syntes-sub">Kontakt</h3>
+    <p><em>[Platshållare – e-post och ev. övriga kontaktvägar.]</em></p>
+
+    <p class="rowspan-note">Allt innehåll finns också samlat i en enda fil:
+    <a href="innehall.md">innehall.md</a> – tänkt att vara lätt att arbeta med för både människor och språkmodeller.</p>
+  </section>
+</div>
+
+  <footer>Sammanställt juli 2026 · underlaget uppdateras löpande inför valet</footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.panel).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      updateAreaBar();
+    });
+  });
+
+  // Sticky-rad: visar vilken fråga läsaren är i medan hen scrollar.
+  var areaBar = document.getElementById('areaBar');
+  var abNum = areaBar.querySelector('.ab-num');
+  var abTitle = areaBar.querySelector('.ab-title');
+  var abLink = areaBar.querySelector('a');
+  var omraden = Array.prototype.slice.call(document.querySelectorAll('.omrade'));
+  var ticking = false;
+
+  function updateAreaBar() {
+    if (!document.getElementById('analysen').classList.contains('active')) {
+      areaBar.classList.remove('visible');
+      return;
+    }
+    var line = 100, active = null;
+    for (var i = 0; i < omraden.length; i++) {
+      if (omraden[i].getBoundingClientRect().top <= line) active = omraden[i];
+    }
+    if (active) {
+      abNum.textContent = active.dataset.num;
+      abTitle.textContent = active.dataset.title;
+      abLink.setAttribute('href', '#' + active.id);
+      areaBar.classList.add('visible');
+    } else {
+      areaBar.classList.remove('visible');
+    }
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(function () { updateAreaBar(); ticking = false; });
+      ticking = true;
+    }
+  });
+  updateAreaBar();
+</script>
+</body>
+</html>
