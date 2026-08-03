@@ -28,7 +28,7 @@ Frågan om nya institutioner för att styra AI får förvånansvärt lite plats.
 
 - **Vänsterpartiet:** Vill se staten i tydlig ledarroll och regionala kompetenscenter samt konsekvensanalyser före AI-införande (enkätsvar), men föreslår inget nytt centralt organ.
 
-- **Miljöpartiet:** Har det bredaste AI-materialet men riktar det mot regler, rättigheter och miljö snarare än mot nya svenska institutioner; nämner en etisk kod för AI-utvecklare och aktivt EU- och globalt regelarbete (handlingsprogram, grön AI-politik, enkätsvar).
+- **Miljöpartiet:** Har det bredaste AI-materialet men riktar det mot regler, rättigheter och miljö snarare än mot nya svenska institutioner; nämner en etisk kod för AI-utvecklare och aktivt EU- och globalt regelarbete (handlingsprogram, grön AI-politik, enkätsvar). Närmast en tillsynsfunktion för teknikens egna risker kommer en enskild motion som vill kräva oberoende säkerhetsgranskning av de mest kraftfulla AI-systemen, med flygets och kärnkraftens kontrollordningar som förebild (motion 2025/26:3320) – ett krav på granskning, dock, inte ett förslag om ett nytt organ, och inte beslutad partilinje.
 
 - **Piratpartiet:** Vill bygga gemensam offentlig och europeisk förmåga (beräkningskapacitet, öppna modeller) men pekar inte ut något nytt namngivet organ; fokus ligger på rättssäkerhet, öppna standarder och antimonopol (enkätsvar, principprogram).
 

@@ -17,7 +17,7 @@ Kallar sin egen linje "teknikrealistisk": ta vara på möjligheterna, hantera ri
 
 Statlig struktur och totalförsvar. Inget parti har fler förslag på nya strukturer för AI: en nationell AI-kommitté, en AI task force vid Statsrådsberedningen, en nationell AI-plan, gemensam AI-infrastruktur och molnpolicy för det offentliga, och ett särskilt AI-utskott i riksdagen. Tillsammans med den nationella suveränitetslinjen ger det en profil där AI framför allt är en fråga om statens förmåga och landets säkerhet.
 
-Här finns också materialets skarpaste enskilda röst om AI:s egna risker: en företrädare har lyft frågan om avancerad AI som ett storskaligt, i förlängningen existentiellt hot – den enda gången temat berörs på allvar i hela materialet.
+Här finns också materialets skarpaste enskilda röst om AI:s egna risker: en företrädare har lyft frågan om avancerad AI som ett storskaligt, i förlängningen existentiellt hot. Ingen annan beskriver hotbilden i den formen – enskilda miljöpartister föreslår skyddsmekanismer mot att kraftfull AI går ur kontroll, men namnger aldrig faran på det sättet.
 
 ## Där de tiger
 

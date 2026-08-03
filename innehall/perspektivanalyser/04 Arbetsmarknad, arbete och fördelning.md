@@ -14,7 +14,7 @@ Alla partier utgår från att AI förändrar arbetsmarknaden – en del jobb fö
 
 ## Underlag
 
-- **Socialdemokraterna:** "Strukturomvandlingar kräver att ingen lämnas efter" – vidareutbildning, omställning och starkt socialförsäkringsskydd, aktiv arbetsmarknadspolitik; kopplas till den svenska modellen och partsamarbetet. Ingen fördelningsfråga om vinsten. Källa: enkätsvar 2026 (partiförfattat).
+- **Socialdemokraterna:** "Strukturomvandlingar kräver att ingen lämnas efter" – vidareutbildning, omställning och starkt socialförsäkringsskydd, aktiv arbetsmarknadspolitik; kopplas till den svenska modellen och partsamarbetet. Ingen fördelningsfråga om vinsten. Källa: enkätsvar 2026 (partiförfattat). En enskild motion vill se "en nationell inriktning för AI till gagn för arbetstagare" (2025/26:1813) – riktningen finns alltså hos enskilda ledamöter, men yrkandet är allmänt hållet och saknar motsvarighet i partiets egna texter.
 
 - **Moderaterna:** svaret på att jobb förändras är utbildning och omställning, inte att bromsa tekniken: stärkt livslångt lärande, fler platser i yrkeshögskolan, yrkesväxling med fungerande omställningsstöd och en a-kassa som reformerats till "en tydligare omställningsförsäkring". AI ska "bidra till högre produktivitet, bättre välfärd och fler möjligheter", inte otrygghet. Tillväxt- och konkurrenskraftsinramning utan egen fördelningsfråga (enkätsvar; även poddintervju och webbsidor). Partilinjen nu partiförfattat belagd.
 

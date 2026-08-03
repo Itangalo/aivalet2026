@@ -119,14 +119,15 @@ Nästan alla partier vill ha en riskbaserad och teknikneutral reglering med EU s
 - **Hårdare tag:** Miljöpartiet och Piratpartiet ser reglering som ett demokratiskt värn och vill gå längre.
 ```
 
-Avvikelser används först när något faller *utanför* grundbilden. Här är grundbilden tystnad, och en enda röst bryter den (perspektivet *Kontrollförlust och AGI-säkerhet*):
+Avvikelser används först när något faller *utanför* grundbilden. Här är grundbilden tystnad, och ett par enstaka röster bryter den (perspektivet *Kontrollförlust och AGI-säkerhet*):
 
 ```
 ## Grundbild
 
-Risken att AI:s egen förmågetillväxt leder till kontrollförlust är i praktiken frånvarande i partiernas AI-politik. Ingen gör den till en fråga.
+Risken att AI:s egen förmågetillväxt leder till kontrollförlust är nästan helt frånvarande i partiernas AI-politik. Inget parti gör den till en fråga.
 
 ## Avvikelser
 
-- **Sverigedemokraterna:** en enskild företrädare har lyft frågan om avancerad AI som ett storskaligt, i förlängningen existentiellt hot – den enda gång temat berörs.
+- **Sverigedemokraterna – hotet beskrivs:** en enskild företrädare har lyft frågan om avancerad AI som ett storskaligt, i förlängningen existentiellt hot.
+- **Miljöpartiet – skyddet föreslås:** enskilda ledamöter vill kräva oberoende säkerhetsgranskning av de kraftfullaste systemen och en nödavstängning, utan att namnge hotbilden.
 ```

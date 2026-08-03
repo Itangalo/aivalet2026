@@ -11,7 +11,7 @@ Har det klart mest utvecklade AI-materialet av alla partier. Grundtesen är att 
 - **Hur AI ska styras:** Den tydligaste pro-regleringslinjen av alla nio. Oron gäller inte överreglering utan att skyddsreglerna införs för långsamt – förseningen av EU-reglernas högriskdel ses med stor oro. Sverige ska delta aktivt i internationellt regelarbete, och en etisk kod för AI-utvecklare, liknande läkarnas, föreslås. Beroendet av ett fåtal globala teknikjättar ska brytas med öppna standarder och europeiska moln- och datalösningar.
 - **Den enskildas rättigheter:** Bland de mest utvecklade. Det ska redovisas när AI används, det ska finnas insyn i träningsdata och i hur systemen fungerar, och enskilda ska skyddas mot diskriminering och kunna få upprättelse. Träningsdata är sällan neutral och kan ge orättvisa beslut. Skapare ska kompenseras rättvist – i förlängningen även retroaktivt – när deras verk använts för att träna AI. Polisens ansiktsigenkänning accepteras bara i snäva undantagsfall, med domstolsprövning som huvudregel och en tidsgräns.
 - **Demokratin:** Risken att ett fåtal globala teknikföretag får oproportionerligt inflytande över information och demokratiska processer står i centrum, tillsammans med vilseledande AI-genererat material. Svaret är transparens och europeisk digital suveränitet.
-- **Omvälvande förändringar:** Ensamt om att systematiskt väga in AI:s eget klimat- och resursavtryck, och om att vilja att Sverige driver ett totalförbud mot autonoma vapensystem.
+- **Omvälvande förändringar:** Ensamt om att systematiskt väga in AI:s eget klimat- och resursavtryck, och om att vilja att Sverige driver ett totalförbud mot autonoma vapensystem. Från partiet kommer också materialets enda konkreta förslag på skydd mot att kraftfull AI går ur kontroll: oberoende säkerhetsgranskning av de mest kraftfulla systemen och en nödavstängning som kan stoppa system som utvecklar farliga beteenden – med flyget och kärnkraften som förebild.
 
 ## Utmärkande drag
 
@@ -26,6 +26,8 @@ Nya svenska institutioner föreslås inte – materialet riktas mot regler, rät
 **Källstyrka: stark – den bredaste och djupaste av alla partier.** Underlaget är både partiförfattat och beslutat: programfördjupningen "En grön AI-politik" (2022), det politiska handlingsprogrammet 2026–2030 med eget AI-avsnitt, ett signerat enkätsvar 2026, fyra motioner och en poddintervju.
 
 **Förbehåll.** Upphovsrättskravet på retroaktiv ersättning kommer ur en enskild motion, men frågan återkommer i enkätsvar och handlingsprogram och är därmed också partiförfattat belagd. Hållningen om polisens ansiktsigenkänning kommer ur en kommittémotion – partiets linje i sakfrågan, men inte ur programtext.
+
+**Säkerhetslinjen är svagast förankrad.** Kraven på oberoende säkerhetsgranskning och nödavstängning finns i motionen "För en säker och hållbar AI" (2025/26:3320, Leila Ali Elmi m.fl.), som motiverar dem med att riskerna är "större än vad dagens lagstiftning kan hantera" och åberopar forskarna Max Tegmark och Geoffrey Hinton. Det är en enskild motion: temat återkommer inte i partiets enkätsvar, handlingsprogram eller programfördjupning, som i stället betonar miljö, rättigheter och autonoma vapen. Motionen talar heller aldrig om generell intelligens eller förmågetillväxt – den föreslår skydden utan att namnge hotbilden.
 
 ## Källor
 
