@@ -242,6 +242,58 @@ def parse_omraden():
     return areas
 
 
+PARTIER_INTRO_STANDARD = {
+    "Ingress": (
+        "Samma material sett parti för parti. Varje porträtt sammanfattar var partiet står "
+        "i de sex frågorna, vad som är dess egen krok, och var det tiger. Tystnad är inte en "
+        'hållning – där underlaget är tunt eller indirekt sägs det ut, och beläggen ligger '
+        'under "Underlag och källor".\n\n'
+        "> En del av materialet kommer från en enkät där alla partier fick samma fem frågor. "
+        "Svaren speglar därför vad de tillfrågades om, inte nödvändigtvis vad de själva "
+        "prioriterar – väg in det när flera partier tar upp samma sak."),
+    "Utanför riksdagen": (
+        "> Piratpartiet sitter inte i riksdagen och kom med i undersökningen senare. Det är "
+        "en värdefull jämförelsepunkt, men bör hållas isär från riksdagspartierna."),
+}
+
+
+def render_intro_block(raw):
+    """Ingresstext till en flik: vanliga stycken blir panel-intro, '> ' blir en liten not."""
+    parts, para = [], []
+
+    def flush():
+        if para:
+            parts.append(f'<p class="panel-intro">{inline(" ".join(para))}</p>')
+            para.clear()
+
+    for line in raw.splitlines():
+        s = line.strip()
+        if not s:
+            flush()
+        elif s.startswith("> "):
+            flush(); parts.append(f'<p class="rowspan-note">{inline(s[2:])}</p>')
+        else:
+            para.append(s)
+    flush()
+    return "\n".join(parts)
+
+
+def parse_partier_intro():
+    """Läs ramtexterna till fliken Partierna ur partier/Intro.md.
+
+    Avsnittet '## Ingress' står överst på fliken, '## Utanför riksdagen' ovanför
+    Piratpartiet. Saknas filen eller ett avsnitt används standardtexten.
+    """
+    intro = dict(PARTIER_INTRO_STANDARD)
+    path = PARTIER / "Intro.md"
+    if path.exists():
+        secs = split_sections(path.read_text(encoding="utf-8"))
+        for key in intro:
+            if secs.get(key, "").strip():
+                intro[key] = secs[key].strip()
+    return {k: render_intro_block(v) for k, v in intro.items()}
+
+
 def parse_partier():
     """Läs partier/NN Parti.md → lista med partiporträtt.
 
@@ -529,14 +581,8 @@ def render_parti_card(pt):
 
 def build_partier_panel(parties):
     out = ['<div class="panel" id="partier">']
-    out.append('<p class="panel-intro">Samma material sett parti för parti. Varje porträtt '
-               'sammanfattar var partiet står i de sex frågorna, vad som är dess egen krok, '
-               'och var det tiger. Tystnad är inte en hållning – där underlaget är tunt eller '
-               'indirekt sägs det ut, och beläggen ligger under "Underlag och källor".</p>')
-    out.append('<p class="rowspan-note">En del av materialet kommer från en enkät där alla '
-               'partier fick samma fem frågor. Svaren speglar därför vad de tillfrågades om, '
-               'inte nödvändigtvis vad de själva prioriterar – väg in det när flera partier '
-               'tar upp samma sak.</p>')
+    intro = parse_partier_intro()
+    out.append(intro["Ingress"])
     riksdag = [p for p in parties if p["i_riksdagen"]]
     ovriga = [p for p in parties if not p["i_riksdagen"]]
 
@@ -555,9 +601,7 @@ def build_partier_panel(parties):
         out.extend(render_parti_card(p) for p in riksdag)
     if ovriga:
         out.append('<h3 class="grouphead">Utanför riksdagen</h3>')
-        out.append('<p class="rowspan-note">Piratpartiet sitter inte i riksdagen och kom med '
-                   'i undersökningen senare. Det är en värdefull jämförelsepunkt, men bör '
-                   'hållas isär från riksdagspartierna.</p>')
+        out.append(intro["Utanför riksdagen"])
         out.extend(render_parti_card(p) for p in ovriga)
     out.append('</div>')
     return "\n".join(out)
