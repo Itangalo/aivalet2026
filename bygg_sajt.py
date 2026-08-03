@@ -170,6 +170,34 @@ def parse_ramtexter():
     return inledning, sub
 
 
+SAJTHUVUD_STANDARD = {
+    "överrubrik": "Riksdagspartierna + Piratpartiet · inför valet 2026",
+    "rubrik": "Vad säger partierna om AI?",
+    "ingress": ("En empirisk genomgång av vad partierna faktiskt skriver och säger om AI – "
+                "ordnad i sex frågor, med arton analyserade perspektiv och primärkällorna "
+                "under varje."),
+}
+
+
+def parse_sajthuvud():
+    """Läs sajtens rubriktexter ur '## Sajthuvud' i ramtextfilen.
+
+    Formatet är en rad per text: 'Överrubrik: …', 'Rubrik: …', 'Ingress: …'.
+    Saknas avsnittet eller en rad används standardtexten, så att sajten alltid
+    går att bygga.
+    """
+    huvud = dict(SAJTHUVUD_STANDARD)
+    path = ANALYS / "Ramtexter – inledning och syntes.md"
+    if not path.exists():
+        return huvud
+    body = split_sections(path.read_text(encoding="utf-8")).get("Sajthuvud", "")
+    for line in body.splitlines():
+        m = re.match(r"^\s*(Överrubrik|Rubrik|Ingress)\s*:\s*(.+?)\s*$", line)
+        if m:
+            huvud[m.group(1).lower()] = m.group(2)
+    return huvud
+
+
 def parse_perspektiv(num: int):
     path = next(PERSP.glob(f"{num:02d} *.md"))
     text = path.read_text(encoding="utf-8")
@@ -674,6 +702,16 @@ def build_html(inledning, areas, perspektiv, parties=()):
     om = build_om_panel()
     partier_tab = ('<button class="tab" data-panel="partier">Partierna</button>'
                    if parties else "")
+    huvud = parse_sajthuvud()
+    sidtitel = html.escape(huvud["rubrik"])
+    overrubrik = inline(huvud["överrubrik"])
+    ingress = inline(huvud["ingress"])
+    # Håll ihop rubrikens sista ord med det näst sista, så att inte ett kort ord
+    # (t.ex. "AI?") blir ensamt på en egen rad.
+    rubrik = inline(huvud["rubrik"])
+    if rubrik.count(" ") >= 1:
+        head, _, tail = rubrik.rpartition(" ")
+        rubrik = f"{head}&nbsp;{tail}"
     party_bar = ('<div class="area-bar" id="partyBar" data-panel="partier" '
                  'data-items="article.parti">\n'
                  '      <a href="#parti-s"><span class="ab-num"></span>'
@@ -683,7 +721,7 @@ def build_html(inledning, areas, perspektiv, parties=()):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vad säger partierna om AI?</title>
+<title>{sidtitel}</title>
 <style>
 {css}
 </style>
@@ -692,10 +730,9 @@ def build_html(inledning, areas, perspektiv, parties=()):
 <div class="wrap">
 
   <header class="hero">
-    <p class="kicker">Riksdagspartierna + Piratpartiet · inför valet 2026</p>
-    <h1>Vad säger partierna om&nbsp;AI?</h1>
-    <p class="lede">En empirisk genomgång av vad partierna faktiskt skriver och säger om AI –
-    ordnad i sex frågor, med arton analyserade perspektiv och primärkällorna under varje.</p>
+    <p class="kicker">{overrubrik}</p>
+    <h1>{rubrik}</h1>
+    <p class="lede">{ingress}</p>
   </header>
 
   <div class="topbar">

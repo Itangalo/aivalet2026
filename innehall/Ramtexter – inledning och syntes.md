@@ -2,6 +2,14 @@
 
 De två ramtexterna som binder ihop de arton perspektivanalyserna till en helhet. Publik, självbärande text för en intresserad allmän läsare, enligt skrivreglerna i `Analysmetod – grundbild och avvikelser.md`. De är input till sajten (`../4 Sajt/`): inledningen ramar in varför AI är en valfråga hösten 2026, syntesen binder ihop var partierna skiljer sig och var de gemensamt tiger.
 
+## Sajthuvud
+
+Texterna högst upp på sajten. En rad var – ändra texten efter kolon, behåll etiketten. Rubriken används också som sidans titel i webbläsarfliken.
+
+Överrubrik: Riksdagspartierna + Piratpartiet · inför valet 2026
+Rubrik: Vad säger partierna om AI?
+Ingress: En empirisk genomgång av vad partierna faktiskt skriver och säger om AI – ordnad i sex frågor, med arton analyserade perspektiv och primärkällorna under varje.
+
 ## Inledning
 
 Artificiell intelligens omformar samhället och politiken. Tekniken påverkar allt från hur information sprids, lärande i skolan och hur vi arbetar till hur våra demokratiska institutioner fattar beslut. Ändå är frågan omställningen (blir konstigt att hänvisa detta till en fråga) nästan osynlig i valrörelsen. Här har vi samlat vad de åtta riksdagspartierna faktiskt säger om AI – och var de inte pratar om alls.
