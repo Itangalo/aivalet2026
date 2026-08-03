@@ -4,15 +4,7 @@ En empirisk genomgång inför valet 2026. Sammanställd ur källmaterialet i `1 
 
 ## Inledning
 
-Hösten 2026 går Sverige till val. Under mandatperioden som passerat har artificiell intelligens gått från en fråga för teknikintresserade till något som rör nästan allt politiken förvaltar: vården och skolan, jobben och tryggheten, det offentliga samtalet, rättssäkerheten och Sveriges plats i världen. Få tekniker har på så kort tid pekats ut som lika avgörande – av forskning, näringsliv och partierna själva.
-
-Ändå är AI påfallande frånvarande där det borde synas mest. De två största partiernas flaggskeppsdokument inför valet – Socialdemokraternas "Plan för Sverige" och Sverigedemokraternas valplattform – nämner inte AI en enda gång, och inte heller Vänsterpartiets valplattform gör det. Den politik som ändå finns bärs ofta upp av enkätsvar och enskilda ledamöter snarare än av de dokument partierna faktiskt går till val på.
-
-Vad tycker partierna då om AI? Den här genomgången försöker svara så empiriskt som möjligt. Utgångspunkten är källorna: partiprogram, valmanifest, riksdagsmotioner, enkätsvar och offentliga uttalanden – vad partierna faktiskt har skrivit och sagt. Att sammanställa och tolka det kräver omdöme, och de slutsatser vi drar är våra. Men vi håller dem nära beläggen och redovisar dem öppet, så att den som vill kan gå tillbaka till källan och pröva dem själv. Materialet är ojämnt, och även det redovisar vi: vissa partier har utförliga, beslutade texter, andra bärs upp av ett enda enkätsvar eller en poddintervju.
-
-Resultatet är sammanställt i arton perspektiv, från grundhållning och offentlig sektor till demokrati, rättssäkerhet och de mest långtgående konsekvenserna. Genomgående är en sak tydlig: alla nio partier är teknikpositiva och vill att Sverige ska ligga i framkant. Skillnaderna – och de mest talande tystnaderna – finns i vad de betonar näst efter möjligheterna, och i vad de inte säger något om alls.
-
-En anmärkning om metoden: arbetet med att gå igenom, sammanställa och analysera materialet har i stor utsträckning gjorts med hjälp av AI, under mänsklig ledning och granskning. Beläggen redovisas öppet under varje perspektiv så att slutsatserna går att kontrollera mot källan. Om företrädare för något parti anser att partiets hållning beskrivs på fel sätt är de välkomna att höra av sig, så rättar vi.
+Artificiell intelligens omformar samhället och politiken. Tekniken påverkar allt från hur information sprids, lärande i skolan och hur vi arbetar till hur våra demokratiska institutioner fattar beslut. Ändå är frågan omställningen (blir konstigt att hänvisa detta till en fråga) nästan osynlig i valrörelsen. Här har vi samlat vad de åtta riksdagspartierna faktiskt säger om AI – och var de inte pratar om alls.
 
 ## Vad är partiernas grundinställning till AI?
 

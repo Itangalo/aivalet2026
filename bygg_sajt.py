@@ -83,6 +83,7 @@ def inline(text: str) -> str:
     text = html.escape(text, quote=False)
     text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"\*(.+?)\*", r"<em>\1</em>", text)
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", r'<a href="\2">\1</a>', text)
     return text
 
 
@@ -403,7 +404,39 @@ def build_kallor_panel():
     return "\n".join(out)
 
 
+def render_om_md(text):
+    """Liten md-renderare för om-sidan: '# ' → sektionsrubrik, '## ' → underrubrik,
+    '> ' → liten not, övrigt → stycken (med inline fet/kursiv/länk)."""
+    parts, para = [], []
+
+    def flush():
+        if para:
+            parts.append(f'<p>{inline(" ".join(para))}</p>')
+            para.clear()
+
+    for line in text.splitlines():
+        s = line.strip()
+        if not s:
+            flush()
+        elif s.startswith("# "):
+            flush(); parts.append(f'<h2 class="sectionhead">{inline(s[2:])}</h2>')
+        elif s.startswith("## "):
+            flush(); parts.append(f'<h3 class="syntes-sub">{inline(s[3:])}</h3>')
+        elif s.startswith("> "):
+            flush(); parts.append(f'<p class="rowspan-note">{inline(s[2:])}</p>')
+        else:
+            para.append(s)
+    flush()
+    return "\n".join(parts)
+
+
 def build_om_panel():
+    om_file = ANALYS / "Om.md"
+    if om_file.exists():
+        return ('<div class="panel" id="om">\n  <section class="intro">\n'
+                + render_om_md(om_file.read_text(encoding="utf-8"))
+                + '\n  </section>\n</div>')
+    # Fallback (om Om.md saknas, t.ex. i äldre dev-layout)
     return """<div class="panel" id="om">
   <section class="intro">
     <h2 class="sectionhead">Om projektet</h2>
