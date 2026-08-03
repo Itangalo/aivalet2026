@@ -20,7 +20,8 @@ Tack för att du vill bidra. Sajten byggs ur markdown-filerna i det här repot, 
 - `innehall/Ramtexter – inledning och syntes.md` – inledningen, och under `## Sajthuvud` sajtens överrubrik, rubrik och ingress (en rad var, etiketten före kolon ska stå kvar).
 - `innehall/Analysmetod – grundbild och avvikelser.md` – hur analysen görs.
 - `innehall/Om.md` – om-sidan. I avsnittet "Vilka vi är" blir varje stycke på formen `Namn: kort beskrivning` automatiskt ett porträttkort. Bilden hämtas ur `bilder/` från namnet i gemener med bindestreck (Maria Ottosson → `bilder/maria-ottosson.jpg`); saknas bilden visas kortet utan foto. Använd gärna kvadratiska bilder, de beskärs till cirklar.
-- `kallor/` – primärkällorna. Rätta gärna transkriberingsfel, men ändra inte innebörden i ett partis egna ord.
+- `innehall/Källor.md` – texterna och grupperingen på fliken Källor. Varje `## `-avsnitt är en grupp; `Mapp:` pekar ut mappen i `kallor/` vars filer listas automatiskt, och rader som inleds med `>` blir gruppens not.
+- `kallor/` – primärkällorna. Rätta gärna transkriberingsfel, men ändra inte innebörden i ett partis egna ord. Nya filer i en mapp dyker upp på sajten automatiskt.
 
 ## Stil
 

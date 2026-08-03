@@ -369,7 +369,7 @@ def file_links(mdpath: Path) -> str:
     return SEP.join(links)
 
 
-def source_group(title, folder, note=None):
+def source_group(title, folder, note_html=""):
     d = KALLOR / folder
     if not d.exists():
         return ""
@@ -379,12 +379,11 @@ def source_group(title, folder, note=None):
         label = html.escape(p.stem)
         rows.append(f'<li><span class="src-label">{label}</span>'
                     f'<span class="src-links">{file_links(p)}</span></li>')
-    note_html = f'<p class="rowspan-note">{note}</p>' if note else ""
     return (f'<h3 class="grouphead">{html.escape(title)}</h3>'
             f'{note_html}<ul class="srclist">{"".join(rows)}</ul>')
 
 
-def podd_group():
+def podd_group(title="AI Sweden-podden", note_html=""):
     d = KALLOR / "Podd – AI Sweden"
     rows = []
     for party in ["Socialdemokraterna", "Moderaterna", "Centerpartiet", "Vänsterpartiet",
@@ -399,13 +398,11 @@ def podd_group():
         joined = SEP.join(links)
         rows.append(f'<li><span class="src-label">{html.escape(party)}</span>'
                     f'<span class="src-links">{joined}</span></li>')
-    note = ("Transkripten är AI-genererade (KB-Whisper), inte officiella – verifiera mot ljudet vid citat. "
-            "Sverigedemokraterna och Piratpartiet saknas i podden.")
-    return (f'<h3 class="grouphead">AI Sweden-podden</h3>'
-            f'<p class="rowspan-note">{note}</p><ul class="srclist">{"".join(rows)}</ul>')
+    return (f'<h3 class="grouphead">{html.escape(title)}</h3>'
+            f'{note_html}<ul class="srclist">{"".join(rows)}</ul>')
 
 
-def riksdag_group():
+def riksdag_group(title="Riksdagsdokument", note_html=""):
     d = KALLOR / "Riksdagsdokument"
     by_party = {p: [] for p in PARTY_ORDER}
     for p in sorted(d.glob("*.md")):
@@ -428,11 +425,8 @@ def riksdag_group():
         inner.append(f'<p class="party-sub">{PARTY_FULL[party]} '
                      f'<span class="cnt">{len(docs)} dokument</span></p>'
                      f'<ul class="srclist">{rows}</ul>')
-    note = ("Systematiskt svep av riksdagsdokument med AI i titeln (2021/22–2025/26). "
-            "De flesta är enskilda motioner – de visar tänkandet inom partierna, inte beslutad politik. "
-            "Kristdemokraterna och Liberalerna saknar helt dokument med AI i titeln.")
-    return (f'<h3 class="grouphead">Riksdagsdokument</h3>'
-            f'<p class="rowspan-note">{note}</p>'
+    return (f'<h3 class="grouphead">{html.escape(title)}</h3>'
+            f'{note_html}'
             f'<details class="riksdag"><summary>Visa alla riksdagsdokument</summary>'
             f'<div class="riksdag-body">{"".join(inner)}</div></details>')
 
@@ -607,19 +601,91 @@ def build_partier_panel(parties):
     return "\n".join(out)
 
 
+KALLOR_STANDARD = """## Ingress
+
+Alla primärkällor bakom analysen, öppet redovisade. Varje källa finns som redigerbar markdown; där det finns en officiell länk anges den också. Analysen ska gå att kontrollera mot källan.
+
+## Enkätsvar 2026
+
+Mapp: Enkätsvar 2026
+
+> Nio partier har besvarat samma fem frågor. Moderaterna inkom sist, i augusti 2026.
+
+## Valmanifest och plattformar 2026
+
+Mapp: Valmanifest 2026
+
+## Parti- och principprogram
+
+Mapp: Parti- och principprogram
+
+## EU-valmanifest 2024
+
+Mapp: EU-valmanifest 2024
+
+## Partiernas webbsidor om AI
+
+Mapp: Webbsidor om AI
+
+## AI Sweden-podden
+
+Visning: podd
+
+> Transkripten är AI-genererade (KB-Whisper), inte officiella – verifiera mot ljudet vid citat. Sverigedemokraterna och Piratpartiet saknas i podden.
+
+## Riksdagsdokument
+
+Visning: riksdag
+
+> Systematiskt svep av riksdagsdokument med AI i titeln (2021/22–2025/26). De flesta är enskilda motioner – de visar tänkandet inom partierna, inte beslutad politik. Kristdemokraterna och Liberalerna saknar helt dokument med AI i titeln.
+"""
+
+
+def parse_kallor_text():
+    """Läs fliken Källors ramtexter och gruppordning ur Källor.md.
+
+    Varje '## '-avsnitt är en grupp: rubriken blir gruppens namn, 'Mapp: X' pekar
+    ut mappen i kallor/, 'Visning: podd|riksdag' väljer specialrendering, och
+    rader som inleds med '>' blir gruppens not. Avsnittet 'Ingress' är texten
+    överst på fliken. Saknas filen används standardtexten ovan.
+    """
+    path = ANALYS / "Källor.md"
+    raw = path.read_text(encoding="utf-8") if path.exists() else KALLOR_STANDARD
+    secs = split_sections(raw)
+    if "Ingress" not in secs:
+        secs = split_sections(KALLOR_STANDARD)
+
+    ingress, grupper = "", []
+    for titel, body in secs.items():
+        mapp = visning = ""
+        rader = []
+        for line in body.splitlines():
+            m = re.match(r"^\s*(Mapp|Visning)\s*:\s*(.+?)\s*$", line)
+            if m:
+                if m.group(1) == "Mapp":
+                    mapp = m.group(2)
+                else:
+                    visning = m.group(2).lower()
+            else:
+                rader.append(line)
+        text = render_intro_block("\n".join(rader))
+        if titel == "Ingress":
+            ingress = text
+        else:
+            grupper.append({"titel": titel, "mapp": mapp, "visning": visning, "not": text})
+    return ingress, grupper
+
+
 def build_kallor_panel():
-    out = ['<div class="panel" id="kallor">']
-    out.append('<p class="panel-intro">Alla primärkällor bakom analysen, öppet redovisade. '
-               'Varje källa finns som redigerbar markdown; där det finns en officiell länk '
-               'anges den också. Analysen ska gå att kontrollera mot källan.</p>')
-    out.append(source_group("Enkätsvar 2026", "Enkätsvar 2026",
-               "Nio partier har besvarat samma fem frågor. Moderaterna inkom sist, i augusti 2026."))
-    out.append(source_group("Valmanifest och plattformar 2026", "Valmanifest 2026"))
-    out.append(source_group("Parti- och principprogram", "Parti- och principprogram"))
-    out.append(source_group("EU-valmanifest 2024", "EU-valmanifest 2024"))
-    out.append(source_group("Partiernas webbsidor om AI", "Webbsidor om AI"))
-    out.append(podd_group())
-    out.append(riksdag_group())
+    ingress, grupper = parse_kallor_text()
+    out = ['<div class="panel" id="kallor">', ingress]
+    for g in grupper:
+        if g["visning"] == "podd":
+            out.append(podd_group(g["titel"], g["not"]))
+        elif g["visning"] == "riksdag":
+            out.append(riksdag_group(g["titel"], g["not"]))
+        elif g["mapp"]:
+            out.append(source_group(g["titel"], g["mapp"], g["not"]))
     out.append('</div>')
     return "\n".join(out)
 
@@ -1222,6 +1288,8 @@ SOURCE_FILES = [
     "Områdessynteser.md",
     "Ramtexter – inledning och syntes.md",
     "Analysmetod – grundbild och avvikelser.md",
+    "Källor.md",
+    "Om.md",
 ]
 
 
