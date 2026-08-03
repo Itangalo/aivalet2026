@@ -832,6 +832,8 @@ def build_html(inledning, areas, perspektiv, parties=()):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{sidtitel}</title>
+<link rel="icon" type="image/png" sizes="32x32" href="bilder/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="bilder/favicon-180.png">
 <style>
 {css}
 </style>

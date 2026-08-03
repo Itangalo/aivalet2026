@@ -29,3 +29,7 @@ Tack för att du vill bidra. Sajten byggs ur markdown-filerna i det här repot, 
 - Håll påståenden nära källan – varje påstående ska gå att spåra till en källa i `kallor/`.
 
 Efter att en pull request slagits samman bygger projektets underhållare om sajten.
+
+## Favicon
+
+Ikonen i webbläsarfliken ligger i `bilder/`. `favicon.svg` är källfilen; `favicon-32.png` och `favicon-180.png` är utrenderade ur den och är de som sajten länkar, så att utseendet inte beror på vilka typsnitt besökarens dator har. Ändrar du svg:n behöver png-filerna renderas om.
