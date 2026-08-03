@@ -221,9 +221,22 @@
     figure.person img { transition: none; }
   }
   /* Partiporträtt */
+  .oversikt-partier ul {
+    list-style: none; margin: 12px 0 0; padding: 0;
+    display: grid; gap: 8px 18px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+  .oversikt-partier li { font-size: 1.02rem; }
+  .oversikt-partier a { display: flex; align-items: baseline; gap: 9px; }
+  .ov-kort {
+    flex: none; min-width: 2.1em; text-align: center; color: var(--accent);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em;
+    border: 1px solid var(--line); border-radius: 4px; padding: 1px 4px;
+  }
   article.parti {
     background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    padding: 26px 28px; margin: 20px 0; scroll-margin-top: 90px;
+    padding: 26px 28px; margin: 20px 0; scroll-margin-top: 104px;
   }
   .parti-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
   .pkort {
@@ -312,8 +325,11 @@
       <button class="tab" data-panel="kallor">Källor</button>
       <button class="tab" data-panel="om">Om</button>
     </nav>
-    <div class="area-bar" id="areaBar">
+    <div class="area-bar" id="areaBar" data-panel="analysen" data-items=".omrade">
       <a href="#omrade-1"><span class="ab-num"></span><span class="ab-title"></span></a>
+    </div>
+    <div class="area-bar" id="partyBar" data-panel="partier" data-items="article.parti">
+      <a href="#parti-s"><span class="ab-num"></span><span class="ab-title"></span></a>
     </div>
   </div>
 
@@ -654,8 +670,22 @@
 <div class="panel" id="partier">
 <p class="panel-intro">Samma material sett parti för parti. Varje porträtt sammanfattar var partiet står i de sex frågorna, vad som är dess egen krok, och var det tiger. Tystnad är inte en hållning – där underlaget är tunt eller indirekt sägs det ut, och beläggen ligger under "Underlag och källor".</p>
 <p class="rowspan-note">En del av materialet kommer från en enkät där alla partier fick samma fem frågor. Svaren speglar därför vad de tillfrågades om, inte nödvändigtvis vad de själva prioriterar – väg in det när flera partier tar upp samma sak.</p>
+<nav class="oversikt oversikt-partier" aria-label="De nio partierna">
+<p class="oversikt-label">Nio partier</p>
+<ul>
+<li><a href="#parti-s"><span class="ov-kort">S</span>Socialdemokraterna</a></li>
+<li><a href="#parti-m"><span class="ov-kort">M</span>Moderaterna</a></li>
+<li><a href="#parti-sd"><span class="ov-kort">SD</span>Sverigedemokraterna</a></li>
+<li><a href="#parti-c"><span class="ov-kort">C</span>Centerpartiet</a></li>
+<li><a href="#parti-v"><span class="ov-kort">V</span>Vänsterpartiet</a></li>
+<li><a href="#parti-kd"><span class="ov-kort">KD</span>Kristdemokraterna</a></li>
+<li><a href="#parti-l"><span class="ov-kort">L</span>Liberalerna</a></li>
+<li><a href="#parti-mp"><span class="ov-kort">MP</span>Miljöpartiet</a></li>
+<li><a href="#parti-pp"><span class="ov-kort">PP</span>Piratpartiet</a></li>
+</ul>
+</nav>
 <h3 class="grouphead">Riksdagspartierna</h3>
-<article class="parti" id="parti-s">
+<article class="parti" id="parti-s" data-num="S" data-title="Socialdemokraterna">
 <div class="parti-head">
 <span class="pkort">S</span>
 <h3>Socialdemokraterna</h3>
@@ -679,7 +709,7 @@
 <p><strong>Förbehåll.</strong> Merparten av riksdagsdokumenten är enskilda ledamöters motioner och skriftliga frågor. De visar vad som rör sig i partiet, inte vad partiet har beslutat. Det gäller bland annat de punkter som rör diskriminering av minoritetsgrupper, AI:s roll i den gröna omställningen och risker för det finansiella systemet – teman som partiet självt inte driver. Att AI saknas i "Plan för Sverige" och i EU-valmanifestet 2024 är i sig en iakttagelse: AI-politiken bärs av enkätsvaret och av enskilda ledamöter snarare än av de dokument partiet går till val på.</p>
 <ul class="srclist"><li><span class="src-label">Enkätsvar 2026: Socialdemokraterna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Socialdemokraterna.md">md</a></span></li><li><span class="src-label">Webbsidor om AI: Socialdemokraterna</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Socialdemokraterna.md">md</a></span></li><li><span class="src-label">EU-valmanifest 2024: Socialdemokraterna - EU-valmanifest 2024</span><span class="src-links"><a href="kallor/EU-valmanifest%202024/Socialdemokraterna%20-%20EU-valmanifest%202024.md">md</a></span></li><li><span class="src-label">Poddintervju (AI Sweden)</span><span class="src-links"><a href="https://open.spotify.com/episode/6rAkteSviAZFMu8xbik8R8" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Socialdemokraterna.md">Transkript</a></span></li><li><span class="src-label">Riksdagsdokument med AI i titeln</span><span class="src-links">16 st, se fliken Källor</span></li></ul>
 </div></details></article>
-<article class="parti" id="parti-m">
+<article class="parti" id="parti-m" data-num="M" data-title="Moderaterna">
 <div class="parti-head">
 <span class="pkort">M</span>
 <h3>Moderaterna</h3>
@@ -704,7 +734,7 @@
 <p><strong>En ledamot går längre än partilinjen.</strong> Motionen "AI och rättssäkerheten" (2024/25:2289, Ulrik Nilsson) föreslår att algoritmer och träningsdata i offentlig sektor ska vara tillgängliga som allmän handling, att en använd algoritm ska kunna prövas juridiskt även av den som inte själv överklagat sitt beslut, och att vissa domstolar bygger AI-kompetens. Det är skarpare i rättssäkerhetsfrågan än något i partiets egna texter – men det är en enskild motion, och den återkommer inte i enkätsvaret.</p>
 <ul class="srclist"><li><span class="src-label">Enkätsvar 2026: Moderaterna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Moderaterna.md">md</a></span></li><li><span class="src-label">Webbsidor om AI: Moderaterna - Sveriges konkurrenskraft</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Moderaterna%20-%20Sveriges%20konkurrenskraft.md">md</a></span></li><li><span class="src-label">Webbsidor om AI: Moderaterna - jobb och arbetsmarknad</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Moderaterna%20-%20jobb%20och%20arbetsmarknad.md">md</a></span></li><li><span class="src-label">Webbsidor om AI: Moderaterna - arbetslöshet</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Moderaterna%20-%20arbetsl%C3%B6shet.md">md</a></span></li><li><span class="src-label">Webbsidor om AI: Moderaterna Östergötland - digitalisering</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Moderaterna%20%C3%96sterg%C3%B6tland%20-%20digitalisering.md">md</a></span></li><li><span class="src-label">Poddintervju (AI Sweden)</span><span class="src-links"><a href="https://open.spotify.com/episode/75PYBCY4aNte27ehrCDh5b" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Moderaterna.md">Transkript</a></span></li><li><span class="src-label">Riksdagsdokument med AI i titeln</span><span class="src-links">8 st, se fliken Källor</span></li></ul>
 </div></details></article>
-<article class="parti" id="parti-sd">
+<article class="parti" id="parti-sd" data-num="SD" data-title="Sverigedemokraterna">
 <div class="parti-head">
 <span class="pkort">SD</span>
 <h3>Sverigedemokraterna</h3>
@@ -729,7 +759,7 @@
 <p><strong>Förbehåll.</strong> Den mest utvecklade texten är en enskild motion, inte ett partidokument. Merparten av riksdagsdokumenten är enskilda ledamöters motioner, flera av samma ledamot, och utgör indikation snarare än beslutad politik. Det gäller särskilt strukturförslagen och den nationella suveränitetslinjen, som inte finns i enkätsvaret. Även den skarpa rösten om AI:s egna risker är en enskild ledamots interpellation från 2023; ansvarigt statsråd kallade bilden alltför dystopisk, och temat har inte återkommit i partiets valmaterial.</p>
 <ul class="srclist"><li><span class="src-label">Enkätsvar 2026: Sverigedemokraterna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Sverigedemokraterna.md">md</a></span></li><li><span class="src-label">Valmanifest 2026: Sverigedemokraterna - Valplattform - 2026</span><span class="src-links"><a href="kallor/Valmanifest%202026/Sverigedemokraterna%20-%20Valplattform%20-%202026.md">md</a></span></li><li><span class="src-label">Riksdagsdokument med AI i titeln</span><span class="src-links">10 st, se fliken Källor</span></li></ul>
 </div></details></article>
-<article class="parti" id="parti-c">
+<article class="parti" id="parti-c" data-num="C" data-title="Centerpartiet">
 <div class="parti-head">
 <span class="pkort">C</span>
 <h3>Centerpartiet</h3>
@@ -753,7 +783,7 @@
 <p><strong>Förbehåll.</strong> I riksdagen är underlaget mycket tunt: en enda skriftlig fråga, om internationell reglering. Den samordnande "AI-generalen" är belagd på partiets webbsida, inte i enkätsvaret.</p>
 <ul class="srclist"><li><span class="src-label">Enkätsvar 2026: Centerpartiet</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Centerpartiet.md">md</a></span></li><li><span class="src-label">Webbsidor om AI: Centerpartiet</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Centerpartiet.md">md</a></span></li><li><span class="src-label">Poddintervju (AI Sweden)</span><span class="src-links"><a href="https://open.spotify.com/episode/3CdZLF8QieoXofnJf1uNNt" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Centerpartiet.md">Transkript</a></span></li><li><span class="src-label">Riksdagsdokument med AI i titeln</span><span class="src-links">1 st, se fliken Källor</span></li></ul>
 </div></details></article>
-<article class="parti" id="parti-v">
+<article class="parti" id="parti-v" data-num="V" data-title="Vänsterpartiet">
 <div class="parti-head">
 <span class="pkort">V</span>
 <h3>Vänsterpartiet</h3>
@@ -777,7 +807,7 @@
 <p><strong>Förbehåll.</strong> Upphovsrättslinjen vilar på en enskild motion och nämns inte i enkätsvaret. Den skarpa hållningen om polisens ansiktsigenkänning kommer ur en kommittémotion, alltså partiets linje i sakfrågan, medan granskningen av Försäkringskassans AI-användning är enskilda ledamöters. Att partiprogram och valplattform saknar AI helt är i sig en iakttagelse. Uppgifter om nationella minoriteter, samiska språk och digitalt utanförskap finns bara i poddintervjun – talat, oredigerat och med icke-officiellt transkript.</p>
 <ul class="srclist"><li><span class="src-label">Enkätsvar 2026: Vänsterpartiet</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/V%C3%A4nsterpartiet.md">md</a></span></li><li><span class="src-label">Parti- och principprogram: Vänsterpartiet - Partiprogram - 2024</span><span class="src-links"><a href="kallor/Parti-%20och%20principprogram/V%C3%A4nsterpartiet%20-%20Partiprogram%20-%202024.md">md</a></span></li><li><span class="src-label">Valmanifest 2026: Vänsterpartiet - Valplattform - 2026</span><span class="src-links"><a href="kallor/Valmanifest%202026/V%C3%A4nsterpartiet%20-%20Valplattform%20-%202026.md">md</a></span></li><li><span class="src-label">Poddintervju (AI Sweden)</span><span class="src-links"><a href="https://open.spotify.com/episode/3Mj1sOfkw4U7D7yDODrSDR" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20V%C3%A4nsterpartiet.md">Transkript</a></span></li><li><span class="src-label">Riksdagsdokument med AI i titeln</span><span class="src-links">4 st, se fliken Källor</span></li></ul>
 </div></details></article>
-<article class="parti" id="parti-kd">
+<article class="parti" id="parti-kd" data-num="KD" data-title="Kristdemokraterna">
 <div class="parti-head">
 <span class="pkort">KD</span>
 <h3>Kristdemokraterna</h3>
@@ -801,7 +831,7 @@
 <p><strong>Förbehåll.</strong> Att principprogrammet 2025, på 69 sidor, inte nämner AI och att partiet saknar riksdagsdokument om AI är i sig iakttagelser om hur mycket egen AI-politik som finns nedskriven. Partiets hållning i övervakningsfrågan avläses främst ur regeringens proposition om polisens ansiktsigenkänning i realtid, inte ur egna programtexter.</p>
 <ul class="srclist"><li><span class="src-label">Enkätsvar 2026: Kristdemokraterna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Kristdemokraterna.md">md</a></span></li><li><span class="src-label">Parti- och principprogram: Kristdemokraterna principprogram 2025</span><span class="src-links"><a href="kallor/Parti-%20och%20principprogram/Kristdemokraterna%20principprogram%202025.md">md</a></span></li><li><span class="src-label">Poddintervju (AI Sweden)</span><span class="src-links"><a href="https://open.spotify.com/episode/4Z8GZ7ApOU1w91SmJBNu6G" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Kristdemokraterna.md">Transkript</a></span></li></ul>
 </div></details></article>
-<article class="parti" id="parti-l">
+<article class="parti" id="parti-l" data-num="L" data-title="Liberalerna">
 <div class="parti-head">
 <span class="pkort">L</span>
 <h3>Liberalerna</h3>
@@ -825,7 +855,7 @@
 <p><strong>Förbehåll.</strong> Att partiet helt saknar riksdagsdokument om AI gör att bilden vilar på regerings- och programtexter snarare än på riksdagsarbete. I övervakningsfrågan avläses hållningen främst ur regeringens proposition om polisens ansiktsigenkänning, inte ur egna texter.</p>
 <ul class="srclist"><li><span class="src-label">Enkätsvar 2026: Liberalerna</span><span class="src-links"><a href="kallor/Enk%C3%A4tsvar%202026/Liberalerna.md">md</a></span></li><li><span class="src-label">Valmanifest 2026: Liberalerna - Valmanifest 2026</span><span class="src-links"><a href="kallor/Valmanifest%202026/Liberalerna%20-%20Valmanifest%202026.md">md</a></span></li><li><span class="src-label">Webbsidor om AI: Liberalerna</span><span class="src-links"><a href="kallor/Webbsidor%20om%20AI/Liberalerna.md">md</a></span></li><li><span class="src-label">Poddintervju (AI Sweden)</span><span class="src-links"><a href="https://open.spotify.com/episode/6F1M1OLNo6edQKRk93m8Ct" target="_blank" rel="noopener">Spotify</a><span class="sep">·</span><a href="kallor/Podd%20%E2%80%93%20AI%20Sweden/AI%20Sweden%20-%20Liberalerna.md">Transkript</a></span></li></ul>
 </div></details></article>
-<article class="parti" id="parti-mp">
+<article class="parti" id="parti-mp" data-num="MP" data-title="Miljöpartiet">
 <div class="parti-head">
 <span class="pkort">MP</span>
 <h3>Miljöpartiet</h3>
@@ -851,7 +881,7 @@
 </div></details></article>
 <h3 class="grouphead">Utanför riksdagen</h3>
 <p class="rowspan-note">Piratpartiet sitter inte i riksdagen och kom med i undersökningen senare. Det är en värdefull jämförelsepunkt, men bör hållas isär från riksdagspartierna.</p>
-<article class="parti" id="parti-pp">
+<article class="parti" id="parti-pp" data-num="PP" data-title="Piratpartiet">
 <div class="parti-head">
 <span class="pkort">PP</span>
 <h3>Piratpartiet</h3>
@@ -946,31 +976,39 @@
     });
   });
 
-  // Sticky-rad: visar vilken fråga läsaren är i medan hen scrollar.
-  var areaBar = document.getElementById('areaBar');
-  var abNum = areaBar.querySelector('.ab-num');
-  var abTitle = areaBar.querySelector('.ab-title');
-  var abLink = areaBar.querySelector('a');
-  var omraden = Array.prototype.slice.call(document.querySelectorAll('.omrade'));
+  // Sticky-rad: visar vilken fråga (respektive vilket parti) läsaren är i
+  // medan hen scrollar. En rad per flik, samma logik för alla.
+  var bars = Array.prototype.slice.call(document.querySelectorAll('.area-bar')).map(function (bar) {
+    return {
+      el: bar,
+      num: bar.querySelector('.ab-num'),
+      title: bar.querySelector('.ab-title'),
+      link: bar.querySelector('a'),
+      panel: document.getElementById(bar.dataset.panel),
+      items: Array.prototype.slice.call(document.querySelectorAll(bar.dataset.items))
+    };
+  });
   var ticking = false;
 
   function updateAreaBar() {
-    if (!document.getElementById('analysen').classList.contains('active')) {
-      areaBar.classList.remove('visible');
-      return;
-    }
-    var line = 100, active = null;
-    for (var i = 0; i < omraden.length; i++) {
-      if (omraden[i].getBoundingClientRect().top <= line) active = omraden[i];
-    }
-    if (active) {
-      abNum.textContent = active.dataset.num;
-      abTitle.textContent = active.dataset.title;
-      abLink.setAttribute('href', '#' + active.id);
-      areaBar.classList.add('visible');
-    } else {
-      areaBar.classList.remove('visible');
-    }
+    bars.forEach(function (bar) {
+      if (!bar.panel || !bar.panel.classList.contains('active')) {
+        bar.el.classList.remove('visible');
+        return;
+      }
+      var line = 100, active = null;
+      for (var i = 0; i < bar.items.length; i++) {
+        if (bar.items[i].getBoundingClientRect().top <= line) active = bar.items[i];
+      }
+      if (active) {
+        bar.num.textContent = active.dataset.num || '';
+        bar.title.textContent = active.dataset.title || '';
+        bar.link.setAttribute('href', '#' + active.id);
+        bar.el.classList.add('visible');
+      } else {
+        bar.el.classList.remove('visible');
+      }
+    });
   }
 
   window.addEventListener('scroll', function () {

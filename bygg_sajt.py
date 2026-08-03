@@ -449,7 +449,8 @@ def riksdag_docs(kort):
 def render_parti_card(pt):
     """Ett partiporträtt: ingress + sex frågor + krok + tystnad + utfällbart underlag."""
     anchor = f'parti-{(pt["kort"] or pt["namn"]).lower()}'
-    parts = [f'<article class="parti" id="{anchor}">', '<div class="parti-head">']
+    parts = [f'<article class="parti" id="{anchor}" data-num="{html.escape(pt["kort"], quote=True)}"'
+             f' data-title="{html.escape(pt["namn"], quote=True)}">', '<div class="parti-head">']
     if pt["kort"]:
         parts.append(f'<span class="pkort">{inline(pt["kort"])}</span>')
     parts.append(f'<h3>{inline(pt["namn"])}</h3>')
@@ -510,6 +511,17 @@ def build_partier_panel(parties):
                'tar upp samma sak.</p>')
     riksdag = [p for p in parties if p["i_riksdagen"]]
     ovriga = [p for p in parties if not p["i_riksdagen"]]
+
+    # Innehållsförteckning – de nio partierna som klickbara ankare.
+    out.append('<nav class="oversikt oversikt-partier" aria-label="De nio partierna">')
+    out.append('<p class="oversikt-label">Nio partier</p>')
+    out.append('<ul>')
+    for p in parties:
+        anchor = f'parti-{(p["kort"] or p["namn"]).lower()}'
+        kort = f'<span class="ov-kort">{inline(p["kort"])}</span>' if p["kort"] else ""
+        out.append(f'<li><a href="#{anchor}">{kort}{inline(p["namn"])}</a></li>')
+    out.append('</ul>')
+    out.append('</nav>')
     if riksdag:
         out.append('<h3 class="grouphead">Riksdagspartierna</h3>')
         out.extend(render_parti_card(p) for p in riksdag)
@@ -662,6 +674,10 @@ def build_html(inledning, areas, perspektiv, parties=()):
     om = build_om_panel()
     partier_tab = ('<button class="tab" data-panel="partier">Partierna</button>'
                    if parties else "")
+    party_bar = ('<div class="area-bar" id="partyBar" data-panel="partier" '
+                 'data-items="article.parti">\n'
+                 '      <a href="#parti-s"><span class="ab-num"></span>'
+                 '<span class="ab-title"></span></a>\n    </div>') if parties else ""
     return f"""<!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -689,9 +705,10 @@ def build_html(inledning, areas, perspektiv, parties=()):
       <button class="tab" data-panel="kallor">Källor</button>
       <button class="tab" data-panel="om">Om</button>
     </nav>
-    <div class="area-bar" id="areaBar">
+    <div class="area-bar" id="areaBar" data-panel="analysen" data-items=".omrade">
       <a href="#omrade-1"><span class="ab-num"></span><span class="ab-title"></span></a>
     </div>
+    {party_bar}
   </div>
 
 {analys}
@@ -718,31 +735,39 @@ def build_html(inledning, areas, perspektiv, parties=()):
     }});
   }});
 
-  // Sticky-rad: visar vilken fråga läsaren är i medan hen scrollar.
-  var areaBar = document.getElementById('areaBar');
-  var abNum = areaBar.querySelector('.ab-num');
-  var abTitle = areaBar.querySelector('.ab-title');
-  var abLink = areaBar.querySelector('a');
-  var omraden = Array.prototype.slice.call(document.querySelectorAll('.omrade'));
+  // Sticky-rad: visar vilken fråga (respektive vilket parti) läsaren är i
+  // medan hen scrollar. En rad per flik, samma logik för alla.
+  var bars = Array.prototype.slice.call(document.querySelectorAll('.area-bar')).map(function (bar) {{
+    return {{
+      el: bar,
+      num: bar.querySelector('.ab-num'),
+      title: bar.querySelector('.ab-title'),
+      link: bar.querySelector('a'),
+      panel: document.getElementById(bar.dataset.panel),
+      items: Array.prototype.slice.call(document.querySelectorAll(bar.dataset.items))
+    }};
+  }});
   var ticking = false;
 
   function updateAreaBar() {{
-    if (!document.getElementById('analysen').classList.contains('active')) {{
-      areaBar.classList.remove('visible');
-      return;
-    }}
-    var line = 100, active = null;
-    for (var i = 0; i < omraden.length; i++) {{
-      if (omraden[i].getBoundingClientRect().top <= line) active = omraden[i];
-    }}
-    if (active) {{
-      abNum.textContent = active.dataset.num;
-      abTitle.textContent = active.dataset.title;
-      abLink.setAttribute('href', '#' + active.id);
-      areaBar.classList.add('visible');
-    }} else {{
-      areaBar.classList.remove('visible');
-    }}
+    bars.forEach(function (bar) {{
+      if (!bar.panel || !bar.panel.classList.contains('active')) {{
+        bar.el.classList.remove('visible');
+        return;
+      }}
+      var line = 100, active = null;
+      for (var i = 0; i < bar.items.length; i++) {{
+        if (bar.items[i].getBoundingClientRect().top <= line) active = bar.items[i];
+      }}
+      if (active) {{
+        bar.num.textContent = active.dataset.num || '';
+        bar.title.textContent = active.dataset.title || '';
+        bar.link.setAttribute('href', '#' + active.id);
+        bar.el.classList.add('visible');
+      }} else {{
+        bar.el.classList.remove('visible');
+      }}
+    }});
   }}
 
   window.addEventListener('scroll', function () {{
@@ -1021,9 +1046,22 @@ CSS = r"""
     figure.person img { transition: none; }
   }
   /* Partiporträtt */
+  .oversikt-partier ul {
+    list-style: none; margin: 12px 0 0; padding: 0;
+    display: grid; gap: 8px 18px;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  }
+  .oversikt-partier li { font-size: 1.02rem; }
+  .oversikt-partier a { display: flex; align-items: baseline; gap: 9px; }
+  .ov-kort {
+    flex: none; min-width: 2.1em; text-align: center; color: var(--accent);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.74rem; font-weight: 700; letter-spacing: 0.05em;
+    border: 1px solid var(--line); border-radius: 4px; padding: 1px 4px;
+  }
   article.parti {
     background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    padding: 26px 28px; margin: 20px 0; scroll-margin-top: 90px;
+    padding: 26px 28px; margin: 20px 0; scroll-margin-top: 104px;
   }
   .parti-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
   .pkort {
