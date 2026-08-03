@@ -18,6 +18,7 @@ Tack för att du vill bidra. Sajten byggs ur markdown-filerna i det här repot, 
 - `innehall/partier/` – de nio partiporträtten (ingress utan rubrik, Så ställer de sig, Utmärkande drag, Där de tiger, Underlag, Källor). Källor listas som sökvägar relativt `kallor/`, en per rad.
 - `innehall/Ramtexter – inledning och syntes.md` – inledningen.
 - `innehall/Analysmetod – grundbild och avvikelser.md` – hur analysen görs.
+- `innehall/Om.md` – om-sidan. I avsnittet "Vilka vi är" blir varje stycke på formen `Namn: kort beskrivning` automatiskt ett porträttkort. Bilden hämtas ur `bilder/` från namnet i gemener med bindestreck (Maria Ottosson → `bilder/maria-ottosson.jpg`); saknas bilden visas kortet utan foto. Använd gärna kvadratiska bilder, de beskärs till cirklar.
 - `kallor/` – primärkällorna. Rätta gärna transkriberingsfel, men ändra inte innebörden i ett partis egna ord.
 
 ## Stil

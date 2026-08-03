@@ -540,29 +540,80 @@ def build_kallor_panel():
     return "\n".join(out)
 
 
+BILDER = HERE / "bilder"
+PERSON_SEKTION = "Vilka vi är"
+
+
+def person_slug(namn):
+    """'Maria Ottosson' → 'maria-ottosson' (för att hitta bilder/<slug>.jpg)."""
+    s = namn.strip().lower()
+    for a, b in (("å", "a"), ("ä", "a"), ("ö", "o"), ("é", "e"), ("ü", "u")):
+        s = s.replace(a, b)
+    return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+
+
+def person_card(namn, beskrivning):
+    """Porträtt i om-sidans 'Vilka vi är': cirkelbild (om den finns) + namn + rad."""
+    parts = ['<figure class="person">']
+    for ext in (".jpg", ".jpeg", ".png", ".webp"):
+        img = BILDER / f"{person_slug(namn)}{ext}"
+        if img.exists():
+            src = "bilder/" + urllib.parse.quote(img.name)
+            parts.append(f'<img src="{src}" alt="{html.escape(namn, quote=True)}" '
+                         f'width="132" height="132" loading="lazy">')
+            break
+    parts.append('<figcaption>')
+    parts.append(f'<span class="person-namn">{inline(namn)}</span>')
+    parts.append(f'<span class="person-om">{inline(beskrivning)}</span>')
+    parts.append('</figcaption></figure>')
+    return "\n".join(parts)
+
+
 def render_om_md(text):
     """Liten md-renderare för om-sidan: '# ' → sektionsrubrik, '## ' → underrubrik,
-    '> ' → liten not, övrigt → stycken (med inline fet/kursiv/länk)."""
-    parts, para = [], []
+    '> ' → liten not, övrigt → stycken (med inline fet/kursiv/länk).
+
+    I avsnittet 'Vilka vi är' blir stycken på formen 'Namn: beskrivning' i stället
+    porträttkort, med bilden hämtad ur bilder/<namn-i-gemener>.jpg om den finns.
+    """
+    parts, para, personer = [], [], []
+    i_personsektion = False
+
+    def flush_personer():
+        if personer:
+            parts.append('<div class="personer">')
+            parts.extend(personer)
+            parts.append('</div>')
+            personer.clear()
 
     def flush():
-        if para:
-            parts.append(f'<p>{inline(" ".join(para))}</p>')
-            para.clear()
+        if not para:
+            return
+        stycke = " ".join(para)
+        para.clear()
+        m = re.match(r"^([^:]{2,48}):\s+(.+)$", stycke)
+        if i_personsektion and m and not m.group(1).startswith(("[", "*")):
+            personer.append(person_card(m.group(1).strip(), m.group(2).strip()))
+        else:
+            flush_personer()
+            parts.append(f'<p>{inline(stycke)}</p>')
 
     for line in text.splitlines():
         s = line.strip()
         if not s:
             flush()
         elif s.startswith("# "):
-            flush(); parts.append(f'<h2 class="sectionhead">{inline(s[2:])}</h2>')
+            flush(); flush_personer(); i_personsektion = False
+            parts.append(f'<h2 class="sectionhead">{inline(s[2:])}</h2>')
         elif s.startswith("## "):
-            flush(); parts.append(f'<h3 class="syntes-sub">{inline(s[3:])}</h3>')
+            flush(); flush_personer()
+            i_personsektion = s[3:].strip() == PERSON_SEKTION
+            parts.append(f'<h3 class="syntes-sub">{inline(s[3:])}</h3>')
         elif s.startswith("> "):
-            flush(); parts.append(f'<p class="rowspan-note">{inline(s[2:])}</p>')
+            flush(); flush_personer(); parts.append(f'<p class="rowspan-note">{inline(s[2:])}</p>')
         else:
             para.append(s)
-    flush()
+    flush(); flush_personer()
     return "\n".join(parts)
 
 
@@ -937,6 +988,38 @@ CSS = r"""
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 0.9rem; color: var(--muted); margin-bottom: 9px; line-height: 1.5;
   }
+  /* Om-sidans porträtt */
+  .personer {
+    display: grid; gap: 30px 20px; margin: 24px 0 10px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  figure.person { margin: 0; text-align: center; }
+  figure.person img {
+    width: 132px; height: 132px; border-radius: 50%; object-fit: cover;
+    display: block; margin: 0 auto 12px; background: var(--accent-soft);
+    box-shadow: 0 0 0 1px var(--line), 0 2px 10px rgba(0, 0, 0, 0.07);
+    filter: grayscale(1); transition: filter 0.5s ease, box-shadow 0.5s ease;
+  }
+  figure.person:hover img, figure.person:focus-within img {
+    filter: grayscale(0); box-shadow: 0 0 0 2px var(--accent), 0 3px 14px rgba(0, 0, 0, 0.12);
+  }
+  .person-namn {
+    display: block; font-weight: 700; font-size: 1.02rem; line-height: 1.3;
+    margin-bottom: 5px;
+  }
+  .person-om {
+    display: block; color: var(--muted); line-height: 1.45;
+    max-width: 24ch; margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.86rem;
+  }
+  /* Pekskärmar saknar hover – visa bilderna i färg direkt. */
+  @media (hover: none) {
+    figure.person img { filter: grayscale(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    figure.person img { transition: none; }
+  }
   /* Partiporträtt */
   article.parti {
     background: var(--card); border: 1px solid var(--line); border-radius: 12px;
@@ -1058,6 +1141,13 @@ def export_public(dest):
         (src / "partier").mkdir(parents=True, exist_ok=True)
         for f in sorted(PARTIER.glob("*.md")):
             shutil.copy2(f, src / "partier" / f.name)
+
+    # Porträttbilder till om-sidan
+    if BILDER.is_dir():
+        (dest / "bilder").mkdir(parents=True, exist_ok=True)
+        for f in sorted(BILDER.iterdir()):
+            if f.is_file() and not f.name.startswith("."):
+                shutil.copy2(f, dest / "bilder" / f.name)
     for name in SOURCE_FILES:
         shutil.copy2(ANALYS / name, src / name)
 
