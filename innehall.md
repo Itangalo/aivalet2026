@@ -809,7 +809,7 @@ Barns särskilda utsatthet behandlas inte som en egen fråga, och AI:s klimatavt
 
 **Källstyrka: stark – det tydligast ideologiskt genomarbetade materialet.** Enkätsvaret 2026 är det utförligaste av alla nio och är undertecknat av partiledaren. Positionerna visar sig genomgående vara förankrade i principprogram 5.0, antaget 2021 – alltså partilinje, inte enskilda formuleringar.
 
-**Förbehåll.** Piratpartiet är inte ett riksdagsparti och saknar därför riksdagsdokument; det deltog inte heller i podden. Partiet kom med i undersökningen efter att det ursprungliga utskicket gått ut. Det är en värdefull jämförelsepunkt, men bör hållas isär från riksdagspartierna.
+**Förbehåll.** Piratpartiet är inte ett riksdagsparti och saknar därför riksdagsdokument; det deltog inte heller i podden. Partiet kom med i undersökningen efter att det ursprungliga utskicket gått ut, på initiativ av en av personerna bakom sajten, som också är utbildningspolitisk talesperson för Piratpartiet men bidrar här som privatperson (se fliken Om). Partiet är en värdefull jämförelsepunkt, men bör hållas isär från riksdagspartierna.
 
 Källor:
 
