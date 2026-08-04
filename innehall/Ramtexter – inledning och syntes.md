@@ -12,7 +12,7 @@ Ingress: Granskning av partiernas politik och visioner om AI, människa, teknik 
 
 ## Inledning
 
-Artificiell intelligens omformar samhället och politiken. Tekniken påverkar allt från hur information sprids, lärande i skolan och hur vi arbetar till hur våra demokratiska institutioner fattar beslut. Ändå är AI nästan osynligt i valrörelsen. Här har vi samlat vad de åtta riksdagspartierna faktiskt säger om AI – och var de inte pratar om alls.
+Artificiell intelligens omformar samhället och politiken. Tekniken påverkar allt från hur information sprids, lärande i skolan och hur vi arbetar till hur våra demokratiska institutioner fattar beslut. Ändå är AI nästan osynligt i valrörelsen. Här har vi samlat vad de åtta riksdagspartierna plus Piratpartiet faktiskt säger om AI – och var de inte pratar om alls.
 
 Läser man partierna sida vid sida är det första intrycket samsyn. Alla nio är teknikpositiva och vill att Sverige ska ligga i framkant; ingen är AI-avvisande. Flera teman är i praktiken partiöverskridande, och skillnaderna framträder först när man frågar vad partierna betonar näst efter möjligheterna.
 
