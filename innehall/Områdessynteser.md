@@ -37,7 +37,7 @@ Partierna är påfallande eniga om hur AI ska styras – så länge man håller 
 ### Här skiljer de sig
 
 - **Hur hårt ska det hållas?: Moderaterna, Kristdemokraterna och Sverigedemokraterna** väger tyngst mot att inte reglera bort konkurrenskraften. **Miljöpartiet och Piratpartiet** drar åt andra hållet och ser reglering som ett demokratiskt värn – ända till uttryckliga förbud mot exempelvis massövervakning. Övriga ligger nära mitten.
-- **Varför söka oberoende?** Samma önskan om europeisk suveränitet bärs av olika motiv: konkurrenskraft är viktigt för **Moderaterna, och Centerpartiet**, nationell säkerhet – där **Sverigedemokraterna** lutar tydligast nationellt – eller demokratisk kontroll och egen offentlig förmåga som **Vänsterpartiet, Miljöpartiet och Piratpartiet** ser som de viktigaste frågorna.
+- **Varför söka oberoende?** Samma önskan om europeisk suveränitet bärs av olika motiv: konkurrenskraft är viktigt för **Moderaterna och Centerpartiet**, nationell säkerhet – där **Sverigedemokraterna** lutar tydligast nationellt – eller demokratisk kontroll och egen offentlig förmåga som **Vänsterpartiet, Miljöpartiet och Piratpartiet** ser som de viktigaste frågorna.
 - **Vem vill bygga nytt?** Endast **Centerpartiet** (en samordnande "AI-general" och ett nationellt AI-center) och **Sverigedemokraterna** (bland annat ett AI-utskott och en nationell AI-plan) föreslår konkreta nya strukturer. Övriga lutar sig mot befintliga myndigheter och den statliga färdplanen. Närmast en granskning av teknikens egna risker kommer enskilda miljöpartister, som vill kräva oberoende säkerhetsgranskning av de kraftfullaste AI-systemen – ett krav på kontroll, inte ett nytt organ.
 
 ## Vilka rättigheter har den enskilda?
