@@ -20,9 +20,9 @@ Alla nio partier är i grunden positiva till AI och vill att Sverige ska ligga i
 
 **Här skiljer de sig**
 
-- **Tillväxt och konkurrenskraft (Moderaterna, Centerpartiet, Kristdemokraterna, Liberalerna):** vill att Sverige ska ta en tätposition och inte bromsa tekniken – "Europas Silicon Valley", topp tio i världen, innovation framför tung byråkrati.
-- **Styrning och fördelning (Vänsterpartiet, Miljöpartiet, Piratpartiet):** lika positiva till tekniken, men vill att samhället aktivt styr utvecklingen och att vinsterna kommer alla till del.
-- **Mellan polerna (Socialdemokraterna, Sverigedemokraterna):** använda tekniken men underställa den demokratisk styrning, respektive en "teknikrealism" med betoning på att människan ska behålla kontrollen.
+- **Tillväxt och konkurrenskraft: Moderaterna, Centerpartiet, Kristdemokraterna, Liberalerna** vill att Sverige ska ta en tätposition och inte bromsa tekniken – "Europas Silicon Valley", topp tio i världen, innovation framför tung byråkrati.
+- **Styrning och fördelning: Vänsterpartiet, Miljöpartiet, Piratpartiet** är lika positiva till tekniken, men vill att samhället aktivt styr utvecklingen och att vinsterna kommer alla till del.
+- **Mellan polerna: Socialdemokraterna, Sverigedemokraterna** vill använda tekniken men underställa den demokratisk styrning, respektive en "teknikrealism" med betoning på att människan ska behålla kontrollen.
 
 *Bygger på 1 analyserat perspektiv, med källor:*
 
@@ -57,9 +57,9 @@ När partierna talar om vad AI faktiskt ska användas till råder stor samsyn. I
 
 **Här skiljer de sig**
 
-- **Vem får vinsten? (Vänsterpartiet, Miljöpartiet, Piratpartiet):** gör fördelningen till en egen politisk fråga – arbetstidsförkortning med bibehållen lön, mer tid för mänskliga möten, på sikt en basinkomst. Vinsterna ska inte bara tillfalla systemens ägare.
-- **Kompetens och tillväxt (Socialdemokraterna, Moderaterna, Sverigedemokraterna, Centerpartiet, Kristdemokraterna, Liberalerna):** stannar vid omställning, kompetens och konkurrenskraft, utan att göra fördelningen till en egen fråga.
-- **Hur brett ska kunskapen nå? (Centerpartiet, Miljöpartiet):** vill sträcka kompetenslyftet till folkbildning för hela samhället och alla åldrar, inte bara skola och yrkesliv; Piratpartiet betonar dessutom kritiskt kunnande framför ren verktygsanvändning.
+- **Vem får vinsten?: Vänsterpartiet, Miljöpartiet, Piratpartiet** gör fördelningen till en egen politisk fråga – arbetstidsförkortning med bibehållen lön, mer tid för mänskliga möten, på sikt en basinkomst. Vinsterna ska inte bara tillfalla systemens ägare.
+- **Kompetens och tillväxt: Socialdemokraterna, Moderaterna, Sverigedemokraterna, Centerpartiet, Kristdemokraterna, Liberalerna** stannar vid omställning, kompetens och konkurrenskraft, utan att göra fördelningen till en egen fråga.
+- **Hur brett ska kunskapen nå?: Centerpartiet, Miljöpartiet** vill sträcka kompetenslyftet till folkbildning för hela samhället och alla åldrar, inte bara skola och yrkesliv; Piratpartiet betonar dessutom kritiskt kunnande framför ren verktygsanvändning.
 
 *Bygger på 3 analyserade perspektiv, med källor:*
 
@@ -148,9 +148,9 @@ Partierna är påfallande eniga om hur AI ska styras – så länge man håller 
 
 **Här skiljer de sig**
 
-- **Hur hårt ska det hållas?** Moderaterna, Kristdemokraterna och Sverigedemokraterna väger tyngst mot att inte reglera bort konkurrenskraften. Miljöpartiet och Piratpartiet drar åt andra hållet och ser reglering som ett demokratiskt värn – ända till uttryckliga förbud mot exempelvis massövervakning. Övriga ligger nära mitten.
-- **Varför söka oberoende?** Samma önskan om europeisk suveränitet bärs av olika motiv: konkurrenskraft (Moderaterna, Centerpartiet), nationell säkerhet – där Sverigedemokraterna lutar tydligast nationellt – eller demokratisk kontroll och egen offentlig förmåga (Vänsterpartiet, Miljöpartiet, Piratpartiet).
-- **Vem vill bygga nytt?** Bara Centerpartiet (en samordnande "AI-general" och ett nationellt AI-center) och Sverigedemokraterna (bland annat ett AI-utskott och en nationell AI-plan) föreslår konkreta nya strukturer. Övriga lutar sig mot befintliga myndigheter och den statliga färdplanen. Närmast en granskning av teknikens egna risker kommer enskilda miljöpartister, som vill kräva oberoende säkerhetsgranskning av de kraftfullaste AI-systemen – ett krav på kontroll, inte ett nytt organ.
+- **Hur hårt ska det hållas?: Moderaterna, Kristdemokraterna och Sverigedemokraterna** väger tyngst mot att inte reglera bort konkurrenskraften. **Miljöpartiet och Piratpartiet** drar åt andra hållet och ser reglering som ett demokratiskt värn – ända till uttryckliga förbud mot exempelvis massövervakning. Övriga ligger nära mitten.
+- **Varför söka oberoende?** Samma önskan om europeisk suveränitet bärs av olika motiv: konkurrenskraft är viktigt för **Moderaterna och Centerpartiet**, nationell säkerhet – där **Sverigedemokraterna** lutar tydligast nationellt – eller demokratisk kontroll och egen offentlig förmåga som **Vänsterpartiet, Miljöpartiet och Piratpartiet** ser som de viktigaste frågorna.
+- **Vem vill bygga nytt?** Endast **Centerpartiet** (en samordnande "AI-general" och ett nationellt AI-center) och **Sverigedemokraterna** (bland annat ett AI-utskott och en nationell AI-plan) föreslår konkreta nya strukturer. Övriga lutar sig mot befintliga myndigheter och den statliga färdplanen. Närmast en granskning av teknikens egna risker kommer enskilda miljöpartister, som vill kräva oberoende säkerhetsgranskning av de kraftfullaste AI-systemen – ett krav på kontroll, inte ett nytt organ.
 
 *Bygger på 3 analyserade perspektiv, med källor:*
 
@@ -238,9 +238,9 @@ Här är mönstret att partierna gärna säger sig värna den enskildas integrit
 
 **Här skiljer de sig**
 
-- **Konkreta rättigheter och skarpa gränser (Piratpartiet, Miljöpartiet, Centerpartiet):** går längst – rätt att veta att AI använts, förklaring och omprövning; nej till biometrisk massövervakning, ansiktsigenkänning i realtid och Chat Control; skydd mot diskriminering och rätt till upprättelse.
-- **Nyttan för brottsbekämpning främst (Sverigedemokraterna samt regeringen: Moderaterna, Kristdemokraterna, Liberalerna):** lägger tyngden vid att AI ska stärka rättssamhället och brottsbekämpningen; regeringen har infört polisens ansiktsigenkänning i realtid.
-- **De svagast bevakade (barn, funktionsnedsättning, minoriteter, skapare):** nämns nästan bara av enstaka partier – Liberalerna om barn och skärmar, Miljöpartiet om utsatta grupper och om att kompensera skapare – medan de hos flertalet är helt frånvarande.
+- **Konkreta rättigheter och skarpa gränser: Piratpartiet, Miljöpartiet, Centerpartiet** går längst – rätt att veta att AI använts, förklaring och omprövning; nej till biometrisk massövervakning, ansiktsigenkänning i realtid och Chat Control; skydd mot diskriminering och rätt till upprättelse.
+- **Nyttan för brottsbekämpning främst: Sverigedemokraterna samt de nuvarande regeringspartierna Moderaterna, Kristdemokraterna och Liberalerna** lägger tyngden vid att AI ska stärka rättssamhället och brottsbekämpningen. Regeringen har redan infört att polisen kan använda ansiktsigenkänning i realtid.
+- **De svagast bevakade (barn, funktionsnedsättning, minoriteter, skapare):** nämns nästan bara av enstaka partier – **Liberalerna** om barn och skärmar, **Miljöpartiet** om utsatta grupper och om att kompensera skapare – medan de hos flertalet är helt frånvarande.
 
 *Bygger på 5 analyserade perspektiv, med källor:*
 
@@ -355,9 +355,9 @@ Nästan alla partier ser AI som ett verkligt hot mot demokratin, inte bara som e
 
 **Här skiljer de sig**
 
-- **Maktkoncentrationen som kärna (Piratpartiet, Centerpartiet, Miljöpartiet):** vill åtgärda plattformarnas makt strukturellt – konkurrensregler, interoperabilitet, insyn och rätten att välja bort profilstyrda flöden.
-- **Smalare eller vagare (Sverigedemokraterna, Liberalerna, Moderaterna):** håller frågan vid att märka manipulerat innehåll, en geopolitisk oro för auktoritärt styrda modeller, respektive en vag avvägning där mer kunskap ska minska riskerna.
-- **Det egna tänkandet (Liberalerna):** i stort sett ensamt om att lyfta risken att AI urholkar omdömet, med en stark kunskapsskola som värn; Piratpartiet och, smalt, Moderaterna berör den delvis.
+- **Maktkoncentrationen som kärna: Piratpartiet, Centerpartiet, Miljöpartiet** vill åtgärda plattformarnas makt strukturellt – konkurrensregler, interoperabilitet, insyn och rätten att välja bort profilstyrda flöden.
+- **Smalare eller vagare: Sverigedemokraterna, Liberalerna, Moderaterna** håller frågan vid att märka manipulerat innehåll, en geopolitisk oro för auktoritärt styrda modeller, respektive en vag avvägning där mer kunskap ska minska riskerna.
+- **Det egna tänkandet: Liberalerna** är i stort sett ensamt om att lyfta risken att AI urholkar omdömet, med en stark kunskapsskola som värn; Piratpartiet och, smalt, Moderaterna berör den delvis.
 
 *Bygger på 2 analyserade perspektiv, med källor:*
 
@@ -410,7 +410,7 @@ Ju längre bort från effektiviseringen här och nu en fråga ligger, desto tyst
 
 **Här skiljer de sig**
 
-- **Enstaka röster bryter tystnaden:** Miljöpartiet är ensamt om att systematiskt väga in AI:s klimat- och resursavtryck och vill att Sverige driver ett totalförbud mot autonoma vapen; Liberalerna vill skydda kritisk infrastruktur mot cyberangrepp. Det är undantagen som bekräftar tystnaden.
+- **Enstaka röster bryter tystnaden: Miljöpartiet** är ensamt om att systematiskt väga in AI:s klimat- och resursavtryck och vill att Sverige driver ett totalförbud mot autonoma vapen; **Liberalerna** vill skydda kritisk infrastruktur mot cyberangrepp. Det är undantagen som bekräftar tystnaden.
 - **Den skarpaste tystnaden:** att avancerad AI i förlängningen kan bli okontrollerbar tas inte upp av något parti i dess valmaterial. Två enskilda ledamöter bryter tystnaden från var sitt håll: en sverigedemokrat beskriver hotet i dess skarpaste form – en intelligens bortom människans, med självbevarelsedrift – och avfärdades av ansvarigt statsråd som alltför dystopisk. Miljöpartister föreslår i stället mekanismerna: oberoende säkerhetsgranskning av de kraftfullaste systemen och en nödavstängning som kan stoppa system som utvecklar farliga beteenden. Ingen av inlagorna har blivit partipolitik.
 
 *Bygger på 4 analyserade perspektiv, med källor:*
