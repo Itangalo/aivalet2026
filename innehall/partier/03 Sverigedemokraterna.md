@@ -27,7 +27,7 @@ AI nämns inte i partiets valplattform inför 2026 – det dokument partiet går
 
 **Källstyrka: god, men ojämn.** Partiförfattat underlag finns i enkätsvaret 2026 – det kortaste av alla nio – och kompletteras av tio riksdagsdokument. Sverigedemokraterna deltog inte i podden.
 
-**Förbehåll.** Den mest utvecklade texten är en enskild motion, inte ett partidokument. Merparten av riksdagsdokumenten är enskilda ledamöters motioner, flera av samma ledamot, och utgör indikation snarare än beslutad politik. Det gäller särskilt strukturförslagen och den nationella suveränitetslinjen, som inte finns i enkätsvaret. Även den skarpa rösten om AI:s egna risker är en enskild ledamots interpellation från 2023; ansvarigt statsråd kallade bilden alltför dystopisk, och temat har inte återkommit i partiets valmaterial.
+**Förbehåll.** Den mest utvecklade texten är en enskild motion, inte ett partidokument. Merparten av riksdagsdokumenten är enskilda ledamöters motioner, flera av samma ledamot, och utgör indikation snarare än beslutad politik. Det gäller särskilt strukturförslagen och den nationella suveränitetslinjen, som inte finns i enkätsvaret. Även den skarpa rösten om AI:s egna risker är en enskild ledamots interpellation från 2023; ansvarigt statsråd invände att det blir dystopiskt att bara lyfta fram riskerna, och temat har inte återkommit i partiets valmaterial.
 
 ## Källor
 
