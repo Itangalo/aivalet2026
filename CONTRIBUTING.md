@@ -1,6 +1,6 @@
 # Att föreslå ändringar
 
-Tack för att du vill bidra. Sajten byggs ur markdown-filerna i det här repot, så alla ändringar görs i md – inte i `index.html` (den genereras).
+Tack för att du vill bidra. Sajten byggs ur markdown-filerna i det här repot, så alla ändringar görs i md. Både `index.html` och `innehall.md` i roten genereras av `bygg_sajt.py` och skrivs över vid varje ombyggnad – redigera aldrig dem direkt, ändringarna försvinner.
 
 ## Enklaste vägen (ingen git-kunskap behövs)
 
@@ -29,6 +29,8 @@ Tack för att du vill bidra. Sajten byggs ur markdown-filerna i det här repot, 
 - Håll påståenden nära källan – varje påstående ska gå att spåra till en källa i `kallor/`.
 
 Efter att en pull request slagits samman bygger projektets underhållare om sajten.
+
+GitHub Pages serverar filerna direkt från grenen `main`. Sajten uppdateras alltså inte av att en md-fil ändras, utan först när någon kört `python3 bygg_sajt.py` och pushat den ombyggda `index.html`. Slås en pull request samman utan ombyggnad syns ändringen i repot men inte på sajten.
 
 ## Favicon
 
