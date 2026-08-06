@@ -45,3 +45,9 @@ Visning: podd
 Visning: riksdag
 
 > Systematiskt svep av riksdagsdokument med AI i titeln (2021/22–2025/26). De flesta är enskilda motioner – de visar tänkandet inom partierna, inte beslutad politik. Kristdemokraterna och Liberalerna saknar helt dokument med AI i titeln.
+
+## Budgetdokument 2026
+
+Mapp: Budgetdokument 2026
+
+> En avgränsad kontroll, inte en del av de arton perspektiven. Frågan var smal: säger något parti mer om AI där det fördelar pengar än i sitt valmaterial? Samtliga 92 utgiftsområdesmotioner för riksmötet 2025/26 har ordsökts; de 18 dokument som är relevanta finns här. Observera asymmetrin: bara Socialdemokraterna, Vänsterpartiet, Centerpartiet och Miljöpartiet har egna budgetdokument. Moderaterna, Kristdemokraterna och Liberalerna är regeringspartier och står bakom budgetpropositionen, och Sverigedemokraterna lägger inget eget budgetalternativ – frånvaro av AI i en budget kan därför bara sägas om de fyra första.
