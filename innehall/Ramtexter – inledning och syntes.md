@@ -8,7 +8,7 @@ Texterna högst upp på sajten. En rad var – ändra texten efter kolon, behål
 
 Överrubrik: Riksdagspartierna + Piratpartiet · inför valet 2026
 Rubrik: Vad har partierna för AI-politik?
-Ingress: Granskning av partiernas politik och visioner om AI, människa, teknik och samhälle – ordnat i sex frågor och arton analyserade perspektiv, grundat i 75 primärkällor.
+Ingress: Granskning av partiernas politik och visioner om AI, människa, teknik och samhälle – ordnat i sex frågor och arton analyserade perspektiv, med samtliga 94 primärkällor publicerade.
 
 ## Inledning
 
