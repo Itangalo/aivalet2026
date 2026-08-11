@@ -12,15 +12,15 @@ Arbetet med att samla in, sammanställa och analysera materialet har i stor utst
 
 ## Vilka vi är
 
-[Maria Ottosson](https://www.linkedin.com/in/maria-ottoson-aba22527/): Folkbildare, initiativtagare till AI-valet 2026 och Folkets AI-kommission
+[Maria Ottoson](https://www.linkedin.com/in/maria-ottoson-aba22527/): Folkbildare, initiativtagare till AI-valet 2026 och Folkets AI-kommission
 
 [Kerstin Beckman](https://www.linkedin.com/in/kerstinbeckman/): Verksamhetsutvecklare, AI-upplysare och författare
 
-[Johan Falk](https://falkai.org/): AI-analytiker och författare
+[Johan Falk](https://falkai.org/): AI-analytiker, författare och forskarutbildad vetenskapsjournalist
 
 [Jonatan Tensetti](https://tensetti.se/): Lärare, folkbildare och författare
 
-[Petter Joelson](https://www.linkedin.com/in/petterjoelson/): Projektkoordinator på Digidem Lab
+[Petter Joelson](https://www.linkedin.com/in/petterjoelson/): Digital strateg och medgrundare av Digidem Lab och Civic Tech Sweden
 
 ## För AI-agenter
 

@@ -695,7 +695,7 @@ PERSON_SEKTION = "Vilka vi är"
 
 
 def person_slug(namn):
-    """'Maria Ottosson' → 'maria-ottosson' (för att hitta bilder/<slug>.jpg)."""
+    """'Maria Ottoson' → 'maria-ottoson' (för att hitta bilder/<slug>.jpg)."""
     s = namn.strip().lower()
     for a, b in (("å", "a"), ("ä", "a"), ("ö", "o"), ("é", "e"), ("ü", "u")):
         s = s.replace(a, b)
