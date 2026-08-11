@@ -702,21 +702,32 @@ def person_slug(namn):
     return re.sub(r"[^a-z0-9]+", "-", s).strip("-")
 
 
-def person_card(namn, beskrivning):
-    """Porträtt i om-sidans 'Vilka vi är': cirkelbild (om den finns) + namn + rad."""
+def person_card(namn, beskrivning, url=None):
+    """Porträtt i om-sidans 'Vilka vi är': cirkelbild (om den finns) + namn + rad.
+
+    Anges en url länkas bild och namn till personens publika sida.
+    """
     parts = ['<figure class="person">']
+    lank = f'<a class="person-lank" href="{html.escape(url, quote=True)}">' if url else ""
+    slut = "</a>" if url else ""
     for ext in (".jpg", ".jpeg", ".png", ".webp"):
         img = BILDER / f"{person_slug(namn)}{ext}"
         if img.exists():
             src = "bilder/" + urllib.parse.quote(img.name)
-            parts.append(f'<img src="{src}" alt="{html.escape(namn, quote=True)}" '
-                         f'width="132" height="132" loading="lazy">')
+            parts.append(f'{lank}<img src="{src}" alt="{html.escape(namn, quote=True)}" '
+                         f'width="132" height="132" loading="lazy">{slut}')
             break
     parts.append('<figcaption>')
-    parts.append(f'<span class="person-namn">{inline(namn)}</span>')
+    parts.append(f'<span class="person-namn">{lank}{inline(namn)}{slut}</span>')
     parts.append(f'<span class="person-om">{inline(beskrivning)}</span>')
     parts.append('</figcaption></figure>')
     return "\n".join(parts)
+
+
+# 'Namn: rad' eller '[Namn](url): rad' i avsnittet 'Vilka vi är'.
+PERSON_RE = re.compile(
+    r"^(?:\[(?P<lanknamn>[^\]]{2,48})\]\((?P<url>[^)\s]+)\)|(?P<namn>[^:\[*]{2,48})):\s+(?P<om>.+)$"
+)
 
 
 def render_om_md(text):
@@ -741,9 +752,10 @@ def render_om_md(text):
             return
         stycke = " ".join(para)
         para.clear()
-        m = re.match(r"^([^:]{2,48}):\s+(.+)$", stycke)
-        if i_personsektion and m and not m.group(1).startswith(("[", "*")):
-            personer.append(person_card(m.group(1).strip(), m.group(2).strip()))
+        m = PERSON_RE.match(stycke)
+        if i_personsektion and m:
+            namn = (m.group("lanknamn") or m.group("namn")).strip()
+            personer.append(person_card(namn, m.group("om").strip(), m.group("url")))
         else:
             flush_personer()
             parts.append(f'<p>{inline(stycke)}</p>')
@@ -1180,6 +1192,10 @@ CSS = r"""
   .person-namn {
     display: block; font-weight: 700; font-size: 1.02rem; line-height: 1.3;
     margin-bottom: 5px;
+  }
+  a.person-lank { color: inherit; text-decoration: none; border: 0; }
+  .person-namn a.person-lank:hover, .person-namn a.person-lank:focus-visible {
+    text-decoration: underline; text-underline-offset: 3px;
   }
   .person-om {
     display: block; color: var(--muted); line-height: 1.45;

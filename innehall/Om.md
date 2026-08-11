@@ -4,7 +4,7 @@ Den här sajten kartlägger vad riksdagspartierna och Piratpartiet säger – oc
 
 AI pekas ut som en av de mest avgörande frågorna för samhället – av forskning, näringsliv och partierna själva. Ändå är den påfallande frånvarande i valrörelsen. Vi ville göra grovjobbet: gå igenom allt material och visa mönstren, så att väljare kan se var partierna står och var de tiger.
 
-Piratpartiet är inte ett riksdagsparti, men togs med i analysen eftersom de har mer uttalad hållning i många AI-frågor jämfört med de flesta riksdagspartier. Vi vill också öppet redovisa att en av medlemmarna i gruppen bakom den här webbplatsen är aktiv medlem i Piratpartiet.
+Piratpartiet är inte ett riksdagsparti, men togs med i analysen eftersom de har mer uttalad hållning i många AI-frågor jämfört med de flesta riksdagspartier. Vi vill också öppet redovisa att en av medlemmarna i gruppen bakom den här webbplatsen (Jonatan) är aktiv medlem i Piratpartiet.
 
 ## Så gjordes analysen
 
@@ -12,17 +12,15 @@ Arbetet med att samla in, sammanställa och analysera materialet har i stor utst
 
 ## Vilka vi är
 
-Maria Ottosson: Folkbildare, initiativtagare till Folkets AI-kommission.
+[Maria Ottosson](https://www.linkedin.com/in/maria-ottoson-aba22527/): Folkbildare, initiativtagare till AI-valet 2026 och Folkets AI-kommission
 
-Kerstin Beckman: AI-upplysare och författare.
+[Kerstin Beckman](https://www.linkedin.com/in/kerstinbeckman/): Verksamhetsutvecklare, AI-upplysare och författare
 
-Johan Falk: Oberoende AI-analytiker, författare till bland annat AI för nybörjare och 2023–2024 ansvarig för AI och utbildning på Skolverket.
+[Johan Falk](https://falkai.org/): AI-analytiker och författare
 
-Jonatan Tensetti: Folkbildare och författare. Även utbildningspolitisk talesperson för Piratpartiet, men bidrar till den här webbplatsen som privatperson.
+[Jonatan Tensetti](https://tensetti.se/): Lärare, folkbildare och författare
 
-## Kontakt
-
-*[Platshållare – e-post och ev. övriga kontaktvägar.]*
+[Petter Joelson](https://www.linkedin.com/in/petterjoelson/): Projektkoordinator på Digidem Lab
 
 ## För AI-agenter
 
