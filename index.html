@@ -980,16 +980,49 @@
 </div>
 
 <script>
+  // Flikarna styrs av adressens hash (#om, #kallor, ...) så att varje flik –
+  // och varje rubrik inuti en flik – går att länka till direkt.
+  function activatePanel(name) {
+    var tab = document.querySelector('.tab[data-panel="' + name + '"]');
+    var panel = document.getElementById(name);
+    if (!tab || !panel) return false;
+    document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+    document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
+    tab.classList.add('active');
+    panel.classList.add('active');
+    updateAreaBar();
+    return true;
+  }
+
+  function applyHash(smooth) {
+    var id = (location.hash || '').slice(1);
+    try { id = decodeURIComponent(id); } catch (e) {}
+    if (!id) {
+      activatePanel('analysen');
+      return;
+    }
+    // Hashen pekar antingen på en flik ...
+    if (activatePanel(id)) {
+      window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+      return;
+    }
+    // ... eller på ett avsnitt inuti en flik, som då öppnas först.
+    var target = document.getElementById(id);
+    if (!target) return;
+    var panel = target.closest('.panel');
+    if (panel) activatePanel(panel.id);
+    target.scrollIntoView();
+  }
+
   document.querySelectorAll('.tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
-      document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
-      document.querySelectorAll('.panel').forEach(function (p) { p.classList.remove('active'); });
-      tab.classList.add('active');
-      document.getElementById(tab.dataset.panel).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      updateAreaBar();
+      var name = tab.dataset.panel;
+      if (location.hash.slice(1) === name) applyHash(true);
+      else location.hash = name;
     });
   });
+
+  window.addEventListener('hashchange', function () { applyHash(true); });
 
   // Sticky-rad: visar vilken fråga (respektive vilket parti) läsaren är i
   // medan hen scrollar. En rad per flik, samma logik för alla.
@@ -1032,6 +1065,7 @@
       ticking = true;
     }
   });
+  applyHash(false);
   updateAreaBar();
 </script>
 </body>
