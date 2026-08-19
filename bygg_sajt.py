@@ -17,6 +17,7 @@ import os
 import re
 import shutil
 import sys
+import unicodedata
 import urllib.parse
 from pathlib import Path
 
@@ -348,16 +349,27 @@ PUBLISH = REPO_LAYOUT
 COPIED = set()
 
 
+def urlseg(seg: str) -> str:
+    """Filnamnssegment → URL-segment.
+
+    macOS lagrar filnamn dekomponerat (NFD: o + combining diaeresis) medan git
+    – med core.precomposeunicode – lagrar dem sammansatta (NFC: ö). Webbservern
+    matchar byte för byte, så länkar byggda ur diskens filnamn ger 404 på
+    GitHub Pages. Normalisera till NFC så länken matchar det som är incheckat.
+    """
+    return urllib.parse.quote(unicodedata.normalize("NFC", seg))
+
+
 def href(path: Path) -> str:
     if PUBLISH:
         try:
             rel = path.relative_to(KALLOR)
             COPIED.add(path)
-            return "kallor/" + "/".join(urllib.parse.quote(s) for s in rel.parts)
+            return "kallor/" + "/".join(urlseg(s) for s in rel.parts)
         except ValueError:
             pass
     rel = os.path.relpath(path, HERE)
-    return "/".join(urllib.parse.quote(seg) for seg in rel.split(os.sep))
+    return "/".join(urlseg(seg) for seg in rel.split(os.sep))
 
 
 def file_links(mdpath: Path) -> str:
@@ -713,7 +725,7 @@ def person_card(namn, beskrivning, url=None):
     for ext in (".jpg", ".jpeg", ".png", ".webp"):
         img = BILDER / f"{person_slug(namn)}{ext}"
         if img.exists():
-            src = "bilder/" + urllib.parse.quote(img.name)
+            src = "bilder/" + urlseg(img.name)
             parts.append(f'{lank}<img src="{src}" alt="{html.escape(namn, quote=True)}" '
                          f'width="132" height="132" loading="lazy">{slut}')
             break
