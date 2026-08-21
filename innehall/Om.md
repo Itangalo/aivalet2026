@@ -22,6 +22,12 @@ Arbetet med att samla in, sammanställa och analysera materialet har i stor utst
 
 [Petter Joelson](https://www.linkedin.com/in/petterjoelson/): Digital strateg och medgrundare av Digidem Lab och Civic Tech Sweden
 
+## Kontakt
+
+Kerstin Beckman: kerstin.beckman(at)proton.me
+
+Johan Falk: johan(at)falkai.org, 070-424 90 58
+
 ## För AI-agenter
 
 Förutom alla källfiler, länkade i separat flik, finns allt innehåll samlat i en enda fil: [innehall.md](innehall.md). Den som vill analysera eller bearbeta med hjälp av språkmodeller använder med fördel den filen.
