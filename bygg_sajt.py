@@ -744,12 +744,12 @@ PERSON_RE = re.compile(
 
 def render_om_md(text):
     """Liten md-renderare för om-sidan: '# ' → sektionsrubrik, '## ' → underrubrik,
-    '> ' → liten not, övrigt → stycken (med inline fet/kursiv/länk).
+    '> ' → liten not, '- ' → punktlista, övrigt → stycken (med inline fet/kursiv/länk).
 
     I avsnittet 'Vilka vi är' blir stycken på formen 'Namn: beskrivning' i stället
     porträttkort, med bilden hämtad ur bilder/<namn-i-gemener>.jpg om den finns.
     """
-    parts, para, personer = [], [], []
+    parts, para, personer, punkter = [], [], [], []
     i_personsektion = False
 
     def flush_personer():
@@ -758,6 +758,12 @@ def render_om_md(text):
             parts.extend(personer)
             parts.append('</div>')
             personer.clear()
+
+    def flush_punkter():
+        if punkter:
+            lis = "".join(f"<li>{inline(p)}</li>" for p in punkter)
+            parts.append(f"<ul>{lis}</ul>")
+            punkter.clear()
 
     def flush():
         if not para:
@@ -775,19 +781,24 @@ def render_om_md(text):
     for line in text.splitlines():
         s = line.strip()
         if not s:
-            flush()
+            flush(); flush_punkter()
         elif s.startswith("# "):
-            flush(); flush_personer(); i_personsektion = False
+            flush(); flush_punkter(); flush_personer(); i_personsektion = False
             parts.append(f'<h2 class="sectionhead">{inline(s[2:])}</h2>')
         elif s.startswith("## "):
-            flush(); flush_personer()
+            flush(); flush_punkter(); flush_personer()
             i_personsektion = s[3:].strip() == PERSON_SEKTION
             parts.append(f'<h3 class="syntes-sub">{inline(s[3:])}</h3>')
         elif s.startswith("> "):
-            flush(); flush_personer(); parts.append(f'<p class="rowspan-note">{inline(s[2:])}</p>')
+            flush(); flush_punkter(); flush_personer()
+            parts.append(f'<p class="rowspan-note">{inline(s[2:])}</p>')
+        elif s.startswith("- "):
+            flush(); flush_personer()
+            punkter.append(s[2:].strip())
         else:
+            flush_punkter()
             para.append(s)
-    flush(); flush_personer()
+    flush(); flush_punkter(); flush_personer()
     return "\n".join(parts)
 
 
