@@ -24,8 +24,10 @@ Arbetet med att samla in, sammanställa och analysera materialet har i stor utst
 
 ## Kontakt
 
+- Maria Ottoson: [maria@cocreative.se](mailto:maria@cocreative.se)
 - Kerstin Beckman: [kerstin.beckman@proton.me](mailto:kerstin.beckman@proton.me)
 - Johan Falk: [johan@falkai.org](mailto:johan@falkai.org), 070-424 90 58
+- Jonatan Tensetti: [jonatan@tensetti.se](mailto:jonatan@tensetti.se)
 
 ## För AI-agenter
 
